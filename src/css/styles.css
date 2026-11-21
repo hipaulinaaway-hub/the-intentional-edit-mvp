@@ -615,7 +615,6 @@ input, textarea { font: inherit; color: inherit; }
   letter-spacing: -0.01em;
   text-align: left;
 }
-.menu__link img { flex: none; }
 .menu__contact { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); }
 .menu__contact .eyebrow { margin-bottom: 4px; }
 
