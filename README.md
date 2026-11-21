@@ -96,7 +96,7 @@ Create a project from the GitHub repo with:
 | Framework preset | None (or Eleventy) |
 | Build command | `npm run build` |
 | Build output directory | `_site` |
-| Environment variable | `NODE_VERSION` = `20` (or newer) |
+| Environment variable | `NODE_VERSION` = `22` |
 
 Every save in Pages CMS commits to GitHub, and Cloudflare rebuilds and publishes in about a minute.
 
