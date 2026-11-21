@@ -103,7 +103,7 @@ eleventyExcludeFromCollections: true
           <h2 class="h2" id="services-title" data-reveal>{{ services.title }}</h2>
         </div>
 
-        <div class="services__cards" data-carousel data-reveal-group>
+        <div class="services__cards" data-reveal-group>
           {%- asyncEach item in services.items %}
           <article class="card" data-reveal>
             <div class="card__media">
@@ -116,10 +116,6 @@ eleventyExcludeFromCollections: true
             </div>
           </article>
           {%- endeach %}
-        </div>
-
-        <div class="services__dots" aria-hidden="true" data-carousel-dots>
-          {%- for item in services.items %}<span{% if loop.first %} class="is-active"{% endif %}></span>{% endfor -%}
         </div>
 
         <button class="btn btn--outline" type="button" data-inquire data-reveal>{{ services.button }}</button>
@@ -356,7 +352,7 @@ eleventyExcludeFromCollections: true
 
         <!-- Sent -->
         <div class="inquiry__step inquiry__sent" data-step-panel="sent" hidden>
-          <span class="inquiry__seal" aria-hidden="true">{% picture "/assets/img/seal-embossed.png", "", "111px", [111, 222, 333] %}</span>
+          <span class="inquiry__seal" aria-hidden="true">{% picture "/assets/img/seal-embossed.png", "", "111px", [111, 222, 333], {}, { sharpAvifOptions: { quality: 85 }, sharpWebpOptions: { quality: 92 } } %}</span>
           <div class="inquiry__sent-copy">
             <h2 class="inquiry__question" tabindex="-1">{{ inquiry.sent_title }}</h2>
             <p class="body-lg">{{ inquiry.sent_text }}</p>

@@ -65,6 +65,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+/* Safety net: nothing may widen the page on phones (a few px of overhang lets iOS Safari
+   zoom out and show a white strip). Set on body only, so the menu's scroll lock still works. */
+body { overflow-x: clip; }
 body.is-locked { overflow: hidden; }
 h1, h2, h3, h4, p, ul, ol, figure, blockquote, address { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
@@ -79,6 +82,12 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 input, textarea { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+/* iPhone Safari draws the focus ring after a tap too (e.g. on the menu's close button, which
+   gets focus when the menu opens). Show rings only once a key has been pressed (main.js adds
+   html.is-keyboard on keydown and removes it on touch/click). */
+.js:not(.is-keyboard) :focus-visible,
+.js:not(.is-keyboard) .card:has(.card__btn:focus-visible),
+.js:not(.is-keyboard) .option input:focus-visible + .option__radio { outline: none; }
 [hidden] { display: none !important; }
 
 .skip-link {
@@ -247,13 +256,13 @@ input, textarea { font: inherit; color: inherit; }
   flex-direction: column;
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 110px;
+  font-size: 90px; /* Figma Display/H1 */
   line-height: 0.92;
   letter-spacing: -0.025em;
   white-space: nowrap;
 }
 .hero__line { display: block; }
-.hero__line--italic { font-style: italic; padding-left: 120px; margin-top: -11px; }
+.hero__line--italic { font-style: italic; padding-left: 1.107em; margin-top: -0.1em; } /* 100px / -9px at 90px */
 .hero__side { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; width: 420px; flex: none; }
 .hero__copy { display: flex; flex-direction: column; gap: 16px; }
 .hero__text { color: var(--cream-88); }
@@ -328,8 +337,6 @@ input, textarea { font: inherit; color: inherit; }
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
-.services__dots { display: none; }
-
 /* ==========================================================================
    04 Meet Tyler
    ========================================================================== */
@@ -341,6 +348,9 @@ input, textarea { font: inherit; color: inherit; }
   padding-top: 56px;
   padding-bottom: 128px;
   background: var(--cream);
+  /* the tilted stamp hangs a few px past the right screen edge on phones (as in the Figma
+     frame, which clips it); clip it here instead of letting the page scroll sideways */
+  overflow-x: clip;
 }
 .about__media { position: relative; }
 .about__photo { position: relative; aspect-ratio: 520 / 640; overflow: hidden; }
@@ -937,7 +947,7 @@ input, textarea { font: inherit; color: inherit; }
    ========================================================================== */
 @media (max-width: 1439px) and (min-width: 1200px) {
   .about { column-gap: clamp(64px, 8.3vw, 120px); }
-  .hero__title { font-size: clamp(96px, 7.64vw, 110px); }
+  .hero__title { font-size: clamp(78px, 6.25vw, 90px); }
   .inquiry__main { padding-inline: 64px; gap: 64px; }
   .inquiry__intro { flex: 0 1 440px; min-width: 0; } /* shrink so the 656px card always fits */
 }
@@ -950,7 +960,7 @@ input, textarea { font: inherit; color: inherit; }
   /* Hero: stack headline over the side copy */
   .hero { height: clamp(640px, 100svh, 900px); padding-top: 28px; padding-bottom: 56px; }
   .hero__content { flex-direction: column; align-items: flex-start; gap: 40px; }
-  .hero__title { font-size: clamp(72px, 10vw, 110px); }
+  .hero__title { font-size: clamp(60px, 8.2vw, 90px); }
   .hero__line--italic { padding-left: 0.9em; margin-top: -0.1em; }
   .hero__side { width: min(420px, 100%); }
 
@@ -1009,7 +1019,7 @@ input, textarea { font: inherit; color: inherit; }
   .nav__logo { width: 162px; }
   .nav__menu-btn { display: flex; align-items: center; justify-content: flex-end; width: 44px; height: 44px; }
   .hero__content { gap: 24px; }
-  .hero__title { font-size: 72px; letter-spacing: -0.02em; }
+  .hero__title { font-size: 56px; letter-spacing: -0.02em; } /* Figma Mobile/Display/H1 */
   .hero__line--italic { padding-left: 0; margin-top: -8px; }
   .hero__side { gap: 28px; width: 100%; }
   .hero__text { display: none; }
@@ -1034,14 +1044,6 @@ input, textarea { font: inherit; color: inherit; }
   .card__photo { inset: 10.29% 12.87%; width: 74.26%; height: 79.41%; } /* 35px inside 272×340 */
   .card__text { gap: 8px; }
   .card__desc { max-width: none; }
-  .services__dots { display: flex; gap: 8px; }
-  .services__dots span {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--brown);
-    opacity: 0.25;
-    transition: opacity 0.3s var(--ease);
-  }
-  .services__dots span.is-active { opacity: 1; }
 
   /* Meet Tyler */
   .about { grid-template-columns: minmax(0, 1fr); row-gap: 56px; padding: 56px 24px; }
@@ -1107,15 +1109,31 @@ input, textarea { font: inherit; color: inherit; }
   .option__desc { font-size: 15px; line-height: 24px; }
   .d-only { display: none; }
   .m-only { display: inline; }
-  .fields { column-gap: 16px; row-gap: 18px; }
+  .fields { column-gap: 16px; row-gap: 20px; }
   .field input, .field textarea, .field label { font-size: 16px; }
   .field.is-active label, .field:focus-within label { font-size: 10px; }
+
+  /* Step 2 compact, so Send stays clear of Safari's floating bottom bar */
+  .inquiry__top { padding-top: 14px; }
+  .inquiry__intro { padding: 16px 24px 22px; }
+  .inquiry[data-step="2"] .inquiry__card { padding-top: 24px; padding-bottom: 28px; }
+  .inquiry__step[data-step-panel="2"] { gap: 18px; }
+  .field { height: 54px; }
+  .field label { top: 7px; }
+  .field.is-active label, .field:focus-within label { top: 4px; }
+  .field--textarea { height: 84px; }
+  .field--textarea label, .field--textarea.is-active label { top: 4px; }
+  .field--textarea:not(.is-active):not(:focus-within) label { top: 8px; }
+  .field textarea { top: 26px; }
+  /* errors on one line (the required fields sit in the left column, so the line can run
+     under the empty right-hand space) — two lines ran into the next row's label */
+  .field__error { top: calc(100% + 3px); font-size: 12px; line-height: 16px; white-space: nowrap; }
   .inquiry__sent .inquiry__actions { margin-top: auto; }
   .inquiry__sent .inquiry__actions .btn { width: 100%; }
 }
 
 @media (max-width: 360px) {
-  .hero__title { font-size: 64px; }
+  .hero__title { font-size: 50px; }
   .menu__link { font-size: 36px; }
   .fields { grid-template-columns: minmax(0, 1fr); }
 }

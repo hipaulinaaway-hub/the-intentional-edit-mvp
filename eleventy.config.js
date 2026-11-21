@@ -26,7 +26,8 @@ const IMAGE_OPTIONS = {
 const toInputPath = (src) => path.join("src", String(src).replace(/^\//, ""));
 const isRaster = (src) => /\.(jpe?g|png|webp|avif|tiff?)$/i.test(String(src));
 
-async function picture(src, alt = "", sizes = "100vw", widths = [800, 1600], attrs = {}) {
+// `options` (optional) overrides IMAGE_OPTIONS for one image, e.g. a higher quality for fine artwork
+async function picture(src, alt = "", sizes = "100vw", widths = [800, 1600], attrs = {}, options = {}) {
   if (!src) return "";
   const htmlAttrs = { alt, sizes, loading: "lazy", decoding: "async", ...attrs };
   // External links, SVGs and GIFs are used as they are
@@ -36,7 +37,7 @@ async function picture(src, alt = "", sizes = "100vw", widths = [800, 1600], att
   }
   // PNGs keep their transparency (no JPEG fallback)
   const formats = /\.png$/i.test(src) ? ["avif", "webp", "png"] : IMAGE_OPTIONS.formats;
-  const metadata = await Image(toInputPath(src), { ...IMAGE_OPTIONS, widths, formats });
+  const metadata = await Image(toInputPath(src), { ...IMAGE_OPTIONS, widths, formats, ...options });
   return Image.generateHTML(metadata, htmlAttrs);
 }
 

@@ -17,6 +17,13 @@
   const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]):not([tabindex="-1"]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  /* ---------- Focus rings for keyboard users only (see :focus-visible in styles.css) ---------- */
+  const root = document.documentElement;
+  document.addEventListener('keydown', (e) => {
+    if (!e.metaKey && !e.ctrlKey) root.classList.add('is-keyboard');
+  }, true);
+  document.addEventListener('pointerdown', () => root.classList.remove('is-keyboard'), true);
+
   /* ---------- Shared: modal open/close helpers ---------- */
   let lastFocused = null;
   let scrollbarComp = 0;
@@ -92,30 +99,6 @@
       });
     });
   });
-
-  /* ---------- Services carousel dots (mobile) ---------- */
-  const track = document.querySelector('[data-carousel]');
-  const dots = [...document.querySelectorAll('[data-carousel-dots] span')];
-  if (track && dots.length) {
-    const cards = [...track.children];
-    let ticking = false;
-    const update = () => {
-      ticking = false;
-      const start = track.getBoundingClientRect().left;
-      let active = 0;
-      let best = Infinity;
-      cards.forEach((card, i) => {
-        const d = Math.abs(card.getBoundingClientRect().left - start - 24);
-        if (d < best) { best = d; active = i; }
-      });
-      // At the end of the track, the last card is the active one
-      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 4) active = cards.length - 1;
-      dots.forEach((dot, i) => dot.classList.toggle('is-active', i === active));
-    };
-    track.addEventListener('scroll', () => {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-  }
 
   /* ---------- Hero video (when chosen in the CMS) ----------
      Muted, looping, inline. Visitors who ask for reduced motion see the poster image instead. */
