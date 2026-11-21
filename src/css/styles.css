@@ -1139,8 +1139,10 @@ input, textarea { font: inherit; color: inherit; }
   .inquiry__step[data-step-panel="2"] { gap: 24px; }
   .inquiry__question { font-size: calc(30px * var(--type)); letter-spacing: -0.005em; }
   .options { gap: 18px; }
-  .option__title { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
-  .option__desc { font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); }
+  /* Step 1 options match the step 2 fields (16px, outside the mobile type scale) */
+  .option__title { font-size: 16px; line-height: 24px; }
+  .option__desc { font-size: 14px; line-height: 22px; }
+  .option__radio, .option input { margin-top: 3px; } /* centred on the 24px title line */
   .d-only { display: none; }
   .m-only { display: inline; }
   .fields { column-gap: 16px; row-gap: 20px; }
