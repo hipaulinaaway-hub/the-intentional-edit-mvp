@@ -189,7 +189,7 @@ content:
             label: Text
             type: text
           - name: button
-            label: Button label (also used in the mobile menu)
+            label: Button label
             type: string
 
       # ------------------------------------------------------------------ FAQ
