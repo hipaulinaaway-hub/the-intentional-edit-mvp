@@ -24,9 +24,6 @@ eleventyExcludeFromCollections: true
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=La+Belle+Aurore&display=swap" rel="stylesheet">
 
-  {%- if hero.image %}
-  <link rel="preload" as="image" href="{{ hero.image }}">
-  {%- endif %}
   <link rel="stylesheet" href="/css/styles.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -53,11 +50,11 @@ eleventyExcludeFromCollections: true
     <!-- 01 Hero -->
     <header class="hero" id="top">
       {%- if heroIsVideo %}
-      <video class="hero__img hero__video" autoplay muted loop playsinline preload="auto"{% if hero.image %} poster="{{ hero.image }}"{% endif %} aria-hidden="true" data-hero-video>
+      <video class="hero__img hero__video" autoplay muted loop playsinline preload="auto"{% if hero.image %} poster="{% imageUrl hero.image, 1600 %}"{% endif %} aria-hidden="true" data-hero-video>
         <source src="{{ hero.video }}"{% if hero.video | lower | endsWith(".webm") %} type="video/webm"{% else %} type="video/mp4"{% endif %}>
       </video>
       {%- elif hero.image %}
-      <img class="hero__img" src="{{ hero.image }}" alt="" fetchpriority="high">
+      {% picture hero.image, "", "(max-width: 767px) 1200px, 100vw", [640, 960, 1280, 1600, 2000], { class: "hero__img", loading: "eager", fetchpriority: "high", decoding: "auto" } %}
       {%- endif %}
       <div class="hero__shade" aria-hidden="true"></div>
 
@@ -107,18 +104,18 @@ eleventyExcludeFromCollections: true
         </div>
 
         <div class="services__cards" data-carousel data-reveal-group>
-          {%- for item in services.items %}
+          {%- asyncEach item in services.items %}
           <article class="card" data-reveal>
             <div class="card__media">
               <span class="card__stamp" aria-hidden="true"><img src="/assets/svg/stamp-portrait-cotton.svg" alt=""></span>
-              <span class="card__photo"><img src="{{ item.image }}" alt="{{ item.image_alt }}" loading="lazy"></span>
+              <span class="card__photo">{% picture item.image, item.image_alt, "(max-width: 767px) 202px, (max-width: 1199px) 30vw, 268px", [320, 540, 800] %}</span>
             </div>
             <div class="card__text">
               <h3 class="h3"><button class="card__btn" type="button" data-inquire data-service="{{ item.form_option }}">{{ item.title }}<span class="sr-only"> — start an inquiry</span></button></h3>
               <p class="body card__desc">{{ item.description }}</p>
             </div>
           </article>
-          {%- endfor %}
+          {%- endeach %}
         </div>
 
         <div class="services__dots" aria-hidden="true" data-carousel-dots>
@@ -132,12 +129,13 @@ eleventyExcludeFromCollections: true
       <section class="about" id="about" aria-labelledby="about-title">
         <div class="about__media" data-reveal>
           <div class="about__photo">
-            <img src="{{ about.photo }}" alt="{{ about.photo_alt }}" loading="lazy" style="object-position: 50% {{ focusMap[about.photo_focus] or '50%' }}">
+            {%- set photoPosition = "object-position: 50% " + (focusMap[about.photo_focus] or "50%") %}
+            {% picture about.photo, about.photo_alt, "(max-width: 767px) calc(100vw - 48px), (max-width: 1023px) 85vw, (max-width: 1199px) 45vw, 520px", [480, 720, 1040, 1400], { style: photoPosition } %}
           </div>
           {%- if about.stamp_photo %}
           <div class="stamp stamp--about" aria-hidden="true">
             <span class="stamp__paper"><img src="/assets/svg/stamp-small-stone.svg" alt=""></span>
-            <img class="stamp__photo" src="{{ about.stamp_photo }}" alt="" loading="lazy">
+            {% picture about.stamp_photo, "", "(max-width: 767px) 98px, 144px", [160, 320, 480], { class: "stamp__photo" } %}
           </div>
           {%- endif %}
         </div>
@@ -194,9 +192,9 @@ eleventyExcludeFromCollections: true
       {%- if instagram.tiles and instagram.tiles.length %}
       <section class="ig" aria-label="Instagram {{ site.instagram_handle }}">
         <ul class="ig__list" data-reveal style="--ig-count: {{ instagram.tiles.length }}">
-          {%- for tile in instagram.tiles %}
-          <li><a class="ig__tile" href="{{ site.instagram_url }}" target="_blank" rel="noopener"><img src="{{ tile.image }}" alt="{{ tile.alt }}" loading="lazy"></a></li>
-          {%- endfor %}
+          {%- asyncEach tile in instagram.tiles %}
+          <li><a class="ig__tile" href="{{ site.instagram_url }}" target="_blank" rel="noopener">{% picture tile.image, tile.alt, "(max-width: 767px) 140px, (max-width: 1199px) 180px, 14vw", [200, 400] %}</a></li>
+          {%- endeach %}
         </ul>
       </section>
       {%- endif %}
@@ -358,7 +356,7 @@ eleventyExcludeFromCollections: true
 
         <!-- Sent -->
         <div class="inquiry__step inquiry__sent" data-step-panel="sent" hidden>
-          <span class="inquiry__seal" aria-hidden="true"><img src="/assets/svg/seal-embossed.svg" alt=""></span>
+          <span class="inquiry__seal" aria-hidden="true">{% picture "/assets/img/seal-embossed.png", "", "111px", [111, 222, 333] %}</span>
           <div class="inquiry__sent-copy">
             <h2 class="inquiry__question" tabindex="-1">{{ inquiry.sent_title }}</h2>
             <p class="body-lg">{{ inquiry.sent_text }}</p>

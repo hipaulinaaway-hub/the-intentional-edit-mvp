@@ -5,3 +5,4 @@ _site/
 # Local tooling and full-size design originals (not needed to build the site)
 .claude/
 design-source/
+.cache/

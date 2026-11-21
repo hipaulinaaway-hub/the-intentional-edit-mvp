@@ -33,7 +33,7 @@ src/
     ig/                 Instagram tiles (Pages CMS "Instagram tiles" library)
     video/              hero videos (Pages CMS "Videos" library)
     svg/                logo, stamps, icons (design assets, not edited in the CMS)
-design-source/          full-size original exports from Figma; not used by the site
+design-source/          full-size Figma exports (incl. the 6.5 MB seal SVG); not used by the site, not in git
 ```
 
 ## Run it locally
@@ -79,9 +79,19 @@ simply ignored while the type is Image.
 3. The sidebar shows **Homepage** (Hero, Services, Meet Tyler, Ready to unplug banner, FAQ,
    Instagram strip, Inquiry form) and **Site settings**.
 
-Uploads go to `src/assets/img`, `src/assets/ig` and `src/assets/video`. Pages CMS doesn't
-resize images, so compress photos before uploading (e.g. squoosh.app; aim for under ~400 KB
-per photo, ~2880 px wide for the hero).
+Uploads go to `src/assets/img`, `src/assets/ig` and `src/assets/video`.
+
+### Images are optimized automatically
+
+Photos in `src/assets/img` and `src/assets/ig` are **masters**: upload the original,
+good-quality JPG (no need to compress it first). On every build, `@11ty/eleventy-img` turns each
+photo into AVIF, WebP and JPEG in several widths, and the page uses `<picture>` with
+`srcset`/`sizes`, so each visitor downloads only the size their screen needs, in the best
+format their browser supports. A visitor scrolling the whole page downloads about 0.5 MB of
+images. PNGs keep their transparency (AVIF/WebP/PNG). Sizes and quality are set in
+`eleventy.config.js` (`IMAGE_OPTIONS` and the `picture` calls in `src/index.njk`).
+
+Hero videos are served as uploaded, so keep them small (see below).
 
 Service cards have a "Pre-selects this inquiry option" field. It must match an option title in
 Inquiry form → Options exactly (e.g. `Trip planning`), or the card opens the form with nothing

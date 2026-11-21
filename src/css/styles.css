@@ -70,6 +70,11 @@ h1, h2, h3, h4, p, ul, ol, figure, blockquote, address { margin: 0; padding: 0; 
 ul, ol { list-style: none; }
 address { font-style: normal; }
 img, svg { display: block; max-width: 100%; }
+/* Responsive images are wrapped in <picture>; let the <img> lay out as if the wrapper weren't there */
+picture { display: contents; }
+/* <source> isn't hidden by default; inside a flex parent (the hero) it would become an empty flex item.
+   Browsers still read its srcset for picking the image size. */
+picture > source { display: none; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 input, textarea { font: inherit; color: inherit; }
@@ -760,7 +765,7 @@ input, textarea { font: inherit; color: inherit; }
 /* Sent */
 .inquiry__sent { gap: 28px; }
 .inquiry__seal { position: relative; width: 88px; height: 88px; }
-.inquiry__seal img { position: absolute; inset: -6.96% -13.05% -19.14% -13.05%; width: auto; height: auto; max-width: none; }
+.inquiry__seal img { position: absolute; left: -13.05%; top: -6.96%; width: 126.1%; height: 126.1%; max-width: none; } /* seal art incl. its shadow is 111px around an 88px seal */
 .inquiry__sent-copy { display: flex; flex-direction: column; gap: 16px; }
 .inquiry__sent .inquiry__actions { margin-top: 0; padding-top: 8px; justify-content: flex-start; }
 
