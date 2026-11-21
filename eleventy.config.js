@@ -16,6 +16,8 @@ const IMAGE_OPTIONS = {
   sharpAvifOptions: { quality: 58 },
   sharpWebpOptions: { quality: 78 },
   sharpJpegOptions: { quality: 80, mozjpeg: true, progressive: true },
+  // PNG is only the fallback for very old browsers (transparent images): palette-compress it
+  sharpPngOptions: { palette: true, quality: 85, effort: 10 },
   // readable file names: hero-1600w.avif
   filenameFormat: (id, src, width, format) => `${path.parse(src).name}-${width}w.${format}`,
 };
