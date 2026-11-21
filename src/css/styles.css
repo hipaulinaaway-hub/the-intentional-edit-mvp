@@ -1099,7 +1099,16 @@ input, textarea { font: inherit; color: inherit; }
   .footer__links li > * { display: flex; align-items: center; min-height: 44px; }
   .footer__contact { align-items: center; text-align: center; width: 100%; }
   .footer__contact a { font-size: 16px; line-height: 26px; }
-  .footer__bottom { flex-direction: column; align-items: center; gap: 0; text-align: center; }
+  /* Figma mobile: location + tagline as their own block, then the line, then © alone */
+  .footer__bottom { flex-direction: column; align-items: center; gap: 5px; padding-top: 0; text-align: center; color: var(--ink); }
+  .footer__bottom::before { content: none; }
+  .footer__bottom > :first-child {
+    order: 1;
+    width: 100%;
+    margin-top: 35px; /* 40px from the tagline, as in Figma */
+    padding-top: 20px;
+    border-top: 1px solid var(--brown-dark);
+  }
 
   /* Pop-up → bottom sheet */
   .inquiry { animation: sheet-up 0.5s var(--ease-drawer); background: var(--brown-dark); }
