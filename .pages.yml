@@ -378,6 +378,11 @@ content:
         type: text
         options:
           maxlength: 160
+      - name: hide_from_search
+        label: Hide site from search engines
+        type: boolean
+        default: true
+        description: "On while the site is a client preview. Turn it off at launch so Google can list the site."
       - name: email
         label: Contact email
         type: string

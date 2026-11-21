@@ -107,6 +107,13 @@ Every save in Pages CMS commits to GitHub, and Cloudflare rebuilds and publishes
 
 Until then the pop-up works fully (validation and the Thank-you screen) but nothing is sent.
 
+## Before launch
+
+- **Search engines:** the site currently tells search engines not to index it (it's a client
+  preview on `the-intentional-edit-mvp.pages.dev`). At launch, turn off
+  Pages CMS → Site settings → **Hide site from search engines**.
+- **Formspree:** add the form ID (see above) so inquiries are actually delivered.
+
 ## Open items (from the Figma dev notes)
 
 - Hero photo: the current file is 1182×665; a 2880×1800+ original will look sharper on large screens.
