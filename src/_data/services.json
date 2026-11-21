@@ -1,0 +1,28 @@
+{
+  "eyebrow": "Ways to work together",
+  "title": "Our services",
+  "button": "Inquire",
+  "items": [
+    {
+      "title": "Hotels & Villas",
+      "description": "Rest by the water or wake in the mountains, with preferred-partner perks.",
+      "image": "/assets/img/service-hotels.jpg",
+      "image_alt": "White stone steps leading up to a villa doorway framed by potted plants",
+      "form_option": "Hotels & villas"
+    },
+    {
+      "title": "Trip Planning",
+      "description": "The culture, the food, the hidden gems, planned day by day around your pace.",
+      "image": "/assets/img/service-trip.jpg",
+      "image_alt": "A traveller on a mountain trail above a turquoise alpine lake",
+      "form_option": "Trip planning"
+    },
+    {
+      "title": "Full Concierge",
+      "description": "Every detail handled, before and during your trip, so all you have to do is arrive.",
+      "image": "/assets/img/service-concierge.jpg",
+      "image_alt": "A white resort pavilion above a pool and tropical gardens at sunset",
+      "form_option": "Full concierge"
+    }
+  ]
+}

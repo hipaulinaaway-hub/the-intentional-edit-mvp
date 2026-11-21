@@ -1,0 +1,7 @@
+node_modules/
+_site/
+.DS_Store
+
+# Local tooling and full-size design originals (not needed to build the site)
+.claude/
+design-source/

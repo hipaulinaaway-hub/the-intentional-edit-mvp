@@ -1,0 +1,406 @@
+# Pages CMS configuration — https://pagescms.org/docs/configuration/
+# Every section of the homepage is one JSON file in src/_data/. Saving in Pages CMS
+# commits to GitHub, and Cloudflare Pages rebuilds the site (npm run build → _site).
+
+media:
+  - name: images
+    label: Photos
+    input: src/assets/img
+    output: /assets/img
+    categories: [image]
+    rename: safe
+  - name: videos
+    label: Videos
+    input: src/assets/video
+    output: /assets/video
+    extensions: [mp4, webm]
+    rename: safe
+  - name: instagram
+    label: Instagram tiles
+    input: src/assets/ig
+    output: /assets/ig
+    categories: [image]
+    rename: safe
+
+content:
+  - name: homepage
+    label: Homepage
+    type: group
+    items:
+      # ---------------------------------------------------------------- Hero
+      - name: hero
+        label: Hero
+        type: file
+        path: src/_data/hero.json
+        format: json
+        fields:
+          - name: media_type
+            label: Background type
+            type: select
+            default: image
+            description: "Image or video behind the headline. For Video, also upload the video below; the image is still used as its poster (shown while it loads and for visitors who prefer reduced motion)."
+            options:
+              values:
+                - name: image
+                  label: Image
+                - name: video
+                  label: Video
+          - name: image
+            label: Background image (also the video poster)
+            type: image
+            required: true
+            description: "Landscape, at least 2880×1800 px, JPG or WebP under ~500 KB."
+            options:
+              media: images
+          - name: video
+            label: Background video
+            type: file
+            description: "Only used when Background type is Video. MP4 (H.264) or WebM, landscape, 10–20 s loop, no sound needed (it plays muted), ideally under 8 MB."
+            options:
+              media: videos
+              extensions: [mp4, webm]
+          - name: title_line_1
+            label: Headline, line 1
+            type: string
+            required: true
+          - name: title_line_2
+            label: Headline, line 2 (italic)
+            type: string
+          - name: eyebrow
+            label: Small heading
+            type: string
+          - name: text
+            label: Intro text (desktop only)
+            type: text
+          - name: button
+            label: Button label
+            type: string
+            required: true
+
+      # ------------------------------------------------------------ Services
+      - name: services
+        label: Services
+        type: file
+        path: src/_data/services.json
+        format: json
+        fields:
+          - name: eyebrow
+            label: Small heading
+            type: string
+          - name: title
+            label: Heading
+            type: string
+          - name: items
+            label: Service cards
+            type: object
+            list:
+              min: 1
+              max: 6
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+              - name: image
+                label: Photo
+                type: image
+                description: "Portrait photo (about 4:5), at least 800×1000 px."
+                options:
+                  media: images
+              - name: image_alt
+                label: Photo description (for screen readers)
+                type: string
+              - name: form_option
+                label: Pre-selects this inquiry option
+                type: string
+                description: "Clicking the card opens the inquiry form with this option ticked. Must match an option title in Inquiry form → Options exactly (e.g. Trip planning). Leave empty to pre-select nothing."
+          - name: button
+            label: Button label
+            type: string
+
+      # ----------------------------------------------------------- Meet Tyler
+      - name: about
+        label: Meet Tyler
+        type: file
+        path: src/_data/about.json
+        format: json
+        fields:
+          - name: eyebrow
+            label: Small heading
+            type: string
+          - name: title
+            label: Heading
+            type: string
+          - name: text
+            label: Text
+            type: text
+          - name: signature
+            label: Handwritten signature
+            type: string
+          - name: photo
+            label: Main photo
+            type: image
+            description: "Portrait photo, at least 1040×1600 px. The top and bottom are cropped slightly and move with scrolling."
+            options:
+              media: images
+          - name: photo_alt
+            label: Main photo description (for screen readers)
+            type: string
+          - name: photo_focus
+            label: Main photo focus
+            type: select
+            default: center
+            description: "Which part of the photo to keep in view when it's cropped."
+            options:
+              values:
+                - name: top
+                  label: Top
+                - name: center
+                  label: Center
+                - name: bottom
+                  label: Bottom
+          - name: stamp_photo
+            label: Stamp photo
+            type: image
+            description: "Small photo inside the postage stamp. Portrait, about 300×400 px. Leave empty to hide the stamp."
+            options:
+              media: images
+
+      # ------------------------------------------------- Ready to unplug (CTA)
+      - name: cta
+        label: Ready to unplug banner
+        type: file
+        path: src/_data/cta.json
+        format: json
+        fields:
+          - name: eyebrow
+            label: Small heading
+            type: string
+          - name: title
+            label: Heading
+            type: string
+          - name: text
+            label: Text
+            type: text
+          - name: button
+            label: Button label (also used in the mobile menu)
+            type: string
+
+      # ------------------------------------------------------------------ FAQ
+      - name: faq
+        label: FAQ
+        type: file
+        path: src/_data/faq.json
+        format: json
+        fields:
+          - name: eyebrow
+            label: Small heading
+            type: string
+          - name: title
+            label: Heading
+            type: string
+          - name: intro
+            label: Intro line
+            type: string
+          - name: note
+            label: Handwritten note
+            type: string
+          - name: items
+            label: Questions
+            type: object
+            description: "The first question is shown open."
+            list:
+              min: 1
+              collapsible:
+                collapsed: true
+                summary: "{question}"
+            fields:
+              - name: question
+                label: Question
+                type: string
+                required: true
+              - name: answer
+                label: Answer
+                type: text
+                required: true
+
+      # ------------------------------------------------------------ Instagram
+      - name: instagram
+        label: Instagram strip
+        type: file
+        path: src/_data/instagram.json
+        format: json
+        fields:
+          - name: tiles
+            label: Tiles
+            type: object
+            description: "All tiles link to the Instagram profile set in Site settings. Use 4:5 portrait images, about 800×1000 px."
+            list:
+              min: 1
+              max: 12
+              collapsible:
+                collapsed: true
+                summary: "{alt}"
+            fields:
+              - name: image
+                label: Image
+                type: image
+                required: true
+                options:
+                  media: instagram
+              - name: alt
+                label: Description (for screen readers)
+                type: string
+
+      # -------------------------------------------------------- Inquiry form
+      - name: inquiry
+        label: Inquiry form
+        type: file
+        path: src/_data/inquiry.json
+        format: json
+        fields:
+          - name: eyebrow
+            label: Small heading
+            type: string
+          - name: eyebrow_sent
+            label: Small heading after sending
+            type: string
+          - name: heading_line_1
+            label: Heading, line 1
+            type: string
+          - name: heading_line_2
+            label: Heading, line 2 (before the italic word)
+            type: string
+          - name: heading_italic
+            label: Heading, italic word
+            type: string
+          - name: steps
+            label: What happens next
+            type: string
+            list:
+              min: 1
+              max: 5
+          - name: step1_question
+            label: Step 1 question
+            type: string
+          - name: options
+            label: Options
+            type: object
+            list:
+              min: 1
+              max: 6
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: string
+              - name: description_mobile
+                label: Shorter description for phones (optional)
+                type: string
+          - name: step1_note
+            label: Step 1 note
+            type: string
+          - name: next_button
+            label: Next button
+            type: string
+          - name: step2_question
+            label: Step 2 question
+            type: string
+          - name: labels
+            label: Field labels
+            type: object
+            fields:
+              - name: first_name
+                label: First name
+                type: string
+              - name: last_name
+                label: Last name
+                type: string
+              - name: email
+                label: Email
+                type: string
+              - name: phone
+                label: Phone
+                type: string
+              - name: travel_dates
+                label: Travel dates
+                type: string
+              - name: call_time
+                label: Best time for a call
+                type: string
+              - name: message
+                label: Message
+                type: string
+          - name: back_button
+            label: Back button
+            type: string
+          - name: send_button
+            label: Send button
+            type: string
+          - name: error_message
+            label: Error message (if sending fails)
+            type: text
+          - name: sent_title
+            label: Thank-you heading
+            type: string
+          - name: sent_text
+            label: Thank-you text
+            type: text
+          - name: sent_button
+            label: Thank-you button
+            type: string
+
+  # ------------------------------------------------------------ Site settings
+  - name: site
+    label: Site settings
+    type: file
+    path: src/_data/site.json
+    format: json
+    fields:
+      - name: title
+        label: Browser tab / Google title
+        type: string
+        required: true
+      - name: description
+        label: Google description
+        type: text
+        options:
+          maxlength: 160
+      - name: email
+        label: Contact email
+        type: string
+        required: true
+      - name: phone
+        label: Phone (as displayed)
+        type: string
+      - name: instagram_handle
+        label: Instagram handle
+        type: string
+      - name: instagram_url
+        label: Instagram profile link
+        type: string
+      - name: footer_copyright
+        label: Footer copyright
+        type: string
+      - name: footer_location
+        label: Footer location
+        type: string
+      - name: footer_tagline
+        label: Footer tagline
+        type: string
+      - name: formspree_id
+        label: Formspree form ID
+        type: string
+        description: "The code after /f/ in your Formspree form URL. Leave empty and the form shows the Thank-you screen without sending anything."

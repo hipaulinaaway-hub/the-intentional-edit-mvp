@@ -1,0 +1,32 @@
+{
+  "tiles": [
+    {
+      "image": "/assets/ig/ig-1-santorini.jpg",
+      "alt": "Instagram post: Postcards from Santorini"
+    },
+    {
+      "image": "/assets/ig/ig-2-meet-the-person.jpg",
+      "alt": "Instagram post: Meet the person behind the Intentional Edit"
+    },
+    {
+      "image": "/assets/ig/ig-3-our-services.jpg",
+      "alt": "Instagram post: Our services, explained"
+    },
+    {
+      "image": "/assets/ig/ig-4-switzerland.jpg",
+      "alt": "Instagram post: Unplugged in Switzerland, day 4"
+    },
+    {
+      "image": "/assets/ig/ig-5-postcards.jpg",
+      "alt": "Instagram post: Postcards from our travelers"
+    },
+    {
+      "image": "/assets/ig/ig-6-santorini.jpg",
+      "alt": "Instagram post: Postcards from Santorini"
+    },
+    {
+      "image": "/assets/ig/ig-7-faq.jpg",
+      "alt": "Instagram post: Frequently asked questions"
+    }
+  ]
+}

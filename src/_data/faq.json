@@ -1,0 +1,32 @@
+{
+  "eyebrow": "Before you inquire",
+  "title": "Frequently Asked Questions",
+  "intro": "Anything else? Ask in your inquiry.",
+  "note": "no silly questions — T.",
+  "items": [
+    {
+      "question": "How far ahead should I book?",
+      "answer": "Ideally three to six months out, or nine to twelve for peak season and milestone trips. My own first trip to Europe took five months to plan. Now that part is my job, not yours."
+    },
+    {
+      "question": "How much does planning cost?",
+      "answer": "It depends on the trip. After a short call I’ll send a clear planning fee up front, so you know exactly what you’re paying before anything is booked."
+    },
+    {
+      "question": "Can you work with my budget?",
+      "answer": "Yes. Tell me the number you’re comfortable with and I’ll design around it, putting the spend where it matters most to you."
+    },
+    {
+      "question": "Do you book flights?",
+      "answer": "I’ll recommend the best routes and timings for your itinerary and plan everything around them. How flights are handled is set out in your planning proposal."
+    },
+    {
+      "question": "When and how do I pay?",
+      "answer": "The planning fee is due when we begin. Hotels and experiences are paid on each supplier’s schedule, and I’ll keep every deadline in one place for you."
+    },
+    {
+      "question": "What if my plans change?",
+      "answer": "Life happens. I’ll handle the changes for you and walk you through each supplier’s policy before you book, so there are no surprises."
+    }
+  ]
+}

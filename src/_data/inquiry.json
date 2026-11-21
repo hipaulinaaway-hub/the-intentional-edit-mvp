@@ -1,0 +1,53 @@
+{
+  "eyebrow": "Inquire",
+  "eyebrow_sent": "Inquiry sent",
+  "heading_line_1": "Let’s plan",
+  "heading_line_2": "your",
+  "heading_italic": "reset.",
+  "steps": [
+    "You share the basics here.",
+    "We talk it through on a short call.",
+    "I send a plan built around you."
+  ],
+  "step1_question": "What can I help you with?",
+  "options": [
+    {
+      "title": "Hotels & villas",
+      "description": "I know where I want to go and need the right stay.",
+      "description_mobile": "I know where I want to go."
+    },
+    {
+      "title": "Trip planning",
+      "description": "One destination, planned day by day.",
+      "description_mobile": ""
+    },
+    {
+      "title": "Full concierge",
+      "description": "Multi-stop, every detail handled, door to door.",
+      "description_mobile": "Every detail handled, door to door."
+    },
+    {
+      "title": "Not sure yet",
+      "description": "Help me figure it out on a call.",
+      "description_mobile": ""
+    }
+  ],
+  "step1_note": "Takes about two minutes",
+  "next_button": "Next",
+  "step2_question": "How can I reach you?",
+  "labels": {
+    "first_name": "First name",
+    "last_name": "Last name",
+    "email": "Email address",
+    "phone": "Phone (optional)",
+    "travel_dates": "Rough travel dates",
+    "call_time": "Best time for a call",
+    "message": "Anything else I should know?"
+  },
+  "back_button": "← Back",
+  "send_button": "Send inquiry",
+  "error_message": "Something went wrong sending your inquiry. Please try again, or email theintentionaledit.travel@gmail.com.",
+  "sent_title": "Thank you!",
+  "sent_text": "Your inquiry is with me. I’ll reply within two working days to set up a time to chat, so keep an eye on your inbox.",
+  "sent_button": "Back to the homepage"
+}

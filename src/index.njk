@@ -1,0 +1,375 @@
+---
+permalink: /index.html
+eleventyExcludeFromCollections: true
+---
+{#-
+  The Intentional Edit — homepage template.
+  All copy and images come from src/_data/*.json, which Pages CMS edits (see .pages.yml).
+-#}
+{%- set heroIsVideo = hero.media_type == "video" and hero.video -%}
+{%- set focusMap = { "top": "20%", "center": "50%", "bottom": "80%" } -%}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <meta name="theme-color" content="#623e2a">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=La+Belle+Aurore&display=swap" rel="stylesheet">
+
+  {%- if hero.image %}
+  <link rel="preload" as="image" href="{{ hero.image }}">
+  {%- endif %}
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="page" id="page">
+    <!-- Slim nav: slides down when scrolling up past the hero -->
+    <div class="sticky-nav" data-sticky-nav>
+      <nav class="sticky-nav__inner" aria-label="Main (compact)">
+        <ul class="nav__group nav__group--left">
+          <li><a class="nav__link" href="#services">Services</a></li>
+          <li><a class="nav__link" href="#about">About</a></li>
+        </ul>
+        <a class="sticky-nav__logo" href="#top" aria-label="The Intentional Edit — back to top"></a>
+        <div class="nav__group nav__group--right">
+          <a class="nav__link" href="#faq">FAQ</a>
+          <button class="btn btn--outline btn--sm" type="button" data-inquire>Inquire</button>
+        </div>
+        <button class="sticky-nav__menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu" data-menu-open><span></span></button>
+      </nav>
+    </div>
+
+    <!-- 01 Hero -->
+    <header class="hero" id="top">
+      {%- if heroIsVideo %}
+      <video class="hero__img hero__video" autoplay muted loop playsinline preload="auto"{% if hero.image %} poster="{{ hero.image }}"{% endif %} aria-hidden="true" data-hero-video>
+        <source src="{{ hero.video }}"{% if hero.video | lower | endsWith(".webm") %} type="video/webm"{% else %} type="video/mp4"{% endif %}>
+      </video>
+      {%- elif hero.image %}
+      <img class="hero__img" src="{{ hero.image }}" alt="" fetchpriority="high">
+      {%- endif %}
+      <div class="hero__shade" aria-hidden="true"></div>
+
+      <nav class="nav" aria-label="Main">
+        <ul class="nav__group nav__group--left">
+          <li><a class="nav__link" href="#services">Services</a></li>
+          <li><a class="nav__link" href="#about">About</a></li>
+        </ul>
+        <a class="nav__logo" href="#top" aria-label="The Intentional Edit — home">
+          <picture>
+            <source media="(max-width: 767px)" srcset="/assets/svg/logo-script-mobile.svg">
+            <img src="/assets/svg/logo-script.svg" alt="The Intentional Edit" width="188" height="55">
+          </picture>
+        </a>
+        <div class="nav__group nav__group--right">
+          <a class="nav__link" href="#faq">FAQ</a>
+          <button class="btn btn--outline-light btn--sm" type="button" data-inquire>Inquire</button>
+        </div>
+        <button class="nav__menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu" data-menu-open>
+          <img src="/assets/svg/icon-menu.svg" alt="" width="28" height="28">
+        </button>
+      </nav>
+
+      <div class="hero__content">
+        <h1 class="hero__title">
+          <span class="hero__line"><span class="hero__line-inner">{{ hero.title_line_1 }}</span></span>
+          <span class="hero__line hero__line--italic"><span class="hero__line-inner">{{ hero.title_line_2 }}</span></span>
+        </h1>
+        <div class="hero__side">
+          <div class="hero__copy">
+            <p class="eyebrow">{{ hero.eyebrow }}</p>
+            {%- if hero.text %}
+            <p class="hero__text body-lg">{{ hero.text }}</p>
+            {%- endif %}
+          </div>
+          <button class="btn btn--light" type="button" data-inquire>{{ hero.button }}</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- 02 Services -->
+      <section class="services" id="services" aria-labelledby="services-title">
+        <div class="section-head" data-reveal-group>
+          <p class="eyebrow" data-reveal>{{ services.eyebrow }}</p>
+          <h2 class="h2" id="services-title" data-reveal>{{ services.title }}</h2>
+        </div>
+
+        <div class="services__cards" data-carousel data-reveal-group>
+          {%- for item in services.items %}
+          <article class="card" data-reveal>
+            <div class="card__media">
+              <span class="card__stamp" aria-hidden="true"><img src="/assets/svg/stamp-portrait-cotton.svg" alt=""></span>
+              <span class="card__photo"><img src="{{ item.image }}" alt="{{ item.image_alt }}" loading="lazy"></span>
+            </div>
+            <div class="card__text">
+              <h3 class="h3"><button class="card__btn" type="button" data-inquire data-service="{{ item.form_option }}">{{ item.title }}<span class="sr-only"> — start an inquiry</span></button></h3>
+              <p class="body card__desc">{{ item.description }}</p>
+            </div>
+          </article>
+          {%- endfor %}
+        </div>
+
+        <div class="services__dots" aria-hidden="true" data-carousel-dots>
+          {%- for item in services.items %}<span{% if loop.first %} class="is-active"{% endif %}></span>{% endfor -%}
+        </div>
+
+        <button class="btn btn--outline" type="button" data-inquire data-reveal>{{ services.button }}</button>
+      </section>
+
+      <!-- 04 Meet Tyler -->
+      <section class="about" id="about" aria-labelledby="about-title">
+        <div class="about__media" data-reveal>
+          <div class="about__photo">
+            <img src="{{ about.photo }}" alt="{{ about.photo_alt }}" loading="lazy" style="object-position: 50% {{ focusMap[about.photo_focus] or '50%' }}">
+          </div>
+          {%- if about.stamp_photo %}
+          <div class="stamp stamp--about" aria-hidden="true">
+            <span class="stamp__paper"><img src="/assets/svg/stamp-small-stone.svg" alt=""></span>
+            <img class="stamp__photo" src="{{ about.stamp_photo }}" alt="" loading="lazy">
+          </div>
+          {%- endif %}
+        </div>
+        <div class="about__intro" data-reveal-group>
+          <p class="eyebrow" data-reveal>{{ about.eyebrow }}</p>
+          <h2 class="h2 about__title" id="about-title" data-reveal>{{ about.title }}</h2>
+          <p class="body-lg about__text" data-reveal>{{ about.text }}</p>
+          {%- if about.signature %}
+          <p class="script-lg about__sign" data-reveal>{{ about.signature }}</p>
+          {%- endif %}
+        </div>
+      </section>
+
+      <!-- 08 Start planning -->
+      <section class="cta" aria-labelledby="cta-title" data-reveal-group>
+        <img class="cta__script" src="/assets/svg/script-background.svg" alt="" aria-hidden="true">
+        <p class="eyebrow cta__eyebrow" data-reveal>{{ cta.eyebrow }}</p>
+        <h2 class="cta__title" id="cta-title" data-reveal><span class="cta__title-inner">{{ cta.title }}</span></h2>
+        <p class="body-lg cta__text" data-reveal>{{ cta.text }}</p>
+        <button class="btn btn--light" type="button" data-inquire data-reveal>{{ cta.button }}</button>
+      </section>
+
+      <!-- 08 FAQ -->
+      <section class="faq" id="faq" aria-labelledby="faq-title">
+        <div class="faq__left" data-reveal-group>
+          <div class="faq__intro">
+            <p class="eyebrow" data-reveal>{{ faq.eyebrow }}</p>
+            <h2 class="h2 faq__title" id="faq-title" data-reveal>{{ faq.title }}</h2>
+            <p class="body" data-reveal>{{ faq.intro }}</p>
+          </div>
+          {%- if faq.note %}
+          <p class="script-sm faq__note" aria-hidden="true" data-reveal>{{ faq.note }}</p>
+          {%- endif %}
+        </div>
+
+        <div class="faq__list" data-accordion data-reveal>
+          {%- for item in faq.items %}
+          <div class="faq-item{% if loop.first %} is-open{% endif %}">
+            <h3 class="faq-item__heading">
+              <button class="faq-item__btn" type="button" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="faq-a{{ loop.index }}" id="faq-q{{ loop.index }}">
+                <span class="faq-item__q">{{ item.question }}</span>
+                <span class="faq-item__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="faq-item__panel" id="faq-a{{ loop.index }}" role="region" aria-labelledby="faq-q{{ loop.index }}">
+              <div class="faq-item__inner"><p class="faq-item__a">{{ item.answer }}</p></div>
+            </div>
+          </div>
+          {%- endfor %}
+        </div>
+      </section>
+
+      <!-- 10 Instagram strip -->
+      {%- if instagram.tiles and instagram.tiles.length %}
+      <section class="ig" aria-label="Instagram {{ site.instagram_handle }}">
+        <ul class="ig__list" data-reveal style="--ig-count: {{ instagram.tiles.length }}">
+          {%- for tile in instagram.tiles %}
+          <li><a class="ig__tile" href="{{ site.instagram_url }}" target="_blank" rel="noopener"><img src="{{ tile.image }}" alt="{{ tile.alt }}" loading="lazy"></a></li>
+          {%- endfor %}
+        </ul>
+      </section>
+      {%- endif %}
+    </main>
+
+    <!-- 11 Footer -->
+    <footer class="footer">
+      <div class="footer__top">
+        <ul class="footer__links" data-reveal>
+          <li><a class="nav__link" href="#services">Services</a></li>
+          <li><a class="nav__link" href="#about">About</a></li>
+          <li><a class="nav__link" href="#faq">FAQ</a></li>
+          <li><button class="nav__link" type="button" data-inquire>Inquire</button></li>
+        </ul>
+        <span class="footer__logo" data-reveal><img src="/assets/svg/logo-monogram.svg" alt="The Intentional Edit monogram" width="78" height="123"></span>
+        <address class="footer__contact" data-reveal>
+          <p class="h4">Get in touch</p>
+          <a class="body" href="mailto:{{ site.email }}">{{ site.email }}</a>
+          {%- if site.phone %}
+          <a class="body" href="tel:{{ site.phone | tel }}">{{ site.phone }}</a>
+          {%- endif %}
+        </address>
+      </div>
+      <div class="footer__bottom" data-reveal>
+        <p>{{ site.footer_copyright }}</p>
+        <p>{{ site.footer_location }}</p>
+        <p>{{ site.footer_tagline }}</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <div class="menu__bar">
+      <img class="menu__logo" src="/assets/svg/logo-script-mobile.svg" alt="The Intentional Edit" width="162" height="47">
+      <button class="menu__close" type="button" aria-label="Close menu" data-menu-close>
+        <img src="/assets/svg/icon-close-menu.svg" alt="" width="28" height="28">
+      </button>
+    </div>
+    <div class="menu__content">
+      <ul class="menu__links">
+        <li><a class="menu__link" href="#services" data-menu-link>Services <img src="/assets/svg/icon-arrow.svg" alt="" width="20" height="20"></a></li>
+        <li><a class="menu__link" href="#about" data-menu-link>About <img src="/assets/svg/icon-arrow.svg" alt="" width="20" height="20"></a></li>
+        <li><a class="menu__link" href="#faq" data-menu-link>FAQ <img src="/assets/svg/icon-arrow.svg" alt="" width="20" height="20"></a></li>
+        <li><button class="menu__link" type="button" data-inquire>Inquire <img src="/assets/svg/icon-arrow.svg" alt="" width="20" height="20"></button></li>
+      </ul>
+      <button class="btn btn--light" type="button" data-inquire>{{ cta.button }}</button>
+    </div>
+    <div class="menu__contact">
+      <p class="eyebrow">Get in touch</p>
+      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      {%- if site.phone %}
+      <a href="tel:{{ site.phone | tel }}">{{ site.phone }}</a>
+      {%- endif %}
+      <a href="{{ site.instagram_url }}" target="_blank" rel="noopener">{{ site.instagram_handle }}</a>
+    </div>
+  </div>
+
+  <!-- Inquiry pop-up -->
+  <div class="inquiry" id="inquiry" role="dialog" aria-modal="true" aria-labelledby="inquiry-heading" hidden data-step="1">
+    <div class="inquiry__top">
+      <p class="eyebrow inquiry__top-label" data-label-default>{{ inquiry.eyebrow }}</p>
+      <p class="eyebrow inquiry__top-label" data-label-sent>{{ inquiry.eyebrow_sent }}</p>
+      <button class="inquiry__close" type="button" data-inquiry-close>
+        <img src="/assets/svg/icon-close.svg" alt="" width="22" height="22">
+        <span>Close</span>
+      </button>
+    </div>
+
+    <div class="inquiry__main">
+      <div class="inquiry__intro">
+        <p class="eyebrow inquiry__eyebrow" data-label-default>{{ inquiry.eyebrow }}</p>
+        <p class="eyebrow inquiry__eyebrow" data-label-sent>{{ inquiry.eyebrow_sent }}</p>
+        <p class="inquiry__heading" id="inquiry-heading">{{ inquiry.heading_line_1 }} <br class="inquiry__br">{{ inquiry.heading_line_2 }} <em>{{ inquiry.heading_italic }}</em></p>
+        <ol class="inquiry__steps">
+          {%- for step in inquiry.steps %}
+          <li><span class="inquiry__num">{{ "0" if loop.index < 10 }}{{ loop.index }}</span> {{ step }}</li>
+          {%- endfor %}
+        </ol>
+      </div>
+
+      <form class="inquiry__card" id="inquiry-form" novalidate data-formspree="{{ site.formspree_id }}">
+        <!-- Step 1 -->
+        <div class="inquiry__step" data-step-panel="1" role="group" aria-labelledby="q-step1">
+          <div class="progress">
+            <p class="eyebrow progress__label">Step 1 of 2</p>
+            <div class="progress__bar" aria-hidden="true"><span class="is-done"></span><span></span></div>
+          </div>
+          <h2 class="inquiry__question" id="q-step1" tabindex="-1">{{ inquiry.step1_question }}</h2>
+          <div class="options" role="radiogroup" aria-labelledby="q-step1">
+            {%- for option in inquiry.options %}
+            <label class="option">
+              <input type="radio" name="service" value="{{ option.title }}">
+              <span class="option__radio" aria-hidden="true"></span>
+              <span class="option__text">
+                <span class="option__title">{{ option.title }}</span>
+                {%- if option.description_mobile %}
+                <span class="option__desc"><span class="d-only">{{ option.description }}</span><span class="m-only">{{ option.description_mobile }}</span></span>
+                {%- elif option.description %}
+                <span class="option__desc">{{ option.description }}</span>
+                {%- endif %}
+              </span>
+            </label>
+            {%- endfor %}
+          </div>
+          <div class="inquiry__actions">
+            <p class="body">{{ inquiry.step1_note }}</p>
+            <button class="btn btn--primary" type="button" data-next disabled>{{ inquiry.next_button }}</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="inquiry__step" data-step-panel="2" role="group" aria-labelledby="q-step2" hidden>
+          <div class="progress">
+            <p class="eyebrow progress__label">Step 2 of 2</p>
+            <div class="progress__bar" aria-hidden="true"><span class="is-done"></span><span class="is-done"></span></div>
+          </div>
+          <h2 class="inquiry__question" id="q-step2" tabindex="-1">{{ inquiry.step2_question }}</h2>
+          <div class="fields">
+            <div class="field">
+              <input id="f-first" name="first_name" type="text" autocomplete="given-name" required aria-describedby="f-first-err">
+              <label for="f-first">{{ inquiry.labels.first_name }}</label>
+              <p class="field__error" id="f-first-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <input id="f-last" name="last_name" type="text" autocomplete="family-name">
+              <label for="f-last">{{ inquiry.labels.last_name }}</label>
+            </div>
+            <div class="field">
+              <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="f-email-err">
+              <label for="f-email">{{ inquiry.labels.email }}</label>
+              <p class="field__error" id="f-email-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+              <label for="f-phone">{{ inquiry.labels.phone }}</label>
+            </div>
+            <div class="field">
+              <input id="f-dates" name="travel_dates" type="text">
+              <label for="f-dates">{{ inquiry.labels.travel_dates }}</label>
+            </div>
+            <div class="field">
+              <input id="f-calltime" name="best_call_time" type="text">
+              <label for="f-calltime">{{ inquiry.labels.call_time }}</label>
+            </div>
+            <div class="field field--textarea">
+              <textarea id="f-notes" name="message" rows="2"></textarea>
+              <label for="f-notes">{{ inquiry.labels.message }}</label>
+            </div>
+            <!-- Honeypot for spam bots: leave empty -->
+            <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+          </div>
+          <p class="inquiry__form-error" role="alert" hidden>{{ inquiry.error_message }}</p>
+          <div class="inquiry__actions">
+            <button class="link-back" type="button" data-back>{{ inquiry.back_button }}</button>
+            <button class="btn btn--primary" type="submit" data-submit>{{ inquiry.send_button }}</button>
+          </div>
+        </div>
+
+        <!-- Sent -->
+        <div class="inquiry__step inquiry__sent" data-step-panel="sent" hidden>
+          <span class="inquiry__seal" aria-hidden="true"><img src="/assets/svg/seal-embossed.svg" alt=""></span>
+          <div class="inquiry__sent-copy">
+            <h2 class="inquiry__question" tabindex="-1">{{ inquiry.sent_title }}</h2>
+            <p class="body-lg">{{ inquiry.sent_text }}</p>
+          </div>
+          <div class="inquiry__actions">
+            <button class="btn btn--primary" type="button" data-inquiry-close>{{ inquiry.sent_button }}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="cursor-pill" aria-hidden="true"><span>Inquire</span></div>
+
+  <script src="/js/main.js" defer></script>
+</body>
+</html>
