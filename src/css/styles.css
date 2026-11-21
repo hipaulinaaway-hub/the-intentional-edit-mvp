@@ -764,10 +764,10 @@ input, textarea { font: inherit; color: inherit; }
   position: absolute; left: 0; top: 17px;
   font-size: 18px;
   line-height: 30px;
-  color: var(--ink);
+  color: var(--ink-65); /* resting hint, muted; full ink once it floats up as the label */
   pointer-events: none;
   transform-origin: left top;
-  transition: top 0.2s var(--ease), font-size 0.2s var(--ease), letter-spacing 0.2s var(--ease), line-height 0.2s var(--ease);
+  transition: top 0.2s var(--ease), font-size 0.2s var(--ease), letter-spacing 0.2s var(--ease), line-height 0.2s var(--ease), color 0.2s var(--ease);
 }
 .field--textarea label { top: 12px; }
 .field.is-active label,
@@ -778,6 +778,7 @@ input, textarea { font: inherit; color: inherit; }
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: var(--ink);
 }
 .field--textarea.is-active label { top: 10px; }
 .field:focus-within { border-bottom-color: var(--ink); }
