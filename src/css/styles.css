@@ -1087,7 +1087,7 @@ input, textarea { font: inherit; color: inherit; }
   .faq__left { gap: 20px; }
   .faq__note { margin-top: 12px; }
   .faq-item__btn { padding: 20px 0; }
-  .faq-item__q { font-size: calc(20px * var(--type)); line-height: 1.25; }
+  .faq-item__q { font-size: calc(26px * var(--type)); line-height: 1.25; } /* 20.8px on phones: 30% above the scaled 16px */
   .faq-item__panel { --pull: -8px; }
   .faq-item__a { font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); padding-bottom: 20px; }
 
