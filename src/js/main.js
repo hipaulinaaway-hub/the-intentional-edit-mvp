@@ -82,16 +82,30 @@
   const menuOpenBtns = [...document.querySelectorAll('[data-menu-open]')]; // hero + scroll-up bar
   let menuTrigger = menuOpenBtns[0];
 
+  // Open/close are CSS transitions on .is-open (see "Mobile menu" in styles.css), so a quick
+  // re-open mid-close simply reverses. `hidden` is set only once the close has played out.
+  const MENU_CLOSE_MS = 320;
+  let menuHideTimer = 0;
+  const menuIsOpen = () => menu.classList.contains('is-open');
+
   function openMenu() {
+    clearTimeout(menuHideTimer);
     lastFocused = document.activeElement;
     menu.hidden = false;
+    menu.inert = false;
+    void menu.offsetWidth; // start from the closed state so the transition runs
+    menu.classList.add('is-open');
     menuOpenBtns.forEach((b) => b.setAttribute('aria-expanded', 'true'));
     lockPage();
     menu.querySelector('[data-menu-close]').focus();
   }
-  function closeMenu({ restoreFocus = true } = {}) {
-    if (menu.hidden) return;
-    menu.hidden = true;
+  function closeMenu({ restoreFocus = true, instant = false } = {}) {
+    if (!menuIsOpen()) return;
+    menu.classList.remove('is-open');
+    menu.inert = true; // not clickable or focusable while it plays out
+    clearTimeout(menuHideTimer);
+    if (instant) menu.hidden = true;
+    else menuHideTimer = setTimeout(() => { menu.hidden = true; }, MENU_CLOSE_MS);
     menuOpenBtns.forEach((b) => b.setAttribute('aria-expanded', 'false'));
     unlockPage();
     if (restoreFocus && lastFocused) lastFocused.focus();
@@ -107,7 +121,7 @@
     trapFocus(menu, e);
   });
   // Close the menu if the viewport grows past mobile
-  window.matchMedia('(min-width: 768px)').addEventListener('change', (mq) => { if (mq.matches) closeMenu({ restoreFocus: false }); });
+  window.matchMedia('(min-width: 768px)').addEventListener('change', (mq) => { if (mq.matches) closeMenu({ restoreFocus: false, instant: true }); });
 
   /* ---------- FAQ accordion (one open at a time) ---------- */
   document.querySelectorAll('[data-accordion]').forEach((list) => {
@@ -323,8 +337,8 @@
   }
 
   function openInquiry(trigger) {
-    const fromMenu = !menu.hidden;
-    if (fromMenu) closeMenu({ restoreFocus: false });
+    const fromMenu = menuIsOpen();
+    if (fromMenu) closeMenu({ restoreFocus: false, instant: true }); // the sheet slides over it
     lastFocused = fromMenu ? menuTrigger : (trigger || document.activeElement);
     if (dialog.dataset.step === 'sent') resetForm();
     // A service card pre-selects its option on step 1

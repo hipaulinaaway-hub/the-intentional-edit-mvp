@@ -573,8 +573,24 @@ input, textarea { font: inherit; color: inherit; }
   overflow-y: auto;
   background: var(--brown-dark);
   color: var(--cream);
-  animation: fade-in 0.3s var(--ease);
+  /* Opens like a blind from the top edge (where the menu button is); closes back up, quicker */
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.32s var(--ease);
 }
+.menu.is-open { clip-path: inset(0); transition: clip-path 0.5s var(--ease-drawer); }
+/* links + contact arrive together as one group (no one-by-one), the X turns into place */
+.menu__content, .menu__contact {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.18s var(--ease), transform 0.18s var(--ease);
+}
+.menu.is-open .menu__content, .menu.is-open .menu__contact {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.5s var(--ease) 0.14s, transform 0.6s var(--ease) 0.14s;
+}
+.menu__close img { opacity: 0; transform: rotate(-90deg); transition: opacity 0.18s var(--ease), transform 0.18s var(--ease); }
+.menu.is-open .menu__close img { opacity: 1; transform: none; transition: opacity 0.4s var(--ease) 0.1s, transform 0.6s var(--ease) 0.1s; }
 .menu__bar { display: flex; align-items: center; justify-content: space-between; }
 .menu__logo { width: 162px; height: auto; }
 .menu__close { display: flex; align-items: center; justify-content: flex-end; width: 44px; height: 44px; }
@@ -933,6 +949,9 @@ input, textarea { font: inherit; color: inherit; }
   .inquiry__card, .inquiry__intro, .inquiry__step,
   .inquiry__sent-copy, .inquiry__sent .inquiry__actions { animation-name: fade !important; }
   .inquiry, .inquiry.is-closing { animation-name: fade !important; }
+  .menu, .menu.is-open { clip-path: none; opacity: 0; transition: opacity 0.25s ease; }
+  .menu.is-open { opacity: 1; }
+  .menu__content, .menu__contact, .menu__close img { transform: none !important; }
   .inquiry.is-closing { animation-direction: reverse !important; }
   .progress__bar span::after { animation: none !important; }
   .card__media, .card__photo img, .ig__tile img, .btn { transition-property: opacity, background-color, color, border-color !important; }
