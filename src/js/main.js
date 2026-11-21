@@ -24,6 +24,34 @@
   }, true);
   document.addEventListener('pointerdown', () => root.classList.remove('is-keyboard'), true);
 
+  /* ---------- In-page links without #hash, and reloads start at the top ----------
+     Menu/nav links used to add #faq etc. to the address, so a reload jumped back to that
+     section; iOS Safari also restores the old scroll position. A shared link like /#faq
+     still opens at that section on a fresh visit. */
+  const navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  if (navEntry && navEntry.type === 'reload') {
+    // only on reload, so Back from Instagram still returns to where you were
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    window.scrollTo(0, 0);
+    window.addEventListener('load', () => window.scrollTo(0, 0), { once: true });
+  }
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    const id = link.getAttribute('href').slice(1);
+    const target = id === 'top' ? document.body : document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    if (id === 'top') window.scrollTo({ top: 0 });
+    else target.scrollIntoView(); // smooth via CSS scroll-behavior, unless reduced motion
+    // keyboard users continue from the section they jumped to
+    if (target !== document.body) {
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+    }
+  });
+
   /* ---------- Shared: modal open/close helpers ---------- */
   let lastFocused = null;
   let scrollbarComp = 0;

@@ -89,6 +89,8 @@ input, textarea { font: inherit; color: inherit; }
 .js:not(.is-keyboard) .card:has(.card__btn:focus-visible),
 .js:not(.is-keyboard) .option input:focus-visible + .option__radio { outline: none; }
 [hidden] { display: none !important; }
+/* sections focused after an in-page link jump (main.js) get no ring */
+[tabindex="-1"]:focus { outline: none; }
 
 .skip-link {
   position: absolute; left: 16px; top: -100px; z-index: 100;

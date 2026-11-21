@@ -54,7 +54,8 @@ eleventyExcludeFromCollections: true
         <source src="{{ hero.video }}"{% if hero.video | lower | endsWith(".webm") %} type="video/webm"{% else %} type="video/mp4"{% endif %}>
       </video>
       {%- elif hero.image %}
-      {% picture hero.image, "", "(max-width: 767px) 1200px, 100vw", [640, 960, 1280, 1600, 2000], { class: "hero__img", loading: "eager", fetchpriority: "high", decoding: "auto" } %}
+      {#- phones show a tall centre crop (~1200 CSS px wide), so 3x screens need ~3600 px; the sunset sky bands at photo quality, hence the gentler compression -#}
+      {% picture hero.image, "", "(max-width: 767px) 1200px, 100vw", [640, 960, 1280, 1600, 2000, 2560, 3200, 3600], { class: "hero__img", loading: "eager", fetchpriority: "high", decoding: "auto" }, { sharpAvifOptions: { quality: 62 }, sharpWebpOptions: { quality: 84 }, sharpJpegOptions: { quality: 84, mozjpeg: true, progressive: true } } %}
       {%- endif %}
       <div class="hero__shade" aria-hidden="true"></div>
 
