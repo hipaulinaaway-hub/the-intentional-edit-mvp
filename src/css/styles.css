@@ -22,6 +22,7 @@
   --brown-dark-30: rgba(98, 62, 42, 0.3);
   --ink-80: rgba(46, 29, 20, 0.8);
   --ink-60: rgba(46, 29, 20, 0.6);
+  --ink-65: rgba(46, 29, 20, 0.65); /* lightest ink that keeps small text at ~5:1 on cream */
   --cream-88: rgba(251, 249, 244, 0.88);
   --cream-85: rgba(251, 249, 244, 0.85);
   --cream-75: rgba(251, 249, 244, 0.75);
@@ -726,7 +727,7 @@ input, textarea { font: inherit; color: inherit; }
 .option input:focus-visible + .option__radio { outline: 2px solid var(--brown); outline-offset: 3px; }
 .option__text { display: flex; flex-direction: column; gap: 2px; }
 .option__title { font-size: calc(18px * var(--type)); line-height: calc(30px * var(--type)); }
-.option__desc { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
+.option__desc { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); color: var(--ink-65); } /* muted under the title */
 .m-only { display: none; }
 
 .inquiry__actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: auto; }
