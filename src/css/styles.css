@@ -37,6 +37,9 @@
   --gutter: 64px;   /* min side margin for the 1200 column */
   --edge: 64px;     /* hero, nav and footer margins */
 
+  /* Type scale: every font-size / px line-height is multiplied by this (0.8 on phones) */
+  --type: 1;
+
   --ease: cubic-bezier(0.23, 1, 0.32, 1);        /* strong ease-out */
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);  /* iOS-like sheet */
@@ -46,7 +49,7 @@
   :root { --gutter: 48px; --edge: 48px; }
 }
 @media (max-width: 767px) {
-  :root { --gutter: 24px; --edge: 24px; }
+  :root { --gutter: 24px; --edge: 24px; --type: 0.8; } /* all type 20% smaller on phones */
 }
 
 /* ---------- Reset ---------- */
@@ -57,6 +60,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 body {
   margin: 0;
+  font-size: calc(16px * var(--type));
   background: var(--cream);
   color: var(--brown);
   font-family: var(--sans);
@@ -95,7 +99,7 @@ input, textarea { font: inherit; color: inherit; }
 .skip-link {
   position: absolute; left: 16px; top: -100px; z-index: 100;
   padding: 12px 20px; background: var(--ink); color: var(--cream);
-  font-size: 14px; border-radius: 100px;
+  font-size: calc(14px * var(--type)); border-radius: 100px;
 }
 .skip-link:focus { top: 16px; }
 
@@ -103,7 +107,7 @@ input, textarea { font: inherit; color: inherit; }
 .eyebrow {
   font-family: var(--sans);
   font-weight: 500;
-  font-size: 14px;
+  font-size: calc(14px * var(--type));
   line-height: 1;
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -111,7 +115,7 @@ input, textarea { font: inherit; color: inherit; }
 .nav__link {
   font-family: var(--sans);
   font-weight: 400;
-  font-size: 12px;
+  font-size: calc(12px * var(--type));
   line-height: 1.2;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -120,7 +124,7 @@ input, textarea { font: inherit; color: inherit; }
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  font-size: 46px;
+  font-size: calc(46px * var(--type));
   line-height: 1.05;
   letter-spacing: -0.01em;
 }
@@ -128,7 +132,7 @@ input, textarea { font: inherit; color: inherit; }
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  font-size: 32px;
+  font-size: calc(32px * var(--type));
   line-height: 1.1;
   letter-spacing: -0.005em;
 }
@@ -136,21 +140,21 @@ input, textarea { font: inherit; color: inherit; }
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  font-size: 26px;
+  font-size: calc(26px * var(--type));
   line-height: 1.2;
 }
-.body-lg { font-size: 18px; line-height: 30px; }
-.body { font-size: 16px; line-height: 26px; }
-.script-lg { font-family: var(--script); font-size: 44px; line-height: 1; color: var(--blue); }
-.script-sm { font-family: var(--script); font-size: 36px; line-height: 1.2; color: var(--blue); }
+.body-lg { font-size: calc(18px * var(--type)); line-height: calc(30px * var(--type)); }
+.body { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
+.script-lg { font-family: var(--script); font-size: calc(44px * var(--type)); line-height: 1; color: var(--blue); }
+.script-sm { font-family: var(--script); font-size: calc(36px * var(--type)); line-height: 1.2; color: var(--blue); }
 
 @media (max-width: 767px) {
-  .eyebrow { font-size: 11px; letter-spacing: 0.2em; }
-  .h2 { font-size: 40px; }
-  .h3 { font-size: 26px; }
-  .body-lg { font-size: 16px; line-height: 26px; }
-  .body { font-size: 15px; line-height: 24px; }
-  .script-lg, .script-sm { font-size: 26px; }
+  .eyebrow { font-size: calc(11px * var(--type)); letter-spacing: 0.2em; }
+  .h2 { font-size: calc(40px * var(--type)); }
+  .h3 { font-size: calc(26px * var(--type)); }
+  .body-lg { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
+  .body { font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); }
+  .script-lg, .script-sm { font-size: calc(26px * var(--type)); }
 }
 
 /* ---------- Buttons ---------- */
@@ -164,7 +168,7 @@ input, textarea { font: inherit; color: inherit; }
   border-radius: 100px;
   font-family: var(--sans);
   font-weight: 500;
-  font-size: 12px;
+  font-size: calc(12px * var(--type));
   line-height: 1;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -258,7 +262,7 @@ input, textarea { font: inherit; color: inherit; }
   flex-direction: column;
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 90px; /* Figma Display/H1 */
+  font-size: calc(90px * var(--type)); /* Figma Display/H1 */
   line-height: 0.92;
   letter-spacing: -0.025em;
   white-space: nowrap;
@@ -414,7 +418,7 @@ input, textarea { font: inherit; color: inherit; }
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  font-size: 46px;
+  font-size: calc(46px * var(--type));
   line-height: 1.05;
   letter-spacing: -0.01em;
   margin-block: 26px; /* the Figma text box is ~100px tall */
@@ -460,7 +464,7 @@ input, textarea { font: inherit; color: inherit; }
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  font-size: 26px;
+  font-size: calc(26px * var(--type));
   line-height: 1.2;
   color: var(--brown);
 }
@@ -497,8 +501,8 @@ input, textarea { font: inherit; color: inherit; }
 .faq-item__a {
   max-width: 600px;
   padding-bottom: 26px;
-  font-size: 16px;
-  line-height: 26px;
+  font-size: calc(16px * var(--type));
+  line-height: calc(26px * var(--type));
   color: var(--brown-85);
 }
 
@@ -553,7 +557,7 @@ input, textarea { font: inherit; color: inherit; }
   gap: 24px;
   padding-top: 20px;
   position: relative;
-  font-size: 12px;
+  font-size: calc(12px * var(--type));
   line-height: 1.2;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -606,13 +610,13 @@ input, textarea { font: inherit; color: inherit; }
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  font-size: 40px;
+  font-size: calc(40px * var(--type));
   line-height: 1.05;
   letter-spacing: -0.01em;
   text-align: left;
 }
 .menu__link img { flex: none; }
-.menu__contact { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; font-size: 15px; line-height: 24px; }
+.menu__contact { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); }
 .menu__contact .eyebrow { margin-bottom: 4px; }
 
 /* ==========================================================================
@@ -639,7 +643,7 @@ input, textarea { font: inherit; color: inherit; }
 .inquiry__close {
   display: flex; align-items: center; gap: 12px;
   padding: 11px 0;
-  font-size: 12px; line-height: 1.2; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: calc(12px * var(--type)); line-height: 1.2; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--cream);
 }
 
@@ -659,7 +663,7 @@ input, textarea { font: inherit; color: inherit; }
 .inquiry__heading {
   font-family: var(--serif);
   font-weight: 300;
-  font-size: 64px;
+  font-size: calc(64px * var(--type));
   line-height: 1;
   letter-spacing: -0.015em;
 }
@@ -669,10 +673,10 @@ input, textarea { font: inherit; color: inherit; }
   display: flex; align-items: center; gap: 20px;
   padding: 16px 0;
   border-top: 1px solid var(--cream-40);
-  font-size: 16px; line-height: 26px;
+  font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type));
 }
 .inquiry__steps li:last-child { border-bottom: 1px solid var(--cream-40); }
-.inquiry__num { font-size: 12px; line-height: 1.2; letter-spacing: 0.2em; }
+.inquiry__num { font-size: calc(12px * var(--type)); line-height: 1.2; letter-spacing: 0.2em; }
 
 .inquiry__card {
   width: 656px;
@@ -691,7 +695,7 @@ input, textarea { font: inherit; color: inherit; }
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  font-size: 44px;
+  font-size: calc(44px * var(--type));
   line-height: 1.1;
   letter-spacing: -0.01em;
   color: var(--brown);
@@ -722,13 +726,13 @@ input, textarea { font: inherit; color: inherit; }
 }
 .option input:focus-visible + .option__radio { outline: 2px solid var(--brown); outline-offset: 3px; }
 .option__text { display: flex; flex-direction: column; gap: 2px; }
-.option__title { font-size: 18px; line-height: 30px; }
-.option__desc { font-size: 16px; line-height: 26px; }
+.option__title { font-size: calc(18px * var(--type)); line-height: calc(30px * var(--type)); }
+.option__desc { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
 .m-only { display: none; }
 
 .inquiry__actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: auto; }
 .inquiry__actions .body { color: var(--ink); }
-.link-back { padding: 10px 12px 10px 0; font-size: 16px; line-height: 26px; }
+.link-back { padding: 10px 12px 10px 0; font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
 
 /* Step 2 fields — underline field with floating label */
 .fields {
@@ -781,13 +785,13 @@ input, textarea { font: inherit; color: inherit; }
 .field.has-error label { color: var(--error); }
 .field__error {
   position: absolute; left: 0; top: calc(100% + 6px);
-  font-size: 13px; line-height: 18px;
+  font-size: calc(13px * var(--type)); line-height: calc(18px * var(--type));
   color: var(--error);
 }
 @keyframes autofill-start { from { opacity: 1; } to { opacity: 1; } }
 .field input:-webkit-autofill { animation: autofill-start 1ms; -webkit-box-shadow: 0 0 0 100px var(--cream) inset; -webkit-text-fill-color: var(--ink); }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-.inquiry__form-error { font-size: 14px; line-height: 20px; color: var(--error); }
+.inquiry__form-error { font-size: calc(14px * var(--type)); line-height: calc(20px * var(--type)); color: var(--error); }
 
 /* Sent */
 .inquiry__sent { gap: 28px; }
@@ -920,7 +924,7 @@ input, textarea { font: inherit; color: inherit; }
   border-radius: 50%;
   background: var(--brown-dark);
   color: var(--cream);
-  font-family: var(--sans); font-weight: 500; font-size: 11px; line-height: 1;
+  font-family: var(--sans); font-weight: 500; font-size: calc(11px * var(--type)); line-height: 1;
   letter-spacing: 0.2em; text-transform: uppercase;
   opacity: 0;
   transform: scale(0.6);
@@ -1040,7 +1044,7 @@ input, textarea { font: inherit; color: inherit; }
   .nav__logo { width: 162px; }
   .nav__menu-btn { display: flex; align-items: center; justify-content: flex-end; width: 44px; height: 44px; }
   .hero__content { gap: 24px; }
-  .hero__title { font-size: 56px; letter-spacing: -0.02em; } /* Figma Mobile/Display/H1 */
+  .hero__title { font-size: calc(56px * var(--type)); letter-spacing: -0.02em; } /* Figma Mobile/Display/H1 */
   .hero__line--italic { padding-left: 0; margin-top: -8px; }
   .hero__side { gap: 28px; width: 100%; }
   .hero__text { display: none; }
@@ -1075,7 +1079,7 @@ input, textarea { font: inherit; color: inherit; }
   /* CTA */
   .cta { gap: 24px; padding: 130px 24px; }
   .cta__script { width: 1028.035px; height: 219.8px; }
-  .cta__title { font-weight: 300; font-size: 52px; line-height: 1; letter-spacing: -0.02em; margin-block: 4px; }
+  .cta__title { font-weight: 300; font-size: calc(52px * var(--type)); line-height: 1; letter-spacing: -0.02em; margin-block: 4px; }
   .cta__text { max-width: 318px; }
 
   /* FAQ */
@@ -1083,9 +1087,9 @@ input, textarea { font: inherit; color: inherit; }
   .faq__left { gap: 20px; }
   .faq__note { margin-top: 12px; }
   .faq-item__btn { padding: 20px 0; }
-  .faq-item__q { font-size: 20px; line-height: 1.25; }
+  .faq-item__q { font-size: calc(20px * var(--type)); line-height: 1.25; }
   .faq-item__panel { --pull: -8px; }
-  .faq-item__a { font-size: 15px; line-height: 24px; padding-bottom: 20px; }
+  .faq-item__a { font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); padding-bottom: 20px; }
 
   /* Instagram */
   .ig__list { gap: 5px; }
@@ -1094,11 +1098,11 @@ input, textarea { font: inherit; color: inherit; }
   /* Footer */
   .footer { gap: 40px; padding: 56px 24px 28px; }
   .footer__top { flex-direction: column; gap: 32px; }
-  .footer__logo { order: -1; }
+  .footer__logo { order: -1; width: 94px; } /* 20% bigger than the 78px monogram */
   .footer__links { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 0 20px; width: 100%; }
   .footer__links li > * { display: flex; align-items: center; min-height: 44px; }
   .footer__contact { align-items: center; text-align: center; width: 100%; }
-  .footer__contact a { font-size: 16px; line-height: 26px; }
+  .footer__contact a { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
   /* Figma mobile: location + tagline as their own block, then the line, then © alone */
   .footer__bottom { flex-direction: column; align-items: center; gap: 5px; padding-top: 0; text-align: center; color: var(--ink); }
   .footer__bottom::before { content: none; }
@@ -1122,7 +1126,7 @@ input, textarea { font: inherit; color: inherit; }
   .inquiry__main { flex: 1; flex-direction: column; align-items: stretch; gap: 0; max-width: none; margin: 0; padding: 0; }
   .inquiry__intro { width: 100%; gap: 0; padding: 22px 24px 28px; }
   .inquiry__eyebrow, .inquiry__steps, .inquiry__br { display: none; }
-  .inquiry__heading { font-size: 40px; letter-spacing: -0.01em; }
+  .inquiry__heading { font-size: calc(40px * var(--type)); letter-spacing: -0.01em; }
   .inquiry__card,
   .inquiry[data-step="sent"] .inquiry__card {
     flex: 1;
@@ -1133,10 +1137,10 @@ input, textarea { font: inherit; color: inherit; }
   }
   .inquiry__step { gap: 24px; }
   .inquiry__step[data-step-panel="2"] { gap: 24px; }
-  .inquiry__question { font-size: 30px; letter-spacing: -0.005em; }
+  .inquiry__question { font-size: calc(30px * var(--type)); letter-spacing: -0.005em; }
   .options { gap: 18px; }
-  .option__title { font-size: 16px; line-height: 26px; }
-  .option__desc { font-size: 15px; line-height: 24px; }
+  .option__title { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
+  .option__desc { font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); }
   .d-only { display: none; }
   .m-only { display: inline; }
   .fields { column-gap: 16px; row-gap: 20px; }
@@ -1157,13 +1161,13 @@ input, textarea { font: inherit; color: inherit; }
   .field textarea { top: 26px; }
   /* errors on one line (the required fields sit in the left column, so the line can run
      under the empty right-hand space) — two lines ran into the next row's label */
-  .field__error { top: calc(100% + 3px); font-size: 12px; line-height: 16px; white-space: nowrap; }
+  .field__error { top: calc(100% + 3px); font-size: calc(12px * var(--type)); line-height: calc(16px * var(--type)); white-space: nowrap; }
   .inquiry__sent .inquiry__actions { margin-top: auto; }
   .inquiry__sent .inquiry__actions .btn { width: 100%; }
 }
 
 @media (max-width: 360px) {
-  .hero__title { font-size: 50px; }
-  .menu__link { font-size: 36px; }
+  .hero__title { font-size: calc(50px * var(--type)); }
+  .menu__link { font-size: calc(36px * var(--type)); }
   .fields { grid-template-columns: minmax(0, 1fr); }
 }
