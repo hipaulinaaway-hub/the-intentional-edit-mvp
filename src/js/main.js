@@ -17,6 +17,13 @@
   const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]):not([tabindex="-1"]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  /* ---------- Smooth scrolling (Lenis) ----------
+     Eases mouse-wheel and trackpad scrolling; touch keeps the phone's own native scroll.
+     Skipped for reduced motion. Dialogs carry data-lenis-prevent so they scroll natively. */
+  const lenis = window.Lenis && !reducedMotion.matches
+    ? new window.Lenis({ lerp: 0.1, autoRaf: true })
+    : null;
+
   /* ---------- Focus rings for keyboard users only (see :focus-visible in styles.css) ---------- */
   const root = document.documentElement;
   document.addEventListener('keydown', (e) => {
@@ -43,7 +50,8 @@
     const target = id === 'top' ? document.body : document.getElementById(id);
     if (!target) return;
     e.preventDefault();
-    if (id === 'top') window.scrollTo({ top: 0 });
+    if (lenis) lenis.scrollTo(id === 'top' ? 0 : target); // honours scroll-margin-top
+    else if (id === 'top') window.scrollTo({ top: 0 });
     else target.scrollIntoView(); // smooth via CSS scroll-behavior, unless reduced motion
     // keyboard users continue from the section they jumped to
     if (target !== document.body) {
@@ -61,11 +69,13 @@
     if (scrollbarComp > 0) body.style.paddingRight = `${scrollbarComp}px`;
     body.classList.add('is-locked');
     page.inert = true;
+    if (lenis) lenis.stop();
   }
   function unlockPage() {
     body.classList.remove('is-locked');
     body.style.paddingRight = '';
     page.inert = false;
+    if (lenis) lenis.start();
   }
   function trapFocus(container, e) {
     if (e.key !== 'Tab') return;
@@ -242,6 +252,30 @@
     window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
     // Keep it open while a keyboard user is inside it
     stickyNav.addEventListener('focusin', () => setShown(true));
+  }
+
+  /* ---------- Hero is covered by the page ----------
+     The hero is sticky (styles.css), so the next section slides up over it. While that
+     happens --cover runs 0→1: the hero dims and its text drifts up a little. A hero video
+     pauses once it's fully hidden. */
+  if (hero) {
+    let heroH = hero.offsetHeight;
+    let queued = false;
+    let covered = false;
+    const render = () => {
+      queued = false;
+      const p = Math.min(1, Math.max(0, window.scrollY / heroH));
+      if (!reducedMotion.matches) hero.style.setProperty('--cover', p.toFixed(3));
+      const nowCovered = p >= 1;
+      if (heroVideo && nowCovered !== covered && !reducedMotion.matches) {
+        if (nowCovered) heroVideo.pause(); else heroVideo.play().catch(() => {});
+      }
+      covered = nowCovered;
+    };
+    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(render); } };
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', () => { heroH = hero.offsetHeight; queue(); });
+    render();
   }
 
   /* ---------- Brown banner: script watermark drifts sideways on scroll ---------- */

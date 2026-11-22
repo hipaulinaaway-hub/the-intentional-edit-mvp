@@ -58,6 +58,10 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
+/* Lenis smooth scrolling (js/vendor/lenis.min.js, started in main.js) */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
 body {
   margin: 0;
   font-size: calc(16px * var(--type));
@@ -206,7 +210,10 @@ input, textarea { font: inherit; color: inherit; }
    01 Hero
    ========================================================================== */
 .hero {
-  position: relative;
+  /* Stays pinned while the page slides up over it */
+  position: sticky;
+  top: 0;
+  z-index: 0;
   isolation: isolate;
   display: flex;
   flex-direction: column;
@@ -222,6 +229,16 @@ input, textarea { font: inherit; color: inherit; }
   object-fit: cover; /* works for the <img> and the <video> option */
 }
 .hero__video { pointer-events: none; }
+/* Dims as the next section covers it; --cover (0→1) is set on scroll in main.js */
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: #140d08; opacity: calc(var(--cover, 0) * 0.6);
+  pointer-events: none;
+}
+.hero__content { transform: translate3d(0, calc(var(--cover, 0) * -48px), 0); }
+/* Everything after the hero rides over it */
+#main, .footer { position: relative; z-index: 1; }
+#main { background: var(--cream); }
 .hero__shade {
   position: absolute; inset: 0; z-index: -1;
   background: linear-gradient(180deg, rgba(20, 13, 8, 0.45) 0%, rgba(20, 13, 8, 0) 28%, rgba(20, 13, 8, 0) 50%, rgba(20, 13, 8, 0.6) 100%);

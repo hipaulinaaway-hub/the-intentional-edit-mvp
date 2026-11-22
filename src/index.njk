@@ -224,7 +224,7 @@ eleventyExcludeFromCollections: true
   </div>
 
   <!-- Mobile menu -->
-  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden data-lenis-prevent>
     <div class="menu__bar">
       <img class="menu__logo" src="/assets/svg/logo-script-mobile.svg" alt="The Intentional Edit" width="162" height="47">
       <button class="menu__close" type="button" aria-label="Close menu" data-menu-close>
@@ -250,7 +250,7 @@ eleventyExcludeFromCollections: true
   </div>
 
   <!-- Inquiry pop-up -->
-  <div class="inquiry" id="inquiry" role="dialog" aria-modal="true" aria-labelledby="inquiry-heading" hidden data-step="1">
+  <div class="inquiry" id="inquiry" role="dialog" aria-modal="true" aria-labelledby="inquiry-heading" hidden data-step="1" data-lenis-prevent>
     <div class="inquiry__top">
       <p class="eyebrow inquiry__top-label" data-label-default>{{ inquiry.eyebrow }}</p>
       <p class="eyebrow inquiry__top-label" data-label-sent>{{ inquiry.eyebrow_sent }}</p>
@@ -367,6 +367,7 @@ eleventyExcludeFromCollections: true
 
   <div class="cursor-pill" aria-hidden="true"><span>Inquire</span></div>
 
+  <script src="/js/vendor/lenis.min.js" defer></script>
   <script src="/js/main.js" defer></script>
 </body>
 </html>
