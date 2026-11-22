@@ -36,6 +36,7 @@
   --content: 1200px;
   --gutter: 64px;   /* min side margin for the 1200 column */
   --edge: 64px;     /* hero, nav and footer margins */
+  --section-y: 144px; /* space above and below every content section */
 
   /* Type scale: every font-size / px line-height is multiplied by this (0.8 on phones) */
   --type: 1;
@@ -47,10 +48,10 @@
 }
 
 @media (max-width: 1199px) {
-  :root { --gutter: 48px; --edge: 48px; }
+  :root { --gutter: 48px; --edge: 48px; --section-y: 112px; }
 }
 @media (max-width: 767px) {
-  :root { --gutter: 24px; --edge: 24px; --type: 0.8; } /* all type 20% smaller on phones */
+  :root { --gutter: 24px; --edge: 24px; --type: 0.8; --section-y: 88px; } /* all type 20% smaller on phones */
 }
 
 /* ---------- Reset ---------- */
@@ -309,9 +310,9 @@ input, textarea { font: inherit; color: inherit; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
-  padding-top: 72px;
-  padding-bottom: 72px;
+  gap: 56px;
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
   background: var(--cream);
 }
 .section-head { display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
@@ -373,15 +374,15 @@ input, textarea { font: inherit; color: inherit; }
   grid-template-columns: minmax(0, 520fr) minmax(0, 560fr);
   align-items: center;
   column-gap: 120px;
-  padding-top: 56px;
-  padding-bottom: 128px;
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
   background: var(--cream);
   /* the tilted stamp hangs a few px past the right screen edge on phones (as in the Figma
      frame, which clips it); clip it here instead of letting the page scroll sideways */
   overflow-x: clip;
 }
 .about__media { position: relative; }
-.about__photo { position: relative; aspect-ratio: 520 / 640; overflow: hidden; }
+.about__photo { position: relative; aspect-ratio: 3 / 4; overflow: hidden; } /* same 3:4 as the other photos */
 .about__photo img {
   position: absolute;
   left: 0; top: -15%;
@@ -593,8 +594,8 @@ input, textarea { font: inherit; color: inherit; }
   justify-content: space-between;
   align-items: start;
   gap: 60px;
-  padding-top: 128px;
-  padding-bottom: 128px;
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
   background: var(--cream);
 }
 .faq__left { display: flex; flex-direction: column; gap: 48px; }
@@ -1154,13 +1155,13 @@ input, textarea { font: inherit; color: inherit; }
   .hero__line--italic { padding-left: 0.9em; margin-top: -0.1em; }
   .hero__side { width: min(420px, 100%); }
 
-  .services { padding-top: 104px; padding-bottom: 96px; gap: 56px; }
+  .services { gap: 56px; }
   .services__cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 56px 40px; }
   .services__cards .card { width: calc((100% - 40px) / 2); max-width: 360px; }
 
-  .about { column-gap: 56px; padding-top: 40px; padding-bottom: 104px; }
+  .about { column-gap: 56px; }
 
-  .faq { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 104px; padding-bottom: 104px; }
+  .faq { grid-template-columns: minmax(0, 1fr); gap: 40px; }
   .faq__left { gap: 20px; }
   .faq__intro { max-width: 520px; }
   .faq__list { max-width: 700px; width: 100%; }
@@ -1213,7 +1214,7 @@ input, textarea { font: inherit; color: inherit; }
   .hero__text { display: none; }
 
   /* Services — horizontal scroll-snap carousel */
-  .services { gap: 32px; padding: 72px 0; }
+  .services { gap: 40px; padding: var(--section-y) 0; }
   .services__cards {
     display: flex;
     flex-wrap: nowrap;
@@ -1234,8 +1235,7 @@ input, textarea { font: inherit; color: inherit; }
   .card__desc { max-width: none; }
 
   /* Meet Tyler */
-  .about { grid-template-columns: minmax(0, 1fr); row-gap: 56px; padding: 56px 24px; }
-  .about__photo { aspect-ratio: 342 / 420; }
+  .about { grid-template-columns: minmax(0, 1fr); row-gap: 64px; padding: var(--section-y) 24px; }
   .stamp--about { width: 39.92%; left: 80.66%; top: 86.47%; }
   .about__intro { gap: 24px; }
 
@@ -1243,7 +1243,7 @@ input, textarea { font: inherit; color: inherit; }
   .cta__title { font-weight: 300; font-size: calc(52px * var(--type)); line-height: 1; }
 
   /* FAQ */
-  .faq { gap: 40px; padding: 72px 24px; }
+  .faq { gap: 40px; padding: var(--section-y) 24px; }
   .faq__left { gap: 20px; }
   .faq__note { margin-top: 12px; }
   .faq-item__btn { padding: 16px 0; }

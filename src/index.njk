@@ -126,7 +126,7 @@ eleventyExcludeFromCollections: true
 
       {%- if destinations.show and destinations.slides.length %}
       <!-- 03 Destinations slider -->
-      <section class="dest" aria-roledescription="carousel" aria-label="{{ destinations.label }}" data-dest data-autoplay="{{ destinations.autoplay_seconds or 6 }}">
+      <section class="dest" id="journal" aria-roledescription="carousel" aria-label="{{ destinations.label }}" data-dest data-autoplay="{{ destinations.autoplay_seconds or 6 }}">
         <div class="dest__bgs" aria-hidden="true">
           {%- for slide in destinations.slides %}
           <div class="dest__bg{% if loop.first %} is-active{% endif %}">{% picture slide.background, "", "100vw", [800, 1280, 1920, 2560], {}, { sharpAvifOptions: { quality: 55 } } %}</div>

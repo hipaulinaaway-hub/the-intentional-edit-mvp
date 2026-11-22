@@ -475,7 +475,7 @@ content:
       - name: journal_url
         label: Journal link
         type: string
-        description: "Where the Journal link in the menu goes (e.g. a blog or Substack URL). Leave as # until the journal exists."
+        description: "Where the Journal link in the menu goes. #journal scrolls to the destinations slider; change it to the journal page address once it exists."
       - name: footer_copyright
         label: Footer copyright
         type: string
