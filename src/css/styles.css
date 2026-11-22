@@ -129,26 +129,24 @@ input, textarea { font: inherit; color: inherit; }
 }
 .h2 {
   font-family: var(--serif);
-  font-style: italic;
   font-weight: 500;
   font-size: calc(46px * var(--type));
   line-height: 1.05;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
 }
 .h3 {
   font-family: var(--serif);
-  font-style: italic;
   font-weight: 500;
   font-size: calc(32px * var(--type));
   line-height: 1.1;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.03em;
 }
 .h4 {
   font-family: var(--serif);
-  font-style: italic;
   font-weight: 500;
   font-size: calc(26px * var(--type));
   line-height: 1.2;
+  letter-spacing: -0.03em;
 }
 .body-lg { font-size: calc(18px * var(--type)); line-height: calc(30px * var(--type)); }
 .body { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
@@ -438,11 +436,10 @@ input, textarea { font: inherit; color: inherit; }
 .cta__eyebrow { color: var(--cream-75); }
 .cta__title {
   font-family: var(--serif);
-  font-style: italic;
   font-weight: 500;
   font-size: calc(46px * var(--type));
   line-height: 1.05;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
   margin-block: 26px; /* the Figma text box is ~100px tall */
 }
 .cta__text { max-width: 454px; color: var(--cream-85); }
@@ -484,11 +481,11 @@ input, textarea { font: inherit; color: inherit; }
 }
 .faq-item__q {
   font-family: var(--serif);
-  font-style: italic;
   font-weight: 500;
   font-size: calc(26px * var(--type));
   line-height: 1.2;
   color: var(--brown);
+  letter-spacing: -0.03em;
 }
 /* + / – drawn in CSS so it can animate */
 .faq-item__icon { position: relative; flex: none; width: 16px; height: 40px; color: var(--blue); }
@@ -713,11 +710,10 @@ input, textarea { font: inherit; color: inherit; }
 .inquiry__step[data-step-panel="2"] { gap: 36px; }
 .inquiry__question {
   font-family: var(--serif);
-  font-style: italic;
   font-weight: 500;
   font-size: calc(44px * var(--type));
   line-height: 1.1;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
   color: var(--brown);
 }
 .inquiry__question:focus { outline: none; }
@@ -1103,7 +1099,7 @@ input, textarea { font: inherit; color: inherit; }
   /* CTA */
   .cta { gap: 24px; padding: 130px 24px; }
   .cta__script { width: 1028.035px; height: 219.8px; }
-  .cta__title { font-weight: 300; font-size: calc(52px * var(--type)); line-height: 1; letter-spacing: -0.02em; margin-block: 4px; }
+  .cta__title { font-weight: 300; font-size: calc(52px * var(--type)); line-height: 1; letter-spacing: -0.03em; margin-block: 4px; }
   .cta__text { max-width: 318px; }
 
   /* FAQ */
@@ -1162,7 +1158,7 @@ input, textarea { font: inherit; color: inherit; }
   }
   .inquiry__step { gap: 24px; }
   .inquiry__step[data-step-panel="2"] { gap: 24px; }
-  .inquiry__question { font-size: calc(30px * var(--type)); letter-spacing: -0.005em; }
+  .inquiry__question { font-size: calc(30px * var(--type)); letter-spacing: -0.03em; }
   .options { gap: 18px; }
   /* Step 1 options match the step 2 fields (16px, outside the mobile type scale) */
   .option__title { font-size: 16px; line-height: 24px; }
