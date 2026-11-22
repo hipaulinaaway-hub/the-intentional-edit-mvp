@@ -15,6 +15,22 @@ eleventyExcludeFromCollections: true
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ site.title }}</title>
   <meta name="description" content="{{ site.description }}">
+  {#- Link previews (iMessage, WhatsApp, Facebook, LinkedIn, X). The image URL must be absolute, so it
+      uses the site address from Site settings — update that one field after moving to a new domain. -#}
+  {%- set siteUrl = (site.url or "") | replace(r/\/$/, "") %}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Intentional Edit">
+  <meta property="og:title" content="{{ site.title }}">
+  <meta property="og:description" content="{{ site.description }}">
+  <meta property="og:url" content="{{ siteUrl }}/">
+  {%- if site.share_image %}
+  <meta property="og:image" content="{{ siteUrl }}{% imageUrl site.share_image, 1200, "jpeg" %}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sunset over the sea with the words Unplug to reconnect">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ siteUrl }}{% imageUrl site.share_image, 1200, "jpeg" %}">
+  {%- endif %}
   <meta name="theme-color" content="#fbf9f4">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">

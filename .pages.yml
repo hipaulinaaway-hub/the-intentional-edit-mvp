@@ -445,6 +445,16 @@ content:
     path: src/_data/site.json
     format: json
     fields:
+      - name: url
+        label: Site address
+        type: string
+        description: "The live address, e.g. https://theintentionaledit.com — used for link previews. Change it after moving to a new domain."
+      - name: share_image
+        label: Link preview image
+        type: image
+        description: "Shown when the site is shared in messages and social media. 1200×630 px (landscape)."
+        options:
+          media: images
       - name: title
         label: Browser tab / Google title
         type: string
