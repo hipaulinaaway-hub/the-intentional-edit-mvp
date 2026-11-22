@@ -1253,7 +1253,7 @@ input, textarea { font: inherit; color: inherit; }
   .services__cards .card { flex: none; width: 236px; max-width: none; gap: 20px; scroll-snap-align: center; }
   .card__photo { inset: 10.29% 12.87%; width: 74.26%; height: 79.41%; } /* 35px inside 272×340 */
   .card__text { gap: 8px; }
-  .card__desc { max-width: 210px; }
+  .card__desc { max-width: none; } /* full card width: two lines */
 
   /* Meet Tyler */
   .about { grid-template-columns: minmax(0, 1fr); row-gap: 64px; padding: var(--section-y) 24px; }
