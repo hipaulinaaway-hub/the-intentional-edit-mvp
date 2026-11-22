@@ -55,8 +55,8 @@
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-/* Brown behind the page: iOS Safari shows this in the status-bar area and when you pull past the top */
-html { background: var(--brown-dark); }
+/* Cream behind the page: iOS Safari shows this in the status-bar area and when you pull past the top */
+html { background: var(--cream); }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
@@ -218,7 +218,7 @@ input, textarea { font: inherit; color: inherit; }
   z-index: 0;
   isolation: isolate;
   /* Safari tints its top bar from the colour of a pinned element at the top */
-  background-color: var(--brown-dark);
+  background-color: var(--cream);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
