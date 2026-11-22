@@ -535,7 +535,7 @@ input, textarea { font: inherit; color: inherit; }
    driving autoplay) but are hidden */
 @media (max-width: 1023px) {
   /* fixed heights: viewport units shift as iOS Safari's toolbar shows and hides, making the photos jump */
-  .dest { --foot: 72px; height: 560px; }
+  .dest { --foot: 72px; height: 616px; }
   .dest__stack, .dest__inquire { height: 210px; }
   .dest__title { font-size: calc(40px * var(--type)); }
   .dest__footer { inset: 0; display: block; padding: 0; pointer-events: none; }
