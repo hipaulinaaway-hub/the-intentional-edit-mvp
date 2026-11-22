@@ -320,6 +320,10 @@ content:
           - name: eyebrow
             label: Small heading
             type: string
+          - name: autoplay_seconds
+            label: Seconds per review
+            type: number
+            description: "How long each review stays before the next one fades in (e.g. 8)."
           - name: items
             label: Reviews
             type: object

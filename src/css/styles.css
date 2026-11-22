@@ -740,6 +740,10 @@ input, textarea { font: inherit; color: inherit; }
 .quote__by { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .quote__name { font-family: var(--script); font-size: calc(30px * var(--type)); line-height: 1.2; color: var(--sand); }
 .quote__trip { font-size: calc(11px * var(--type)); letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-75); }
+/* The next arrow's outline fills up as the countdown to the next review (same ring as the slider) */
+.quotes__ring { display: block; }
+.quotes.is-paused .quotes__ring circle { animation-play-state: paused; }
+.quotes.is-static .quotes__ring { display: none; }
 .quotes__count { font-size: calc(12px * var(--type)); letter-spacing: 0.2em; color: var(--cream-75); }
 @media (max-width: 767px) {
   .quotes { gap: 24px; padding: 112px 24px; } /* a little taller than the standard 88px */

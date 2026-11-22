@@ -365,10 +365,12 @@
   if (quotes) {
     const items = [...quotes.querySelectorAll('.quote')];
     const current = quotes.querySelector('[data-quotes-current]');
+    const ring = quotes.querySelector('.quotes__ring');
     let at = 0;
     const show = (to) => {
       const next = (to + items.length) % items.length;
       if (next === at) return;
+      if (ring) { ring.classList.remove('is-running'); void ring.getBoundingClientRect(); ring.classList.add('is-running'); }
       items[at].classList.remove('is-active'); items[at].setAttribute('aria-hidden', 'true'); items[at].inert = true;
       items[next].classList.add('is-active'); items[next].removeAttribute('aria-hidden'); items[next].inert = false;
       at = next;
@@ -387,6 +389,20 @@
       const dx = e.clientX - sx; const dy = e.clientY - sy;
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) show(at + (dx < 0 ? 1 : -1));
     });
+    // Autoplay: the ring on the next arrow is the timer; when it fills, the next review fades in.
+    // Paused off screen and while a keyboard user is inside; none for reduced motion.
+    if (!ring || items.length < 2 || reducedMotion.matches) quotes.classList.add('is-static');
+    else {
+      ring.querySelector('circle').addEventListener('animationend', () => show(at + 1));
+      let qFocused = false; let qVisible = false;
+      const qSync = () => quotes.classList.toggle('is-paused', qFocused || !qVisible);
+      quotes.addEventListener('focusin', () => { qFocused = root.classList.contains('is-keyboard'); qSync(); });
+      quotes.addEventListener('focusout', (e) => { if (!quotes.contains(e.relatedTarget)) { qFocused = false; qSync(); } });
+      quotes.addEventListener('pointerdown', () => { qFocused = false; qSync(); });
+      if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => { qVisible = en.isIntersecting; qSync(); }, { threshold: 0.35 }).observe(quotes);
+      else qVisible = true;
+      qSync();
+    }
   }
 
   /* ---------- Brown banner: script watermark drifts sideways, photos drift up and down
