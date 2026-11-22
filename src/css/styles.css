@@ -193,8 +193,8 @@ input, textarea { font: inherit; color: inherit; }
   .btn--primary:not(:disabled):hover { background: var(--ink); }
   /* Kit says cream → white, which is invisible on the photo/brown; invert instead */
   .btn--light:not(:disabled):hover { background: transparent; color: var(--cream); }
-  /* CTA banner: same hover as the Inquire button in Services */
-  .cta .btn--light:not(:disabled):hover { background: var(--brown-dark); border-color: var(--brown-dark); color: var(--cream); }
+  /* CTA banner: the fill clears to a cream outline (a brown fill would vanish into the brown banner) */
+  .cta .btn--light:not(:disabled):hover { background: transparent; border-color: var(--cream); color: var(--cream); }
   .btn--outline:not(:disabled):hover { background: var(--brown-dark); border-color: var(--brown-dark); color: var(--cream); }
   .btn--outline-light:not(:disabled):hover { background: var(--cream); color: var(--brown); }
   .nav__link:hover::after { transform: scaleX(1); }
