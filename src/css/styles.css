@@ -834,7 +834,7 @@ input, textarea { font: inherit; color: inherit; }
   width: 100%;
   max-width: 1440px;
   margin: auto;
-  padding: 104px 120px;
+  padding: 96px 120px 48px; /* a little more above, clear of Close */
 }
 .inquiry__intro { display: flex; flex-direction: column; gap: 28px; width: 440px; flex: none; }
 .inquiry[data-step="sent"] [data-label-default],
@@ -858,36 +858,37 @@ input, textarea { font: inherit; color: inherit; }
 .inquiry__num { font-size: calc(12px * var(--type)); line-height: 1.2; letter-spacing: 0.2em; }
 
 .inquiry__card {
-  width: 656px;
-  min-height: 742px;
+  width: 600px;
+  min-height: min(660px, calc(100svh - 144px)); /* never runs into the bottom of a short screen */
   flex: none;
   display: flex;
-  padding: 56px;
+  padding: 44px 48px;
   border-radius: 2px;
   background: var(--cream);
   color: var(--brown);
 }
-.inquiry[data-step="sent"] .inquiry__card { min-height: 0; width: 652px; padding: 72px 56px; }
-.inquiry__step { display: flex; flex-direction: column; gap: 40px; width: 100%; animation: step-in 0.3s var(--ease) both; }
-.inquiry__step[data-step-panel="2"] { gap: 36px; }
+.inquiry[data-step="sent"] .inquiry__card { min-height: 0; width: 600px; padding: 64px 48px; }
+.inquiry__step { display: flex; flex-direction: column; gap: 32px; width: 100%; animation: step-in 0.3s var(--ease) both; }
+.inquiry__step[data-step-panel="2"] { gap: 24px; }
 .inquiry__question {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: calc(44px * var(--type));
+  font-size: calc(40px * var(--type));
   line-height: 1.1;
   letter-spacing: -0.03em;
   color: var(--brown);
 }
 .inquiry__question:focus { outline: none; }
 
-.progress { display: flex; flex-direction: column; gap: 14px; }
+.progress { display: flex; flex-direction: column; gap: 12px; }
 .progress__label { color: var(--brown); }
+@media (min-width: 768px) { .progress__label { font-size: 10px; letter-spacing: 0.18em; } } /* quieter "Step 1 of 2" */
 .progress__bar { display: flex; gap: 8px; }
 .progress__bar span { position: relative; flex: 1; height: 2px; background: var(--brown-20); overflow: hidden; }
 .progress__bar span.is-done::after { content: ""; position: absolute; inset: 0; background: var(--brown); transform-origin: left center; }
 
 /* Step 1 options */
-.options { flex: 1; display: flex; flex-direction: column; gap: 22px; }
+.options { flex: 1; display: flex; flex-direction: column; gap: 18px; }
 .option { position: relative; display: flex; align-items: flex-start; gap: 16px; cursor: pointer; }
 .option input { position: absolute; opacity: 0; width: 18px; height: 18px; margin: 6px 0 0; pointer-events: none; }
 .option__radio {
