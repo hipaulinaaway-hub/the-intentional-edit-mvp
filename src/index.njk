@@ -37,10 +37,10 @@ eleventyExcludeFromCollections: true
         <ul class="nav__group nav__group--left">
           <li><a class="nav__link" href="#services">Services</a></li>
           <li><a class="nav__link" href="#about">About</a></li>
+          <li><a class="nav__link" href="{{ site.journal_url or "#" }}">Journal</a></li>
         </ul>
         <a class="sticky-nav__logo" href="#top" aria-label="The Intentional Edit — back to top"></a>
         <div class="nav__group nav__group--right">
-          <a class="nav__link" href="{{ site.journal_url or "#" }}">Journal</a>
           <a class="nav__link" href="#faq">FAQ</a>
           <button class="btn btn--outline btn--sm" type="button" data-inquire>Inquire</button>
         </div>
@@ -64,6 +64,7 @@ eleventyExcludeFromCollections: true
         <ul class="nav__group nav__group--left">
           <li><a class="nav__link" href="#services">Services</a></li>
           <li><a class="nav__link" href="#about">About</a></li>
+          <li><a class="nav__link" href="{{ site.journal_url or "#" }}">Journal</a></li>
         </ul>
         <a class="nav__logo" href="#top" aria-label="The Intentional Edit — home">
           <picture>
@@ -72,7 +73,6 @@ eleventyExcludeFromCollections: true
           </picture>
         </a>
         <div class="nav__group nav__group--right">
-          <a class="nav__link" href="{{ site.journal_url or "#" }}">Journal</a>
           <a class="nav__link" href="#faq">FAQ</a>
           <button class="btn btn--outline-light btn--sm" type="button" data-inquire>Inquire</button>
         </div>
