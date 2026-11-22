@@ -160,7 +160,7 @@ input, textarea { font: inherit; color: inherit; }
   .h3 { font-size: calc(26px * var(--type)); }
   .body-lg { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
   .body { font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); }
-  .script-lg, .script-sm { font-size: calc(18.2px * var(--type)); }
+  .script-lg, .script-sm { font-size: calc(21.84px * var(--type)); }
 }
 
 /* ---------- Buttons ---------- */
