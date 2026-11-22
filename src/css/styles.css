@@ -709,7 +709,7 @@ input, textarea { font: inherit; color: inherit; }
   isolation: isolate;
   display: flex; flex-direction: column; align-items: center;
   gap: 32px;
-  padding: var(--section-y) var(--gutter);
+  padding: calc(var(--section-y) + 40px) var(--gutter); /* roomier than a standard section: 184px on desktop */
   overflow: hidden;
   background: var(--brown-dark);
   color: var(--cream);
