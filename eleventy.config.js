@@ -53,6 +53,7 @@ export default function (eleventyConfig) {
   // Static files are copied as they are. Photo masters (assets/img, assets/ig)
   // are not copied: the optimized versions in /img/ are used instead.
   eleventyConfig.addPassthroughCopy({ "src/css": "css" });
+  eleventyConfig.addPassthroughCopy({ "src/favicon": "/" }); // favicon.svg, apple-touch-icon.png at the site root
   eleventyConfig.addPassthroughCopy({ "src/js": "js" });
   eleventyConfig.addPassthroughCopy({ "src/assets/svg": "assets/svg" });
   eleventyConfig.addPassthroughCopy({ "src/assets/video": "assets/video" });

@@ -530,9 +530,10 @@ input, textarea { font: inherit; color: inherit; }
   .dest__arrow:hover { background-color: rgba(251, 249, 244, 0.12); }
 }
 
-/* Phones: photos and name centred, the arrows side by side at the bottom; the tabs stay in the page
-   for screen readers (and keep driving autoplay) but are hidden */
-@media (max-width: 767px) {
+/* Phones and small tablets (the four tabs don't fit under 1024px): photos and name centred,
+   the arrows side by side at the bottom; the tabs stay in the page for screen readers (and keep
+   driving autoplay) but are hidden */
+@media (max-width: 1023px) {
   .dest { --foot: 72px; height: clamp(560px, 100svh, 760px); }
   .dest__stack, .dest__inquire { height: min(210px, 28svh); }
   .dest__title { font-size: calc(40px * var(--type)); }
@@ -541,6 +542,10 @@ input, textarea { font: inherit; color: inherit; }
   .dest__nav { position: absolute; left: 0; right: 0; bottom: 60px; justify-content: center; }
   .dest__arrow { pointer-events: auto; }
   .dest__ring { display: block; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .dest__stack, .dest__inquire { height: min(340px, 40svh); }
+  .dest__title { font-size: 48px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
