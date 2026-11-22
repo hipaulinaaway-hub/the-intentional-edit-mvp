@@ -443,7 +443,7 @@ input, textarea { font: inherit; color: inherit; }
   display: grid; place-items: center;
   pointer-events: none;
 }
-.dest__stack { grid-area: 1 / 1; position: relative; height: min(456px, 56svh); aspect-ratio: 322 / 456; }
+.dest__stack { grid-area: 1 / 1; position: relative; height: min(380px, 46svh); aspect-ratio: 322 / 456; }
 .dest__card { position: absolute; inset: 0; }
 .dest__card--1 { transform: translateX(12%) rotate(8.87deg); }
 .dest__card--2 { transform: translate(-8%, 3%) rotate(-8.18deg); }
@@ -473,7 +473,7 @@ input, textarea { font: inherit; color: inherit; }
 }
 .dest__slide.is-active .dest__title { opacity: 1; filter: none; transition: opacity 1.4s ease 0.8s, filter 1.4s ease 0.8s; }
 /* The photos open the inquiry, with the same "Inquire" cursor and lift as the service cards */
-.dest__inquire { grid-area: 1 / 1; z-index: 2; height: min(456px, 56svh); aspect-ratio: 322 / 456; }
+.dest__inquire { grid-area: 1 / 1; z-index: 2; height: min(380px, 46svh); aspect-ratio: 322 / 456; }
 .dest__slide.is-active .dest__inquire { pointer-events: auto; }
 .dest__inquire:focus-visible { outline: 2px solid var(--sand); outline-offset: 10px; }
 .dest__stack { transition: transform 0.5s var(--ease); }
