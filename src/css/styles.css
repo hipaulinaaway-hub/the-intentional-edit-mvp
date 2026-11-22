@@ -85,7 +85,7 @@ body { overflow-x: clip; }
 body.is-locked { overflow: hidden; }
 /* Text selection in our colours: brown on light sections, cream on the dark ones */
 ::selection { background: var(--brown); color: var(--cream); }
-:is(.hero, .dest, .cta, .menu, .inquiry) ::selection { background: var(--cream); color: var(--brown-dark); }
+:is(.hero, .dest, .cta, .quotes, .menu, .inquiry) ::selection { background: var(--cream); color: var(--brown-dark); }
 .inquiry__card ::selection { background: var(--brown); color: var(--cream); }
 h1, h2, h3, h4, p, ul, ol, figure, blockquote, address { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
@@ -697,6 +697,68 @@ input, textarea { font: inherit; color: inherit; }
   font-size: calc(16px * var(--type));
   line-height: calc(26px * var(--type));
   color: var(--brown-85);
+}
+
+/* ==========================================================================
+   09 Kind words (testimonials) — on/off and content in Pages CMS
+   One review at a time, centred on brown; the reviewer signs in the handwritten
+   face, like Tyler's own signature. Reviews cross-fade (main.js).
+   ========================================================================== */
+.quotes {
+  position: relative;
+  isolation: isolate;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 32px;
+  padding: var(--section-y) var(--gutter);
+  overflow: hidden;
+  background: var(--brown-dark);
+  color: var(--cream);
+  text-align: center;
+}
+.quotes__mark {
+  position: absolute; top: calc(var(--section-y) - 0.42em); left: 50%; z-index: -1;
+  transform: translateX(-50%);
+  font-family: var(--serif); font-size: calc(240px * var(--type)); line-height: 1;
+  color: var(--cream); opacity: 0.08;
+  pointer-events: none;
+}
+.quotes__eyebrow { color: var(--cream-75); }
+.quotes__stage {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 760px) 48px;
+  align-items: center; justify-content: center;
+  gap: 64px;
+  width: 100%;
+}
+.quotes__track { display: grid; grid-column: 2; touch-action: pan-y; }
+.quote {
+  grid-area: 1 / 1; margin: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+  opacity: 0; filter: blur(4px);
+  transition: opacity 0.6s ease, filter 0.6s ease;
+}
+.quote.is-active { opacity: 1; filter: none; transition: opacity 1.2s ease 0.35s, filter 1.2s ease 0.35s; }
+.quote__text {
+  margin: 0;
+  font-family: var(--serif); font-weight: 400; font-style: italic;
+  font-size: calc(36px * var(--type)); line-height: 1.3; letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.quote__by { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.quote__name { font-family: var(--script); font-size: calc(30px * var(--type)); line-height: 1.2; color: var(--sand); }
+.quote__trip { font-size: calc(11px * var(--type)); letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-75); }
+.quotes__count { font-size: calc(12px * var(--type)); letter-spacing: 0.2em; color: var(--cream-75); }
+@media (max-width: 767px) {
+  .quotes { gap: 24px; padding-inline: 24px; }
+  .quotes__stage { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 32px 12px; }
+  .quotes__track { grid-column: 1 / -1; grid-row: 1; }
+  .quotes__arrow--prev { grid-row: 2; justify-self: end; }
+  .quotes__arrow--next { grid-row: 2; justify-self: start; }
+  .quote__text { font-size: calc(30px * var(--type)); }
+  .quote__name { font-size: calc(30px * var(--type)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quote, .quote.is-active { filter: none !important; transition-delay: 0s !important; }
 }
 
 /* ==========================================================================

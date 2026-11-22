@@ -360,6 +360,35 @@
     sync();
   }
 
+  /* ---------- Kind words (testimonials): one review at a time, by hand only ---------- */
+  const quotes = document.querySelector('[data-quotes]');
+  if (quotes) {
+    const items = [...quotes.querySelectorAll('.quote')];
+    const current = quotes.querySelector('[data-quotes-current]');
+    let at = 0;
+    const show = (to) => {
+      const next = (to + items.length) % items.length;
+      if (next === at) return;
+      items[at].classList.remove('is-active'); items[at].setAttribute('aria-hidden', 'true'); items[at].inert = true;
+      items[next].classList.add('is-active'); items[next].removeAttribute('aria-hidden'); items[next].inert = false;
+      at = next;
+      if (current) current.textContent = String(at + 1).padStart(2, '0');
+    };
+    quotes.querySelector('[data-quotes-prev]')?.addEventListener('click', () => show(at - 1));
+    quotes.querySelector('[data-quotes-next]')?.addEventListener('click', () => show(at + 1));
+    quotes.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(at - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(at + 1); }
+    });
+    let sx = 0; let sy = 0;
+    quotes.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') { sx = e.clientX; sy = e.clientY; } });
+    quotes.addEventListener('pointerup', (e) => {
+      if (e.pointerType === 'mouse') return;
+      const dx = e.clientX - sx; const dy = e.clientY - sy;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) show(at + (dx < 0 ? 1 : -1));
+    });
+  }
+
   /* ---------- Brown banner: script watermark drifts sideways, photos drift up and down
      at their own speeds (data-speed), so the scene has a little depth ---------- */
   const cta = document.querySelector('.cta');

@@ -257,6 +257,36 @@ eleventyExcludeFromCollections: true
         </div>
       </section>
 
+      {%- if testimonials.show and testimonials.items.length %}
+      <!-- 09 Kind words (testimonials) -->
+      <section class="quotes" aria-roledescription="carousel" aria-label="Kind words from travelers" data-quotes>
+        <span class="quotes__mark" aria-hidden="true">&ldquo;</span>
+        <p class="eyebrow quotes__eyebrow" data-reveal>{{ testimonials.eyebrow }}</p>
+        <div class="quotes__stage" data-reveal>
+          {%- if testimonials.items.length > 1 %}
+          <button class="dest__arrow quotes__arrow quotes__arrow--prev" type="button" aria-label="Previous review" data-quotes-prev><img src="/assets/svg/arrow-circle-left.svg" alt="" width="48" height="48"></button>
+          {%- endif %}
+          <div class="quotes__track">
+            {%- for item in testimonials.items %}
+            <figure class="quote{% if loop.first %} is-active{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ testimonials.items.length }}"{% if not loop.first %} aria-hidden="true" inert{% endif %}>
+              <blockquote class="quote__text">{{ item.quote }}</blockquote>
+              <figcaption class="quote__by">
+                <span class="quote__name">&mdash; {{ item.name }}</span>
+                {%- if item.trip %}<span class="quote__trip">{{ item.trip }}</span>{% endif %}
+              </figcaption>
+            </figure>
+            {%- endfor %}
+          </div>
+          {%- if testimonials.items.length > 1 %}
+          <button class="dest__arrow quotes__arrow quotes__arrow--next" type="button" aria-label="Next review" data-quotes-next><img src="/assets/svg/arrow-circle-right.svg" alt="" width="48" height="48"></button>
+          {%- endif %}
+        </div>
+        {%- if testimonials.items.length > 1 %}
+        <p class="quotes__count" aria-hidden="true"><span data-quotes-current>01</span> / {{ "0" if testimonials.items.length < 10 }}{{ testimonials.items.length }}</p>
+        {%- endif %}
+      </section>
+      {%- endif %}
+
       <!-- 10 Instagram strip -->
       {%- if instagram.tiles and instagram.tiles.length %}
       <section class="ig" aria-label="Instagram {{ site.instagram_handle }}">
