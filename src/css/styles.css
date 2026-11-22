@@ -164,8 +164,8 @@ input, textarea { font: inherit; color: inherit; }
   .eyebrow { font-size: calc(11px * var(--type)); letter-spacing: 0.2em; }
   .h2 { font-size: calc(40px * var(--type)); }
   .h3 { font-size: calc(26px * var(--type)); }
-  .body-lg { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
-  .body { font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); }
+  .body-lg { font-size: calc(18px * var(--type)); line-height: calc(28px * var(--type)); } /* 14.4px on phones */
+  .body { font-size: calc(17px * var(--type)); line-height: calc(26px * var(--type)); }    /* 13.6px on phones */
   .script-lg, .script-sm { font-size: calc(25.8px * var(--type)); }
 }
 
@@ -1243,7 +1243,7 @@ input, textarea { font: inherit; color: inherit; }
   .nav__menu-btn { display: flex; align-items: center; justify-content: flex-end; width: 44px; height: 44px; }
   /* Centred composition: the headline block sits in the middle with its second line
      still stepped to the right, then the tagline and button centred under it */
-  .hero__content { align-items: center; gap: 28px; }
+  .hero__content { align-items: center; gap: 16px; } /* tagline sits close under the headline */
   .hero__title { align-self: center; font-size: calc(56px * var(--type)); letter-spacing: -0.02em; } /* Figma Mobile/Display/H1 */
   .hero__line--italic { padding-left: 0.6em; margin-top: -8px; }
   .hero__side { align-items: center; gap: 28px; width: 100%; text-align: center; }
@@ -1272,7 +1272,8 @@ input, textarea { font: inherit; color: inherit; }
   .services__cards .card { flex: none; width: 236px; max-width: none; gap: 20px; scroll-snap-align: center; }
   .card__photo { inset: 10.29% 12.87%; width: 74.26%; height: 79.41%; } /* 35px inside 272×340 */
   .card__text { gap: 8px; }
-  .card__desc { max-width: none; } /* full card width: two lines */
+  /* a touch wider than the card (into half of each gap) so every description stays on two lines */
+  .card__desc { max-width: none; width: calc(100% + 16px); margin-inline: -8px; font-size: calc(16px * var(--type)); line-height: calc(25px * var(--type)); }
 
   /* Meet Tyler */
   .about { grid-template-columns: minmax(0, 1fr); row-gap: 64px; padding: var(--section-y) 24px; }
@@ -1290,7 +1291,7 @@ input, textarea { font: inherit; color: inherit; }
   .faq-item__icon { height: 32px; } /* the icon box sets the row height: 64px rows */
   .faq-item__q { font-size: calc(26px * var(--type)); line-height: 1.25; } /* 20.8px on phones: 30% above the scaled 16px */
   .faq-item__panel { --pull: -8px; }
-  .faq-item__a { font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); padding-bottom: 16px; }
+  .faq-item__a { font-size: calc(17px * var(--type)); line-height: calc(26px * var(--type)); padding-bottom: 16px; }
 
   /* Instagram */
   .ig__list { gap: 5px; }
