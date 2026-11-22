@@ -1248,6 +1248,8 @@ input, textarea { font: inherit; color: inherit; }
     padding: 0 calc((100% - 236px) / 2) 16px; /* first and last card can sit centred */
     margin-bottom: -16px; /* room for the stamp shadow */
     overflow-x: auto;
+    overflow-y: hidden; /* horizontal only: no vertical wobble under the finger on iOS */
+    overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: 24px;
     scrollbar-width: none;
