@@ -534,8 +534,9 @@ input, textarea { font: inherit; color: inherit; }
    the arrows side by side at the bottom; the tabs stay in the page for screen readers (and keep
    driving autoplay) but are hidden */
 @media (max-width: 1023px) {
-  .dest { --foot: 72px; height: clamp(560px, 100svh, 760px); }
-  .dest__stack, .dest__inquire { height: min(210px, 28svh); }
+  /* fixed heights: viewport units shift as iOS Safari's toolbar shows and hides, making the photos jump */
+  .dest { --foot: 72px; height: 560px; }
+  .dest__stack, .dest__inquire { height: 210px; }
   .dest__title { font-size: calc(40px * var(--type)); }
   .dest__footer { inset: 0; display: block; padding: 0; pointer-events: none; }
   .dest__tabs { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -544,7 +545,8 @@ input, textarea { font: inherit; color: inherit; }
   .dest__ring { display: block; }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
-  .dest__stack, .dest__inquire { height: min(340px, 40svh); }
+  .dest { height: 760px; }
+  .dest__stack, .dest__inquire { height: 340px; }
   .dest__title { font-size: 48px; }
 }
 
