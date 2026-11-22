@@ -532,7 +532,7 @@ input, textarea { font: inherit; color: inherit; }
    for screen readers (and keep driving autoplay) but are hidden */
 @media (max-width: 767px) {
   .dest { --foot: 72px; height: clamp(560px, 100svh, 760px); }
-  .dest__stack, .dest__inquire { height: min(300px, 40svh); }
+  .dest__stack, .dest__inquire { height: min(210px, 28svh); }
   .dest__title { font-size: calc(40px * var(--type)); }
   .dest__footer { inset: 0; display: block; padding: 0; pointer-events: none; }
   .dest__tabs { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
