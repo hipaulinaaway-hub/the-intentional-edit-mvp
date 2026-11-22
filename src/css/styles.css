@@ -1086,10 +1086,11 @@ input, textarea { font: inherit; color: inherit; }
   .faq { gap: 40px; padding: 72px 24px; }
   .faq__left { gap: 20px; }
   .faq__note { margin-top: 12px; }
-  .faq-item__btn { padding: 20px 0; }
+  .faq-item__btn { padding: 16px 0; }
+  .faq-item__icon { height: 32px; } /* the icon box sets the row height: 64px rows */
   .faq-item__q { font-size: calc(26px * var(--type)); line-height: 1.25; } /* 20.8px on phones: 30% above the scaled 16px */
   .faq-item__panel { --pull: -8px; }
-  .faq-item__a { font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); padding-bottom: 20px; }
+  .faq-item__a { font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); padding-bottom: 16px; }
 
   /* Instagram */
   .ig__list { gap: 5px; }
@@ -1141,7 +1142,8 @@ input, textarea { font: inherit; color: inherit; }
   .options { gap: 18px; }
   /* Step 1 options match the step 2 fields (16px, outside the mobile type scale) */
   .option__title { font-size: 16px; line-height: 24px; }
-  .option__desc { font-size: 14px; line-height: 22px; }
+  .option__text { gap: 0; }
+  .option__desc { font-size: 14px; line-height: 20px; }
   .option__radio, .option input { margin-top: 3px; } /* centred on the 24px title line */
   .d-only { display: none; }
   .m-only { display: inline; }
