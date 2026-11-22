@@ -81,6 +81,10 @@ body {
    zoom out and show a white strip). Set on body only, so the menu's scroll lock still works. */
 body { overflow-x: clip; }
 body.is-locked { overflow: hidden; }
+/* Text selection in our colours: brown on light sections, cream on the dark ones */
+::selection { background: var(--brown); color: var(--cream); }
+:is(.hero, .dest, .cta, .menu, .inquiry) ::selection { background: var(--cream); color: var(--brown-dark); }
+.inquiry__card ::selection { background: var(--brown); color: var(--cream); }
 h1, h2, h3, h4, p, ul, ol, figure, blockquote, address { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
 address { font-style: normal; }
@@ -376,7 +380,7 @@ input, textarea { font: inherit; color: inherit; }
   column-gap: 120px;
   padding-top: var(--section-y);
   padding-bottom: var(--section-y);
-  background: var(--cream);
+  background: var(--sand); /* #F4F0E8 */
   /* the tilted stamp hangs a few px past the right screen edge on phones (as in the Figma
      frame, which clips it); clip it here instead of letting the page scroll sideways */
   overflow-x: clip;
