@@ -528,7 +528,7 @@ input, textarea { font: inherit; color: inherit; }
   .dest__title { font-size: calc(40px * var(--type)); }
   .dest__footer { inset: 0; display: block; padding: 0; pointer-events: none; }
   .dest__tabs { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .dest__nav { position: absolute; left: 0; right: 0; bottom: 40px; justify-content: center; }
+  .dest__nav { position: absolute; left: 0; right: 0; bottom: 60px; justify-content: center; }
   .dest__arrow { pointer-events: auto; }
   .dest__ring { display: block; }
 }
