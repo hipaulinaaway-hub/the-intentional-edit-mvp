@@ -352,11 +352,11 @@ input, textarea { font: inherit; color: inherit; }
   transition: transform 0.7s var(--ease);
 }
 .card__media { transition: transform 0.5s var(--ease); }
-.card__text { display: flex; flex-direction: column; gap: 8px; }
-.card__desc { max-width: 320px; color: var(--brown-85); }
+.card__text { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.card__desc { max-width: 300px; color: var(--brown-85); font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); }
 /* The title button stretches over the whole card, so clicking anywhere opens the inquiry */
 .card { position: relative; cursor: pointer; }
-.card__btn { font: inherit; letter-spacing: inherit; text-align: left; cursor: pointer; }
+.card__btn { font: inherit; letter-spacing: inherit; text-align: center; cursor: pointer; }
 .card__btn::after { content: ""; position: absolute; inset: 0; z-index: 1; }
 .card__btn:focus-visible { outline: none; }
 .card:has(.card__btn:focus-visible) { outline: 2px solid var(--brown); outline-offset: 10px; }
@@ -427,6 +427,10 @@ input, textarea { font: inherit; color: inherit; }
   background: var(--brown-dark);
   color: var(--sand);
   touch-action: pan-y;
+  /* Starts inset from the page edges and opens to full bleed as it scrolls into view:
+     --open runs 0→1 (main.js); without JS or with reduced motion it is simply full width */
+  --inset: calc((1 - var(--open, 1)) * var(--edge) * 1.5);
+  clip-path: inset(var(--inset) var(--inset));
 }
 .dest__bgs, .dest__bg { position: absolute; inset: 0; }
 .dest__bgs { z-index: -1; }

@@ -329,6 +329,25 @@
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go(index + (dx < 0 ? 1 : -1));
     });
 
+    // Opens from inset to full bleed as it scrolls into view (eased, scroll-linked)
+    if (!reducedMotion.matches) {
+      let queued = false;
+      const open = () => {
+        queued = false;
+        const r = dest.getBoundingClientRect();
+        const vh = window.innerHeight;
+        if (r.bottom < 0 || r.top > vh) return;
+        // 0 as the top edge enters at the bottom of the screen, 1 once it reaches the top
+        const p = Math.min(1, Math.max(0, (vh - r.top) / vh));
+        const eased = p * p * (3 - 2 * p); // smoothstep: soft start and finish
+        dest.style.setProperty('--open', eased.toFixed(3));
+      };
+      const queueOpen = () => { if (!queued) { queued = true; requestAnimationFrame(open); } };
+      window.addEventListener('scroll', queueOpen, { passive: true });
+      window.addEventListener('resize', queueOpen);
+      open();
+    }
+
     // Pause while off screen, or while a keyboard user is tabbing through the controls
     let focused = false; let visible = false;
     const sync = () => dest.classList.toggle('is-paused', focused || !visible);
