@@ -837,10 +837,10 @@ input, textarea { font: inherit; color: inherit; }
    Reveal hidden states only apply when JS is running (html.js).
    ========================================================================== */
 @keyframes hero-settle { from { transform: scale(1.06); } }
-@keyframes line-rise { from { transform: translateY(120%); } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(16px); } }
 @keyframes reveal-up { from { opacity: 0; transform: translateY(40px); } }
 @keyframes reveal-blur { from { opacity: 0; transform: translateY(40px); filter: blur(20px); } }
+@keyframes reveal-blur-soft { from { opacity: 0; transform: translateY(40px); filter: blur(8px); } }
 @keyframes fade { from { opacity: 0; } }
 @keyframes stamp-settle { from { transform: rotate(-2deg) scale(0.97); } }
 @keyframes card-in { from { opacity: 0; transform: translateY(24px); } }
@@ -854,21 +854,24 @@ input, textarea { font: inherit; color: inherit; }
 /* --- Hero entrance --- */
 .hero__img { animation: hero-settle 2.2s var(--ease) both; }
 .nav { animation: fade 0.8s var(--ease) 0.15s both; }
-/* each headline line rises from behind its own mask (clip-path leaves layout alone;
-   generous top/side room for italics, a little below for descenders) */
-.hero__line { clip-path: inset(-0.4em -0.5em -0.15em -0.5em); }
-.hero__line-inner { display: block; animation: line-rise 1.1s var(--ease) 0.25s both; }
-.hero__line--italic .hero__line-inner { animation-delay: 0.37s; }
-.hero__copy > *, .hero__side > .btn { animation: fade-up 0.9s var(--ease) both; }
-.hero__copy > :nth-child(1) { animation-delay: 0.6s; }
-.hero__copy > :nth-child(2) { animation-delay: 0.68s; }
-.hero__side > .btn { animation-delay: 0.76s; }
+/* each headline line comes into focus like the section headings (rise, fade, un-blur),
+   then the copy and button rise in after it */
+.hero__line-inner { display: block; animation: reveal-blur 1.6s var(--ease-expo) 0.3s both; }
+.hero__line--italic .hero__line-inner { animation-delay: 0.45s; }
+.hero__copy > * { animation: reveal-blur-soft 2s var(--ease-expo) both; }
+.hero__side > .btn { animation: reveal-up 2s var(--ease-expo) both; }
+.hero__copy > :nth-child(1) { animation-delay: 0.75s; }
+.hero__copy > :nth-child(2) { animation-delay: 0.9s; }
+.hero__side > .btn { animation-delay: 1.05s; }
 
 /* --- Scroll reveals (fill-mode backwards hands transform back to hover styles afterwards) --- */
 .js [data-reveal]:not(.is-visible) { opacity: 0; }
 .js [data-reveal].is-visible { animation: reveal-up 2s var(--ease-expo) var(--d, 0s) backwards; }
 /* Section headings come into focus: rise, fade and un-blur */
 .js h2[data-reveal].is-visible { animation: reveal-blur 1.6s var(--ease-expo) var(--d, 0s) backwards; }
+/* Text (labels, paragraphs) does the same with a lighter blur, sized for smaller type.
+   The handwritten notes keep their write-on. */
+.js p[data-reveal]:not(.about__sign):not(.faq__note).is-visible { animation: reveal-blur-soft 2s var(--ease-expo) var(--d, 0s) backwards; }
 .js .card.is-visible .card__media { animation: stamp-settle 1.1s var(--ease) var(--d, 0s) backwards; }
 /* Handwritten notes write themselves left to right, like ink. clip-path follows the
    element's own rotation, so the wipe runs along the tilted baseline. */
@@ -968,7 +971,8 @@ input, textarea { font: inherit; color: inherit; }
 
 /* --- Reduced motion: keep the fades, drop the movement --- */
 @media (prefers-reduced-motion: reduce) {
-  .hero__img, .hero__line-inner, .card__media, .inquiry__seal { animation: none !important; }
+  .hero__img, .card__media, .inquiry__seal { animation: none !important; }
+  .hero__line-inner { animation-name: fade !important; }
   .js .about__sign.is-visible, .js .faq__note.is-visible { animation: fade 0.9s ease both !important; }
   .faq-item__q, .faq-item__icon { transition-property: color !important; }
   .hero__copy > *, .hero__side > .btn, .js [data-reveal].is-visible,
