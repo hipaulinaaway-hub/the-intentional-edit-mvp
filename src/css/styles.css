@@ -1241,10 +1241,14 @@ input, textarea { font: inherit; color: inherit; }
   .nav__group { display: none; }
   .nav__logo { width: 162px; }
   .nav__menu-btn { display: flex; align-items: center; justify-content: flex-end; width: 44px; height: 44px; }
-  .hero__content { gap: 24px; }
-  .hero__title { font-size: calc(56px * var(--type)); letter-spacing: -0.02em; } /* Figma Mobile/Display/H1 */
-  .hero__line--italic { padding-left: 0; margin-top: -8px; }
-  .hero__side { gap: 28px; width: 100%; }
+  /* Centred composition: the headline block sits in the middle with its second line
+     still stepped to the right, then the tagline and button centred under it */
+  .hero__content { align-items: center; gap: 28px; }
+  .hero__title { align-self: center; font-size: calc(56px * var(--type)); letter-spacing: -0.02em; } /* Figma Mobile/Display/H1 */
+  .hero__line--italic { padding-left: 0.6em; margin-top: -8px; }
+  .hero__side { align-items: center; gap: 28px; width: 100%; text-align: center; }
+  .hero__copy { align-items: center; }
+  .hero__copy .eyebrow { max-width: 200px; line-height: 1.6; } /* two short lines, as in the mock-up */
   .hero__text { display: none; }
 
   /* Services — horizontal scroll-snap carousel */
