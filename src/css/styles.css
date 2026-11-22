@@ -715,13 +715,6 @@ input, textarea { font: inherit; color: inherit; }
   color: var(--cream);
   text-align: center;
 }
-.quotes__mark {
-  position: absolute; top: calc(var(--section-y) - 0.42em); left: 50%; z-index: -1;
-  transform: translateX(-50%);
-  font-family: var(--serif); font-size: calc(240px * var(--type)); line-height: 1;
-  color: var(--cream); opacity: 0.08;
-  pointer-events: none;
-}
 .quotes__eyebrow { color: var(--cream-75); }
 .quotes__stage {
   display: grid;

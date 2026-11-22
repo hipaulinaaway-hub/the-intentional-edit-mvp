@@ -1,21 +1,21 @@
 {
-  "show": false,
+  "show": true,
   "eyebrow": "Kind words",
   "items": [
     {
       "quote": "I handed Tyler a vague idea and a very full calendar. She came back with ten days that felt like they were made for me, and I didn't open my laptop once.",
       "name": "Sarah M.",
-      "trip": "Amalfi Coast"
+      "trip": "Sample review"
     },
     {
       "quote": "Every detail was already handled when we arrived, from the late check-in to the table by the water. It was the first holiday in years where we actually rested.",
       "name": "Emma & James",
-      "trip": "Santorini"
+      "trip": "Sample review"
     },
     {
       "quote": "She listened to how we wanted to feel, not just where we wanted to go. That made all the difference.",
       "name": "Laura K.",
-      "trip": "Swiss Alps"
+      "trip": "Sample review"
     }
   ]
 }
