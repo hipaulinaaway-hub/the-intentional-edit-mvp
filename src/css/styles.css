@@ -794,7 +794,7 @@ input, textarea { font: inherit; color: inherit; }
 .menu__close img { opacity: 0; transform: rotate(-90deg); transition: opacity 0.18s var(--ease), transform 0.18s var(--ease); }
 .menu.is-open .menu__close img { opacity: 1; transform: none; transition: opacity 0.4s var(--ease) 0.1s, transform 0.6s var(--ease) 0.1s; }
 .menu__bar { display: flex; align-items: center; justify-content: space-between; }
-.menu__logo { width: 162px; height: auto; }
+.menu__logo { width: 146px; height: auto; }
 .menu__close { display: flex; align-items: center; justify-content: flex-end; width: 44px; height: 44px; }
 .menu__content { display: flex; flex-direction: column; align-items: center; gap: 40px; }
 .menu__links { width: 100%; }
@@ -1239,7 +1239,7 @@ input, textarea { font: inherit; color: inherit; }
   }
   .nav { justify-content: space-between; }
   .nav__group { display: none; }
-  .nav__logo { width: 162px; }
+  .nav__logo { width: 146px; }
   .nav__menu-btn { display: flex; align-items: center; justify-content: flex-end; width: 44px; height: 44px; }
   /* Centred composition: the headline block sits in the middle with its second line
      still stepped to the right, then the tagline and button centred under it */
