@@ -147,12 +147,25 @@ eleventyExcludeFromCollections: true
       </section>
 
       <!-- 08 Start planning -->
-      <section class="cta" aria-labelledby="cta-title" data-reveal-group>
+      <section class="cta" aria-labelledby="cta-title">
+        {#- three mood photos scattered around the copy (the bottom one is desktop only); they drift at different speeds on scroll -#}
+        <div class="cta__photos" aria-hidden="true" data-reveal-group>
+          {%- if cta.photo_1 %}
+          <div class="cta__photo cta__photo--1" data-reveal data-speed="-0.6">{% picture cta.photo_1, "", "(max-width: 959px) 36vw, 261px", [280, 420, 560, 800] %}</div>
+          {%- endif %}
+          {%- if cta.photo_2 %}
+          <div class="cta__photo cta__photo--2" data-reveal data-speed="0.5">{% picture cta.photo_2, "", "(max-width: 959px) 44vw, 261px", [280, 420, 560, 800] %}</div>
+          {%- endif %}
+          {%- if cta.photo_3 %}
+          <div class="cta__photo cta__photo--3" data-reveal data-speed="-0.9">{% picture cta.photo_3, "", "239px", [240, 480, 720] %}</div>
+          {%- endif %}
+        </div>
         <img class="cta__script" src="/assets/svg/script-background.svg" alt="" aria-hidden="true">
-        <p class="eyebrow cta__eyebrow" data-reveal>{{ cta.eyebrow }}</p>
-        <h2 class="cta__title" id="cta-title" data-reveal><span class="cta__title-inner">{{ cta.title | emphasis | safe }}</span></h2>
-        <p class="body-lg cta__text" data-reveal>{{ cta.text }}</p>
-        <button class="btn btn--light" type="button" data-inquire data-reveal>{{ cta.button }}</button>
+        <div class="cta__content" data-reveal-group>
+          <h2 class="cta__title" id="cta-title" data-reveal><span class="cta__title-inner">{{ cta.title | emphasis | safe }}</span></h2>
+          <p class="body-lg cta__text" data-reveal>{{ cta.text }}</p>
+          <button class="btn btn--light" type="button" data-inquire data-reveal>{{ cta.button }}</button>
+        </div>
       </section>
 
       <!-- 08 FAQ -->

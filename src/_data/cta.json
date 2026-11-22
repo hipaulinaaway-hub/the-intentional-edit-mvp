@@ -1,6 +1,8 @@
 {
-  "eyebrow": "Start planning",
   "title": "Ready to *unplug?*",
   "text": "Ready for a reset but no energy to plan it? That part’s my job. Tell me about the trip you have in mind, and I’ll reply within two working days.",
-  "button": "Plan my trip"
+  "button": "Plan my trip",
+  "photo_1": "/assets/img/cta-cocktails.jpg",
+  "photo_2": "/assets/img/cta-lounge.jpg",
+  "photo_3": "/assets/img/cta-bar.jpg"
 }

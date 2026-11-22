@@ -411,38 +411,66 @@ input, textarea { font: inherit; color: inherit; }
 /* ==========================================================================
    08 Start planning (CTA)
    ========================================================================== */
+/* Laid out on the 1440px Figma frame: --u is one Figma px, scaled down on narrower
+   screens; --x0 centres that frame on screens wider than 1440. Photos sit behind the
+   script watermark, which sits behind the copy. */
 .cta {
+  --u: min(calc(100vw / 1440), 1px);
+  --x0: max(0px, (100% - 1440px) / 2);
   position: relative;
   isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
-  padding: 160px var(--edge);
+  min-height: calc(762 * var(--u));
+  padding: calc(365 * var(--u)) 0 max(calc(125 * var(--u)), 72px);
   overflow: hidden;
   background: var(--brown-dark);
   color: var(--cream);
-  text-align: center;
 }
+.cta__photo { position: absolute; z-index: -2; overflow: hidden; }
+.cta__photo img { width: 100%; height: 100%; object-fit: cover; }
+.cta__photo--1 { left: calc(var(--x0) + 142 * var(--u)); top: calc(25 * var(--u));  width: calc(261 * var(--u)); height: calc(356 * var(--u)); }
+.cta__photo--2 { left: calc(var(--x0) + 979 * var(--u)); top: calc(-55 * var(--u)); width: calc(261 * var(--u)); height: calc(356 * var(--u)); }
+.cta__photo--3 { left: calc(var(--x0) + 466 * var(--u)); top: calc(461 * var(--u)); width: calc(239 * var(--u)); height: calc(324 * var(--u)); }
 .cta__script {
   position: absolute;
-  left: 50%; top: 50%;
-  width: 2447.7px; height: 523.334px;
+  left: calc(var(--x0) - 182 * var(--u)); top: calc(-52.76 * var(--u));
+  width: calc(1990 * var(--u)); height: auto;
   max-width: none;
-  transform: translate(-50%, -50%);
   z-index: -1;
   pointer-events: none;
 }
-.cta__eyebrow { color: var(--cream-75); }
+.cta__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 26px;
+  width: 362px;
+  margin-left: calc(var(--x0) + 802 * var(--u));
+}
 .cta__title {
   font-family: var(--serif);
   font-weight: 500;
   font-size: calc(46px * var(--type));
   line-height: 1.05;
   letter-spacing: -0.03em;
-  margin-block: 26px; /* the Figma text box is ~100px tall */
 }
-.cta__text { max-width: 454px; color: var(--cream-85); }
+.cta__text { color: var(--cream-85); }
+
+/* Phones and small tablets: the 390px Figma frame — two photos in the top corners,
+   copy centred below */
+@media (max-width: 959px) {
+  .cta {
+    --u: min(calc(100vw / 390), 1.4px);
+    min-height: 0;
+    padding: calc(362 * var(--u)) 24px calc(89 * var(--u));
+    text-align: center;
+  }
+  .cta__photo--1 { left: 0; top: calc(90 * var(--u)); width: calc(138 * var(--u)); height: calc(188 * var(--u)); }
+  .cta__photo--2 { left: auto; right: 0; top: 0; width: calc(168 * var(--u)); height: calc(228 * var(--u)); }
+  .cta__photo--3 { display: none; }
+  .cta__script { left: calc(-138 * var(--u)); top: calc(173 * var(--u)); width: calc(696 * var(--u)); }
+  .cta__content { align-items: center; gap: 24px; width: auto; max-width: 342px; margin-inline: auto; }
+  .cta__text { max-width: 318px; }
+}
 
 /* ==========================================================================
    08 FAQ
@@ -1020,8 +1048,6 @@ input, textarea { font: inherit; color: inherit; }
 
   .about { column-gap: 56px; padding-top: 40px; padding-bottom: 104px; }
 
-  .cta { padding-block: 136px; }
-
   .faq { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 104px; padding-bottom: 104px; }
   .faq__left { gap: 20px; }
   .faq__intro { max-width: 520px; }
@@ -1101,11 +1127,8 @@ input, textarea { font: inherit; color: inherit; }
   .stamp--about { width: 39.92%; left: 80.66%; top: 86.47%; }
   .about__intro { gap: 24px; }
 
-  /* CTA */
-  .cta { gap: 24px; padding: 130px 24px; }
-  .cta__script { width: 1028.035px; height: 219.8px; }
-  .cta__title { font-weight: 300; font-size: calc(52px * var(--type)); line-height: 1; letter-spacing: -0.03em; margin-block: 4px; }
-  .cta__text { max-width: 318px; }
+  /* CTA (layout lives with the section; phones get the lighter, larger heading) */
+  .cta__title { font-weight: 300; font-size: calc(52px * var(--type)); line-height: 1; }
 
   /* FAQ */
   .faq { gap: 40px; padding: 72px 24px; }

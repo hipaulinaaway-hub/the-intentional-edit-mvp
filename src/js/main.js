@@ -278,9 +278,11 @@
     render();
   }
 
-  /* ---------- Brown banner: script watermark drifts sideways on scroll ---------- */
+  /* ---------- Brown banner: script watermark drifts sideways, photos drift up and down
+     at their own speeds (data-speed), so the scene has a little depth ---------- */
   const cta = document.querySelector('.cta');
   const ctaScript = cta && cta.querySelector('.cta__script');
+  const ctaPhotos = cta ? [...cta.querySelectorAll('.cta__photo[data-speed]')] : [];
   if (cta && ctaScript && !reducedMotion.matches) {
     let queued = false;
     const render = () => {
@@ -291,6 +293,8 @@
       const p = Math.max(-1, Math.min(1, (vh / 2 - (r.top + r.height / 2)) / (vh / 2 + r.height / 2)));
       const range = Math.min(160, window.innerWidth * 0.12); // ~160px desktop, ~45px phone
       ctaScript.style.translate = `${(-p * range).toFixed(1)}px 0`;
+      const drift = Math.min(40, window.innerWidth * 0.03); // ~40px desktop, ~12px phone
+      ctaPhotos.forEach((el) => { el.style.translate = `0 ${(p * drift * Number(el.dataset.speed)).toFixed(1)}px`; });
     };
     const queue = () => { if (!queued) { queued = true; requestAnimationFrame(render); } };
     window.addEventListener('scroll', queue, { passive: true });

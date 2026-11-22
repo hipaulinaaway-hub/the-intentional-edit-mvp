@@ -181,9 +181,6 @@ content:
         path: src/_data/cta.json
         format: json
         fields:
-          - name: eyebrow
-            label: Small heading
-            type: string
           - name: title
             label: Heading
             type: string
@@ -194,6 +191,24 @@ content:
           - name: button
             label: Button label
             type: string
+          - name: photo_1
+            label: Photo — top left
+            type: image
+            description: "Portrait (3:4), at least 800×1100 px. Upload the original; it is optimized automatically. Leave empty to hide."
+            options:
+              media: images
+          - name: photo_2
+            label: Photo — top right
+            type: image
+            description: "Portrait (3:4), at least 800×1100 px. Sits against the top edge of the banner. Leave empty to hide."
+            options:
+              media: images
+          - name: photo_3
+            label: Photo — bottom (desktop only)
+            type: image
+            description: "Portrait (3:4), at least 720×1000 px. Sits against the bottom edge; not shown on phones. Leave empty to hide."
+            options:
+              media: images
 
       # ------------------------------------------------------------------ FAQ
       - name: faq
