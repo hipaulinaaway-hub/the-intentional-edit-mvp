@@ -57,6 +57,8 @@
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+/* No grey flash on tap (iOS/Android); our own pressed and focus states handle feedback */
+html { -webkit-tap-highlight-color: transparent; }
 /* Cream behind the page: iOS Safari shows this in the status-bar area and when you pull past the top */
 html { background: var(--cream); }
 @media (prefers-reduced-motion: no-preference) {
