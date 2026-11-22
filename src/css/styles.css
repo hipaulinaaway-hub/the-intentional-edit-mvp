@@ -419,7 +419,7 @@ input, textarea { font: inherit; color: inherit; }
    driven by the progress line under the active tab (main.js).
    ========================================================================== */
 .dest {
-  --foot: 132px; /* room for the tabs under the photos */
+  --foot: 156px; /* room for the tabs under the photos */
   position: relative;
   isolation: isolate;
   height: clamp(640px, 100svh, 900px);
@@ -485,7 +485,7 @@ input, textarea { font: inherit; color: inherit; }
 .dest__footer {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
   display: flex; align-items: flex-end; gap: 56px;
-  padding: 0 48px 48px 75px;
+  padding: 0 48px 72px 75px;
 }
 .dest__tabs { flex: 1; display: flex; gap: 20px; }
 .dest__tab {
