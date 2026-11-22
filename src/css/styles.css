@@ -20,8 +20,7 @@
   --brown-85: rgba(107, 63, 39, 0.85);
   --brown-20: rgba(107, 63, 39, 0.2);
   --brown-dark-30: rgba(98, 62, 42, 0.3);
-  --ink-80: rgba(46, 29, 20, 0.8);
-  --ink-60: rgba(46, 29, 20, 0.6);
+  --brown-70: rgba(107, 63, 39, 0.7); /* field underlines: ~3.9:1 on cream (3:1 needed) */
   --brown-80: rgba(107, 63, 39, 0.8); /* muted text: lightest brown that keeps small text at ~5:1 on cream */
   --cream-88: rgba(251, 249, 244, 0.88);
   --cream-85: rgba(251, 249, 244, 0.85);
@@ -705,8 +704,8 @@ input, textarea { font: inherit; color: inherit; }
 .progress { display: flex; flex-direction: column; gap: 14px; }
 .progress__label { color: var(--brown); }
 .progress__bar { display: flex; gap: 8px; }
-.progress__bar span { position: relative; flex: 1; height: 2px; background: rgba(46, 29, 20, 0.2); overflow: hidden; }
-.progress__bar span.is-done::after { content: ""; position: absolute; inset: 0; background: var(--ink); transform-origin: left center; }
+.progress__bar span { position: relative; flex: 1; height: 2px; background: var(--brown-20); overflow: hidden; }
+.progress__bar span.is-done::after { content: ""; position: absolute; inset: 0; background: var(--brown); transform-origin: left center; }
 
 /* Step 1 options */
 .options { flex: 1; display: flex; flex-direction: column; gap: 22px; }
@@ -716,7 +715,7 @@ input, textarea { font: inherit; color: inherit; }
   flex: none;
   width: 18px; height: 18px;
   margin-top: 6px;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--brown);
   border-radius: 50%;
   transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
@@ -743,7 +742,7 @@ input, textarea { font: inherit; color: inherit; }
   row-gap: 28px;
   align-content: start;
 }
-.field { position: relative; height: 64px; border-bottom: 1px solid var(--ink-60); transition: border-color 0.2s var(--ease); }
+.field { position: relative; height: 64px; border-bottom: 1px solid var(--brown-70); transition: border-color 0.2s var(--ease); }
 .field--textarea { grid-column: 1 / -1; height: 112px; }
 .field input,
 .field textarea {
@@ -781,7 +780,7 @@ input, textarea { font: inherit; color: inherit; }
   color: var(--brown);
 }
 .field--textarea.is-active label { top: 10px; }
-.field:focus-within { border-bottom-color: var(--ink); }
+.field:focus-within { border-bottom-color: var(--brown); }
 .field.has-error { border-bottom-color: var(--error); }
 .field.has-error label { color: var(--error); }
 .field__error {
