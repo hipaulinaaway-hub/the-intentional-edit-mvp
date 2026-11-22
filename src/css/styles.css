@@ -1241,7 +1241,7 @@ input, textarea { font: inherit; color: inherit; }
     flex-wrap: nowrap;
     justify-content: flex-start;
     gap: 16px;
-    padding: 0 24px 16px;
+    padding: 0 calc((100% - 236px) / 2) 16px; /* first and last card can sit centred */
     margin-bottom: -16px; /* room for the stamp shadow */
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -1250,7 +1250,7 @@ input, textarea { font: inherit; color: inherit; }
     -webkit-overflow-scrolling: touch;
   }
   .services__cards::-webkit-scrollbar { display: none; }
-  .services__cards .card { flex: none; width: 236px; max-width: none; gap: 20px; scroll-snap-align: start; }
+  .services__cards .card { flex: none; width: 236px; max-width: none; gap: 20px; scroll-snap-align: center; }
   .card__photo { inset: 10.29% 12.87%; width: 74.26%; height: 79.41%; } /* 35px inside 272×340 */
   .card__text { gap: 8px; }
   .card__desc { max-width: 210px; }
