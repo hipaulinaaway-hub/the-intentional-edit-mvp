@@ -22,7 +22,7 @@
   --brown-dark-30: rgba(98, 62, 42, 0.3);
   --ink-80: rgba(46, 29, 20, 0.8);
   --ink-60: rgba(46, 29, 20, 0.6);
-  --ink-65: rgba(46, 29, 20, 0.65); /* lightest ink that keeps small text at ~5:1 on cream */
+  --brown-80: rgba(107, 63, 39, 0.8); /* muted text: lightest brown that keeps small text at ~5:1 on cream */
   --cream-88: rgba(251, 249, 244, 0.88);
   --cream-85: rgba(251, 249, 244, 0.85);
   --cream-75: rgba(251, 249, 244, 0.75);
@@ -182,14 +182,14 @@ input, textarea { font: inherit; color: inherit; }
 /* Primary = brown on light surfaces */
 .btn--primary { background: var(--brown-dark); color: var(--cream); }
 /* Light = cream on dark surfaces */
-.btn--light { background: var(--cream); border-color: var(--cream); color: var(--ink); }
+.btn--light { background: var(--cream); border-color: var(--cream); color: var(--brown); }
 /* Hover states only where a real hover exists (touch screens would keep them "stuck" after a tap) */
 @media (hover: hover) and (pointer: fine) {
   .btn--primary:not(:disabled):hover { background: var(--ink); }
   /* Kit says cream → white, which is invisible on the photo/brown; invert instead */
   .btn--light:not(:disabled):hover { background: transparent; color: var(--cream); }
   .btn--outline:not(:disabled):hover { background: var(--brown-dark); border-color: var(--brown-dark); color: var(--cream); }
-  .btn--outline-light:not(:disabled):hover { background: var(--cream); color: var(--ink); }
+  .btn--outline-light:not(:disabled):hover { background: var(--cream); color: var(--brown); }
   .nav__link:hover::after { transform: scaleX(1); }
   .footer__contact a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .inquiry__close:hover span { text-decoration: underline; text-underline-offset: 4px; }
@@ -482,7 +482,7 @@ input, textarea { font: inherit; color: inherit; }
 .faq-item__q { transition: transform 0.45s var(--ease), color 0.3s ease; }
 .faq-item__icon { transition: transform 0.45s var(--ease); }
 @media (hover: hover) and (pointer: fine) {
-  .faq-item__btn:hover .faq-item__q { transform: translateX(6px); color: var(--ink); }
+  .faq-item__btn:hover .faq-item__q { transform: translateX(6px); }
   .faq-item__btn:hover .faq-item__icon { transform: rotate(90deg); }
 }
 
@@ -535,18 +535,18 @@ input, textarea { font: inherit; color: inherit; }
   gap: 48px;
   padding: 64px var(--edge) 28px;
   background: var(--sand);
-  color: var(--ink);
+  color: var(--brown);
 }
 .footer__top,
 .footer__bottom { width: 100%; max-width: 1680px; margin-inline: auto; }
 .footer__top { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
 .footer__links { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; width: 360px; }
-.footer__links .nav__link { position: relative; color: var(--ink); }
+.footer__links .nav__link { position: relative; color: var(--brown); }
 .footer__logo { width: 78px; flex: none; }
 .footer__logo img { width: 100%; height: auto; }
 .footer__contact { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; width: 360px; text-align: right; }
 .footer__contact .h4 { color: var(--brown); }
-.footer__contact a { color: var(--ink); }
+.footer__contact a { color: var(--brown); }
 .footer__bottom::before {
   content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
   background: var(--brown-dark-30);
@@ -562,7 +562,7 @@ input, textarea { font: inherit; color: inherit; }
   line-height: 1.2;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ink-80);
+  color: var(--brown);
 }
 
 /* ==========================================================================
@@ -686,7 +686,7 @@ input, textarea { font: inherit; color: inherit; }
   padding: 56px;
   border-radius: 2px;
   background: var(--cream);
-  color: var(--ink);
+  color: var(--brown);
 }
 .inquiry[data-step="sent"] .inquiry__card { min-height: 0; width: 652px; padding: 72px 56px; }
 .inquiry__step { display: flex; flex-direction: column; gap: 40px; width: 100%; animation: step-in 0.3s var(--ease) both; }
@@ -703,7 +703,7 @@ input, textarea { font: inherit; color: inherit; }
 .inquiry__question:focus { outline: none; }
 
 .progress { display: flex; flex-direction: column; gap: 14px; }
-.progress__label { color: var(--ink); }
+.progress__label { color: var(--brown); }
 .progress__bar { display: flex; gap: 8px; }
 .progress__bar span { position: relative; flex: 1; height: 2px; background: rgba(46, 29, 20, 0.2); overflow: hidden; }
 .progress__bar span.is-done::after { content: ""; position: absolute; inset: 0; background: var(--ink); transform-origin: left center; }
@@ -727,11 +727,11 @@ input, textarea { font: inherit; color: inherit; }
 .option input:focus-visible + .option__radio { outline: 2px solid var(--brown); outline-offset: 3px; }
 .option__text { display: flex; flex-direction: column; gap: 2px; }
 .option__title { font-size: calc(18px * var(--type)); line-height: calc(30px * var(--type)); }
-.option__desc { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); color: var(--ink-65); } /* muted under the title */
+.option__desc { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); color: var(--brown-80); } /* muted under the title */
 .m-only { display: none; }
 
 .inquiry__actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: auto; }
-.inquiry__actions .body { color: var(--ink); }
+.inquiry__actions .body { color: var(--brown); }
 .link-back { padding: 10px 12px 10px 0; font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
 
 /* Step 2 fields — underline field with floating label */
@@ -755,16 +755,16 @@ input, textarea { font: inherit; color: inherit; }
   background: transparent;
   font-size: 18px;
   line-height: 30px;
-  color: var(--ink);
+  color: var(--brown);
   outline: none;
-  caret-color: var(--ink);
+  caret-color: var(--brown);
 }
 .field textarea { top: 34px; height: auto; resize: none; }
 .field label {
   position: absolute; left: 0; top: 17px;
   font-size: 18px;
   line-height: 30px;
-  color: var(--ink-65); /* resting hint, muted; full ink once it floats up as the label */
+  color: var(--brown-80); /* resting hint, muted; full brown once it floats up as the label */
   pointer-events: none;
   transform-origin: left top;
   transition: top 0.2s var(--ease), font-size 0.2s var(--ease), letter-spacing 0.2s var(--ease), line-height 0.2s var(--ease), color 0.2s var(--ease);
@@ -778,7 +778,7 @@ input, textarea { font: inherit; color: inherit; }
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--brown);
 }
 .field--textarea.is-active label { top: 10px; }
 .field:focus-within { border-bottom-color: var(--ink); }
@@ -790,7 +790,7 @@ input, textarea { font: inherit; color: inherit; }
   color: var(--error);
 }
 @keyframes autofill-start { from { opacity: 1; } to { opacity: 1; } }
-.field input:-webkit-autofill { animation: autofill-start 1ms; -webkit-box-shadow: 0 0 0 100px var(--cream) inset; -webkit-text-fill-color: var(--ink); }
+.field input:-webkit-autofill { animation: autofill-start 1ms; -webkit-box-shadow: 0 0 0 100px var(--cream) inset; -webkit-text-fill-color: var(--brown); }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .inquiry__form-error { font-size: calc(14px * var(--type)); line-height: calc(20px * var(--type)); color: var(--error); }
 
@@ -884,7 +884,7 @@ input, textarea { font: inherit; color: inherit; }
 }
 .sticky-nav.is-shown { transform: none; visibility: visible; transition: transform 0.45s var(--ease), visibility 0s; }
 .sticky-nav__inner { display: flex; align-items: center; width: 100%; max-width: 1680px; margin-inline: auto; padding: 12px var(--edge); }
-.sticky-nav .nav__link { position: relative; padding-block: 8px; color: var(--ink); }
+.sticky-nav .nav__link { position: relative; padding-block: 8px; color: var(--brown); }
 /* the cream logo / menu SVGs drawn in brown via mask, so the asset files stay untouched */
 .sticky-nav__logo {
   flex: none; width: 128px; height: 37.5px; /* 188 × 55 logo at 68% */
@@ -1105,7 +1105,7 @@ input, textarea { font: inherit; color: inherit; }
   .footer__contact { align-items: center; text-align: center; width: 100%; }
   .footer__contact a { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
   /* Figma mobile: location + tagline as their own block, then the line, then © alone */
-  .footer__bottom { flex-direction: column; align-items: center; gap: 5px; padding-top: 0; text-align: center; color: var(--ink); }
+  .footer__bottom { flex-direction: column; align-items: center; gap: 5px; padding-top: 0; text-align: center; color: var(--brown); }
   .footer__bottom::before { content: none; }
   .footer__bottom > :first-child {
     order: 1;
