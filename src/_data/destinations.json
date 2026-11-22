@@ -4,18 +4,18 @@
   "autoplay_seconds": 6,
   "slides": [
     {
-      "name": "Switzerland",
-      "background": "/assets/img/destinations/switzerland-bg.jpg",
-      "photo_1": "/assets/img/destinations/switzerland-1.jpg",
-      "photo_2": "/assets/img/destinations/switzerland-2.jpg",
-      "photo_3": "/assets/img/destinations/switzerland-3.jpg"
-    },
-    {
       "name": "Portugal",
       "background": "/assets/img/service-hotels.jpg",
       "photo_1": "/assets/img/cta-bar.jpg",
       "photo_2": "/assets/img/stamp-pool.jpg",
       "photo_3": "/assets/img/cta-lounge.jpg"
+    },
+    {
+      "name": "Switzerland",
+      "background": "/assets/img/destinations/switzerland-bg.jpg",
+      "photo_1": "/assets/img/destinations/switzerland-1.jpg",
+      "photo_2": "/assets/img/destinations/switzerland-2.jpg",
+      "photo_3": "/assets/img/destinations/switzerland-3.jpg"
     },
     {
       "name": "Croatia",
