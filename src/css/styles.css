@@ -449,7 +449,7 @@ input, textarea { font: inherit; color: inherit; }
 .dest__card-inner {
   position: relative; width: 100%; height: 100%; overflow: hidden;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
-  opacity: 0; transform: scale(1.25); filter: blur(16px);
+  opacity: 0; transform: scale(1.06); filter: blur(6px);
   transition: opacity 0.7s var(--ease-in-out), transform 1.1s var(--ease-in-out), filter 0.9s var(--ease-in-out);
 }
 .dest__card-inner::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); }
@@ -504,15 +504,15 @@ input, textarea { font: inherit; color: inherit; }
   .dest__arrow:hover { background-color: rgba(251, 249, 244, 0.12); }
 }
 
-/* Phones: photos and name centred, an arrow either side; the tabs stay in the page
+/* Phones: photos and name centred, the arrows side by side at the bottom; the tabs stay in the page
    for screen readers (and keep driving autoplay) but are hidden */
 @media (max-width: 767px) {
-  .dest { --foot: 0px; height: clamp(560px, 100svh, 760px); }
-  .dest__stack { height: min(320px, 44svh); }
-  .dest__title { font-size: calc(40px * var(--type)); padding-inline: 64px; } /* clear of the arrows */
+  .dest { --foot: 72px; height: clamp(560px, 100svh, 760px); }
+  .dest__stack { height: min(380px, 50svh); }
+  .dest__title { font-size: calc(40px * var(--type)); }
   .dest__footer { inset: 0; display: block; padding: 0; pointer-events: none; }
   .dest__tabs { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .dest__nav { position: absolute; left: 12px; right: 12px; top: 50%; transform: translateY(-50%); justify-content: space-between; }
+  .dest__nav { position: absolute; left: 0; right: 0; bottom: 40px; justify-content: center; }
   .dest__arrow { pointer-events: auto; }
 }
 

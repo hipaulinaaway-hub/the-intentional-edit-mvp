@@ -281,8 +281,9 @@
   /* ---------- Destinations slider ----------
      Slides change on a timer: the progress line under the active tab is a CSS animation,
      and when it ends we move on, so pausing the animation pauses the slider. Paused while
-     hovered, while a control has focus, and while off screen. No autoplay for reduced
-     motion. Arrows, tabs, arrow keys and swipes all work by hand. */
+     off screen and while a keyboard user is inside it (a mouse click on an arrow leaves the
+     button focused, so focus alone must not pause it). No autoplay for reduced motion.
+     Arrows, tabs, arrow keys and swipes all work by hand. */
   const dest = document.querySelector('[data-dest]');
   if (dest) {
     const slides = [...dest.querySelectorAll('.dest__slide')];
@@ -325,15 +326,12 @@
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go(index + (dx < 0 ? 1 : -1));
     });
 
-    // Pause while hovered, focused or off screen
-    let hovered = false; let focused = false; let visible = false;
-    const sync = () => dest.classList.toggle('is-paused', hovered || focused || !visible);
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      dest.addEventListener('pointerenter', () => { hovered = true; sync(); });
-      dest.addEventListener('pointerleave', () => { hovered = false; sync(); });
-    }
-    dest.addEventListener('focusin', () => { focused = true; sync(); });
+    // Pause while off screen, or while a keyboard user is tabbing through the controls
+    let focused = false; let visible = false;
+    const sync = () => dest.classList.toggle('is-paused', focused || !visible);
+    dest.addEventListener('focusin', () => { focused = root.classList.contains('is-keyboard'); sync(); });
     dest.addEventListener('focusout', (e) => { if (!dest.contains(e.relatedTarget)) { focused = false; sync(); } });
+    dest.addEventListener('pointerdown', () => { focused = false; sync(); });
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }, { threshold: 0.35 }).observe(dest);
     } else { visible = true; }
