@@ -362,7 +362,7 @@
     render();
   }
 
-  /* ---------- "Inquire" cursor over service cards (mouse only) ---------- */
+  /* ---------- "Inquire" cursor over service cards and the slider photos (mouse only) ---------- */
   const pill = document.querySelector('.cursor-pill');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   if (pill && finePointer.matches && !reducedMotion.matches) {
@@ -379,7 +379,7 @@
     };
     const start = () => { if (!raf) raf = requestAnimationFrame(loop); };
     const hide = () => { active = false; pill.classList.remove('is-active'); };
-    document.querySelectorAll('.card').forEach((card) => {
+    document.querySelectorAll('.card, .dest__inquire').forEach((card) => {
       card.addEventListener('pointerenter', (e) => {
         tx = e.clientX; ty = e.clientY;
         if (!pill.classList.contains('is-active')) { x = tx; y = ty; } // appear at the pointer, not fly in
