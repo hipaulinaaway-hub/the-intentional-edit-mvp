@@ -150,8 +150,8 @@ input, textarea { font: inherit; color: inherit; }
 }
 .body-lg { font-size: calc(18px * var(--type)); line-height: calc(30px * var(--type)); }
 .body { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
-.script-lg { font-family: var(--script); font-size: calc(44px * var(--type)); line-height: 1; color: var(--blue); }
-.script-sm { font-family: var(--script); font-size: calc(36px * var(--type)); line-height: 1.2; color: var(--blue); }
+.script-lg { font-family: var(--script); font-size: calc(30.8px * var(--type)); line-height: 1; color: var(--blue); }
+.script-sm { font-family: var(--script); font-size: calc(25.2px * var(--type)); line-height: 1.2; color: var(--blue); }
 
 @media (max-width: 767px) {
   .eyebrow { font-size: calc(11px * var(--type)); letter-spacing: 0.2em; }
@@ -159,7 +159,7 @@ input, textarea { font: inherit; color: inherit; }
   .h3 { font-size: calc(26px * var(--type)); }
   .body-lg { font-size: calc(16px * var(--type)); line-height: calc(26px * var(--type)); }
   .body { font-size: calc(15px * var(--type)); line-height: calc(24px * var(--type)); }
-  .script-lg, .script-sm { font-size: calc(26px * var(--type)); }
+  .script-lg, .script-sm { font-size: calc(18.2px * var(--type)); }
 }
 
 /* ---------- Buttons ---------- */
