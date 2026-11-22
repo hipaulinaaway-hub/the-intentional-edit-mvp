@@ -796,6 +796,8 @@ input, textarea { font: inherit; color: inherit; }
 .menu__close { display: flex; align-items: center; justify-content: flex-end; width: 44px; height: 44px; }
 .menu__content { display: flex; flex-direction: column; align-items: center; gap: 40px; }
 .menu__links { width: 100%; }
+/* Alternate italic and upright: Services, About, Journal, FAQ, Inquire */
+.menu__links li:nth-child(even) .menu__link { font-style: normal; }
 .menu__link {
   display: flex;
   align-items: center;
