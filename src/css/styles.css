@@ -43,6 +43,7 @@
   --ease: cubic-bezier(0.23, 1, 0.32, 1);        /* strong ease-out */
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);  /* iOS-like sheet */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);     /* long, soft expo-out for scroll reveals */
 }
 
 @media (max-width: 1199px) {
@@ -838,6 +839,8 @@ input, textarea { font: inherit; color: inherit; }
 @keyframes hero-settle { from { transform: scale(1.06); } }
 @keyframes line-rise { from { transform: translateY(120%); } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(16px); } }
+@keyframes reveal-up { from { opacity: 0; transform: translateY(40px); } }
+@keyframes reveal-blur { from { opacity: 0; transform: translateY(40px); filter: blur(20px); } }
 @keyframes fade { from { opacity: 0; } }
 @keyframes stamp-settle { from { transform: rotate(-2deg) scale(0.97); } }
 @keyframes card-in { from { opacity: 0; transform: translateY(24px); } }
@@ -863,7 +866,9 @@ input, textarea { font: inherit; color: inherit; }
 
 /* --- Scroll reveals (fill-mode backwards hands transform back to hover styles afterwards) --- */
 .js [data-reveal]:not(.is-visible) { opacity: 0; }
-.js [data-reveal].is-visible { animation: fade-up 0.9s var(--ease) var(--d, 0s) backwards; }
+.js [data-reveal].is-visible { animation: reveal-up 2s var(--ease-expo) var(--d, 0s) backwards; }
+/* Section headings come into focus: rise, fade and un-blur */
+.js h2[data-reveal].is-visible { animation: reveal-blur 1.6s var(--ease-expo) var(--d, 0s) backwards; }
 .js .card.is-visible .card__media { animation: stamp-settle 1.1s var(--ease) var(--d, 0s) backwards; }
 /* Handwritten notes write themselves left to right, like ink. clip-path follows the
    element's own rotation, so the wipe runs along the tilted baseline. */
@@ -924,10 +929,7 @@ input, textarea { font: inherit; color: inherit; }
 }
 
 /* --- Brown banner: headline rises from a mask (watermark drift is set in JS) --- */
-.cta__title { clip-path: inset(-0.4em -0.5em -0.15em -0.5em); }
 .cta__title-inner { display: inline-block; }
-.js .cta__title.is-visible { animation: none; }
-.js .cta__title.is-visible .cta__title-inner { animation: line-rise 1.1s var(--ease) var(--d, 0s) backwards; }
 
 /* --- "Inquire" cursor over service cards (desktop pointers; JS adds html.has-cursor-pill) --- */
 .cursor-pill {
@@ -982,8 +984,6 @@ input, textarea { font: inherit; color: inherit; }
   .faq-item__panel, .faq-item__icon::before, .faq-item__icon::after { transition-duration: 0.01ms !important; }
   .sticky-nav { transform: none; opacity: 0; transition: opacity 0.2s ease, visibility 0s linear 0.2s !important; }
   .sticky-nav.is-shown { opacity: 1; transition: opacity 0.2s ease, visibility 0s !important; }
-  .js .cta__title.is-visible { animation: fade 0.9s ease both !important; }
-  .js .cta__title.is-visible .cta__title-inner { animation: none !important; }
   .js .ig__list.is-visible img { animation: none !important; }
 }
 
