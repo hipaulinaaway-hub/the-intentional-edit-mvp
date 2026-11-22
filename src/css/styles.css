@@ -746,7 +746,7 @@ input, textarea { font: inherit; color: inherit; }
 .quotes.is-static .quotes__ring { display: none; }
 .quotes__count { font-size: calc(12px * var(--type)); letter-spacing: 0.2em; color: var(--cream-75); }
 @media (max-width: 767px) {
-  .quotes { gap: 24px; padding: 112px 24px; } /* a little taller than the standard 88px */
+  .quotes { gap: 24px; padding: 136px 24px; } /* taller than the standard 88px */
   .quotes__stage { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 32px 12px; }
   .quotes__track { grid-column: 1 / -1; grid-row: 1; }
   .quotes__arrow--prev { grid-row: 2; justify-self: end; }
