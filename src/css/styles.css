@@ -414,8 +414,8 @@ input, textarea { font: inherit; color: inherit; }
 /* ==========================================================================
    03 Destinations slider
    Each slide: a fan of three photos with the name over it, on a full-bleed
-   background. Changing slide: the old photos fade out quickly, then the new three
-   fade in and come into focus together, then the name follows. Autoplay is
+   background. Changing slide is a slow, quiet fade: the old photos fade out, the new
+   three fade in together from a faint blur, then the name follows. Autoplay is
    driven by the progress line under the active tab (main.js).
    ========================================================================== */
 .dest {
@@ -434,7 +434,7 @@ input, textarea { font: inherit; color: inherit; }
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(20, 13, 8, 0.45) 0%, rgba(20, 13, 8, 0.5) 55%, rgba(20, 13, 8, 0.78) 100%);
 }
-.dest__bg { opacity: 0; transform: scale(1.08); transition: opacity 1.4s var(--ease-in-out), transform 2.4s var(--ease-in-out); }
+.dest__bg { opacity: 0; transform: scale(1.03); transition: opacity 1.6s ease, transform 3s ease-out; }
 .dest__bg.is-active { opacity: 1; transform: none; }
 .dest__bg img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -450,9 +450,9 @@ input, textarea { font: inherit; color: inherit; }
 .dest__card-inner {
   position: relative; width: 100%; height: 100%; overflow: hidden;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
-  opacity: 0; transform: scale(1.03); filter: blur(6px);
-  /* leaving: a quick, quiet fade */
-  transition: opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
+  opacity: 0; filter: blur(3px);
+  /* leaving: a quiet fade */
+  transition: opacity 0.7s ease, filter 0.7s ease;
 }
 .dest__card-inner::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); }
 .dest__card--1 .dest__card-inner::after { background: rgba(0, 0, 0, 0.3); }
@@ -460,7 +460,7 @@ input, textarea { font: inherit; color: inherit; }
 .dest__slide.is-active .dest__card-inner {
   opacity: 1; transform: none; filter: none;
   /* arriving: all three photos fade and come into focus together, once the old ones are gone */
-  transition: opacity 1.2s var(--ease) 0.4s, filter 1.2s var(--ease) 0.4s, transform 1.6s var(--ease) 0.4s;
+  transition: opacity 1.4s ease 0.5s, filter 1.4s ease 0.5s;
 }
 .dest__title {
   grid-area: 1 / 1; position: relative; z-index: 1;
@@ -468,10 +468,10 @@ input, textarea { font: inherit; color: inherit; }
   font-family: var(--serif); font-weight: 400;
   font-size: calc(56px * var(--type)); line-height: 0.92; letter-spacing: -0.025em;
   text-transform: uppercase; text-align: center;
-  opacity: 0; filter: blur(20px); transform: translateY(30px);
-  transition: opacity 0.7s var(--ease-in-out), filter 0.9s var(--ease-in-out), transform 1.1s var(--ease-in-out);
+  opacity: 0; filter: blur(8px);
+  transition: opacity 0.7s ease, filter 0.7s ease;
 }
-.dest__slide.is-active .dest__title { opacity: 1; filter: none; transform: none; transition-delay: 0.55s; }
+.dest__slide.is-active .dest__title { opacity: 1; filter: none; transition: opacity 1.4s ease 0.8s, filter 1.4s ease 0.8s; }
 /* The photos open the inquiry, with the same "Inquire" cursor and lift as the service cards */
 .dest__inquire { grid-area: 1 / 1; z-index: 2; height: min(456px, 56svh); aspect-ratio: 322 / 456; }
 .dest__slide.is-active .dest__inquire { pointer-events: auto; }
@@ -504,8 +504,15 @@ input, textarea { font: inherit; color: inherit; }
 .dest__num { font-size: calc(11px * var(--type)); letter-spacing: 0.16em; }
 .dest__name { font-family: var(--serif); font-size: calc(24px * var(--type)); line-height: 1.05; letter-spacing: -0.01em; text-transform: uppercase; }
 .dest__nav { flex: none; display: flex; gap: 11px; }
-.dest__arrow { display: block; width: 47px; height: 49px; border-radius: 50%; transition: background-color 0.3s ease, transform 0.16s var(--ease); }
+.dest__arrow { display: block; width: 48px; height: 48px; border-radius: 50%; transition: background-color 0.3s ease, transform 0.16s var(--ease); }
+.dest__arrow { position: relative; }
 .dest__arrow img { display: block; }
+/* Phones: the next arrow's outline fills up as the countdown to the next slide */
+.dest__ring { display: none; position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--sand); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; pointer-events: none; transform: rotate(-90deg); } /* starts at 12 o'clock */
+.dest__ring.is-running circle { animation: dest-ring var(--dest-time, 6s) linear forwards; }
+.dest.is-paused .dest__ring circle { animation-play-state: paused; }
+.dest.is-static .dest__ring { display: none !important; }
+@keyframes dest-ring { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 .dest__arrow:active { transform: scale(0.95); }
 @media (hover: hover) and (pointer: fine) {
   .dest__tab:hover { opacity: 1; }
@@ -523,6 +530,7 @@ input, textarea { font: inherit; color: inherit; }
   .dest__tabs { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .dest__nav { position: absolute; left: 0; right: 0; bottom: 40px; justify-content: center; }
   .dest__arrow { pointer-events: auto; }
+  .dest__ring { display: block; }
 }
 
 @media (prefers-reduced-motion: reduce) {

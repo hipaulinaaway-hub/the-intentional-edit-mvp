@@ -289,6 +289,7 @@
     const slides = [...dest.querySelectorAll('.dest__slide')];
     const bgs = [...dest.querySelectorAll('.dest__bg')];
     const tabs = [...dest.querySelectorAll('.dest__tab')];
+    const ring = dest.querySelector('.dest__ring');
     const n = slides.length;
     let index = 0;
     dest.style.setProperty('--dest-time', `${Number(dest.dataset.autoplay) || 6}s`);
@@ -302,6 +303,8 @@
       slides[next].removeAttribute('aria-hidden'); slides[next].inert = false;
       tabs[index].setAttribute('aria-selected', 'false'); tabs[next].setAttribute('aria-selected', 'true');
       index = next;
+      // restart the countdown ring on the next arrow (phones)
+      if (ring) { ring.classList.remove('is-running'); void ring.getBoundingClientRect(); ring.classList.add('is-running'); }
     };
 
     tabs.forEach((tab, i) => {
