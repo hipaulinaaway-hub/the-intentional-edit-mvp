@@ -1042,12 +1042,12 @@ input, textarea { font: inherit; color: inherit; }
 
 /* --- Scroll reveals (fill-mode backwards hands transform back to hover styles afterwards) --- */
 .js [data-reveal]:not(.is-visible) { opacity: 0; }
-.js [data-reveal].is-visible { animation: reveal-up 2s var(--ease-expo) var(--d, 0s) backwards; }
+.js [data-reveal].is-visible { animation: reveal-up 1.4s var(--ease-expo) var(--d, 0s) backwards; }
 /* Section headings come into focus: rise, fade and un-blur */
-.js h2[data-reveal].is-visible { animation: reveal-blur 1.6s var(--ease-expo) var(--d, 0s) backwards; }
+.js h2[data-reveal].is-visible { animation: reveal-blur 1.3s var(--ease-expo) var(--d, 0s) backwards; }
 /* Text (labels, paragraphs) does the same with a lighter blur, sized for smaller type.
    The handwritten notes keep their write-on. */
-.js p[data-reveal]:not(.about__sign):not(.faq__note).is-visible { animation: reveal-blur-soft 2s var(--ease-expo) var(--d, 0s) backwards; }
+.js p[data-reveal]:not(.about__sign):not(.faq__note).is-visible { animation: reveal-blur-soft 1.4s var(--ease-expo) var(--d, 0s) backwards; }
 .js .card.is-visible .card__media { animation: stamp-settle 1.1s var(--ease) var(--d, 0s) backwards; }
 /* Handwritten notes write themselves left to right, like ink. clip-path follows the
    element's own rotation, so the wipe runs along the tilted baseline. */

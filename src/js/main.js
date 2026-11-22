@@ -166,10 +166,10 @@
 
   /* ---------- Scroll reveals (play once) ---------- */
   const revealEls = [...document.querySelectorAll('[data-reveal]')];
-  // Stagger siblings within a group: 150ms apart, capped so long rows don't drag
+  // Stagger siblings within a group: 90ms apart, capped so the last item (often a button) isn't late
   document.querySelectorAll('[data-reveal-group]').forEach((group) => {
     group.querySelectorAll('[data-reveal]').forEach((el, i) => {
-      el.style.setProperty('--d', `${Math.min(i * 150, 600)}ms`);
+      el.style.setProperty('--d', `${Math.min(i * 90, 270)}ms`);
     });
   });
   if ('IntersectionObserver' in window) {
@@ -179,7 +179,7 @@
         entry.target.classList.add('is-visible');
         io.unobserve(entry.target);
       });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+    }, { rootMargin: '0px', threshold: 0 }); // start as soon as it peeks in
     // Elements in the footer sit at the very bottom, inside the -8% margin: watch them
     // with a margin-free observer so they reveal as soon as any part shows.
     const ioEnd = new IntersectionObserver((entries) => {
