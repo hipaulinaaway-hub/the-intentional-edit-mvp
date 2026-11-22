@@ -68,6 +68,10 @@ export default function (eleventyConfig) {
     return digits.length === 10 ? `+1${digits}` : digits;
   });
 
+  // Section headings: words wrapped in *asterisks* (typed in the CMS) are set in italics.
+  eleventyConfig.addFilter("emphasis", (value = "") => String(value)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+    .replace(/\*([^*]+)\*/g, "<em>$1</em>"));
   eleventyConfig.addFilter("endsWith", (value = "", suffix = "") => String(value).endsWith(suffix));
 
   return {

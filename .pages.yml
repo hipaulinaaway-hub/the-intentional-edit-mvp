@@ -90,6 +90,7 @@ content:
           - name: title
             label: Heading
             type: string
+            description: "Wrap words in *asterisks* to set them in italics, e.g. Our *services*"
           - name: items
             label: Service cards
             type: object
@@ -137,6 +138,7 @@ content:
           - name: title
             label: Heading
             type: string
+            description: "Wrap words in *asterisks* to set them in italics, e.g. Our *services*"
           - name: text
             label: Text
             type: text
@@ -185,6 +187,7 @@ content:
           - name: title
             label: Heading
             type: string
+            description: "Wrap words in *asterisks* to set them in italics, e.g. Our *services*"
           - name: text
             label: Text
             type: text
@@ -205,6 +208,7 @@ content:
           - name: title
             label: Heading
             type: string
+            description: "Wrap words in *asterisks* to set them in italics, e.g. Our *services*"
           - name: intro
             label: Intro line
             type: string

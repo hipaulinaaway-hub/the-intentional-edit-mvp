@@ -101,7 +101,7 @@ eleventyExcludeFromCollections: true
       <section class="services" id="services" aria-labelledby="services-title">
         <div class="section-head" data-reveal-group>
           <p class="eyebrow" data-reveal>{{ services.eyebrow }}</p>
-          <h2 class="h2" id="services-title" data-reveal>{{ services.title }}</h2>
+          <h2 class="h2" id="services-title" data-reveal>{{ services.title | emphasis | safe }}</h2>
         </div>
 
         <div class="services__cards" data-reveal-group>
@@ -138,7 +138,7 @@ eleventyExcludeFromCollections: true
         </div>
         <div class="about__intro" data-reveal-group>
           <p class="eyebrow" data-reveal>{{ about.eyebrow }}</p>
-          <h2 class="h2 about__title" id="about-title" data-reveal>{{ about.title }}</h2>
+          <h2 class="h2 about__title" id="about-title" data-reveal>{{ about.title | emphasis | safe }}</h2>
           <p class="body-lg about__text" data-reveal>{{ about.text }}</p>
           {%- if about.signature %}
           <p class="script-lg about__sign" data-reveal>{{ about.signature }}</p>
@@ -150,7 +150,7 @@ eleventyExcludeFromCollections: true
       <section class="cta" aria-labelledby="cta-title" data-reveal-group>
         <img class="cta__script" src="/assets/svg/script-background.svg" alt="" aria-hidden="true">
         <p class="eyebrow cta__eyebrow" data-reveal>{{ cta.eyebrow }}</p>
-        <h2 class="cta__title" id="cta-title" data-reveal><span class="cta__title-inner">{{ cta.title }}</span></h2>
+        <h2 class="cta__title" id="cta-title" data-reveal><span class="cta__title-inner">{{ cta.title | emphasis | safe }}</span></h2>
         <p class="body-lg cta__text" data-reveal>{{ cta.text }}</p>
         <button class="btn btn--light" type="button" data-inquire data-reveal>{{ cta.button }}</button>
       </section>
@@ -160,7 +160,7 @@ eleventyExcludeFromCollections: true
         <div class="faq__left" data-reveal-group>
           <div class="faq__intro">
             <p class="eyebrow" data-reveal>{{ faq.eyebrow }}</p>
-            <h2 class="h2 faq__title" id="faq-title" data-reveal>{{ faq.title }}</h2>
+            <h2 class="h2 faq__title" id="faq-title" data-reveal>{{ faq.title | emphasis | safe }}</h2>
             <p class="body" data-reveal>{{ faq.intro }}</p>
           </div>
           {%- if faq.note %}
