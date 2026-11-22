@@ -125,6 +125,63 @@ content:
             label: Button label
             type: string
 
+      # ------------------------------------------------- Destinations slider
+      - name: destinations
+        label: Destinations slider
+        type: file
+        path: src/_data/destinations.json
+        format: json
+        fields:
+          - name: show
+            label: Show this section
+            type: boolean
+          - name: label
+            label: Section name (for screen readers)
+            type: string
+          - name: autoplay_seconds
+            label: Seconds per slide
+            type: number
+            description: "How long each destination stays before the next one slides in (e.g. 6)."
+          - name: slides
+            label: Destinations
+            type: object
+            list:
+              min: 1
+              max: 6
+              collapsible:
+                collapsed: true
+                summary: "{name}"
+            fields:
+              - name: name
+                label: Destination name
+                type: string
+                required: true
+                description: "Shown large over the photos and in the tabs under them (desktop)."
+              - name: background
+                label: Background photo
+                type: image
+                description: "Landscape, at least 2000 px wide. It is darkened behind the photos. Upload the original; it is optimized automatically."
+                options:
+                  media: images
+              - name: photo_1
+                label: Back photo (tilted right)
+                type: image
+                description: "Portrait (about 2:3 or 3:4), at least 650×920 px."
+                options:
+                  media: images
+              - name: photo_2
+                label: Middle photo (tilted left)
+                type: image
+                description: "Portrait (about 2:3 or 3:4), at least 650×920 px."
+                options:
+                  media: images
+              - name: photo_3
+                label: Front photo
+                type: image
+                description: "Portrait (about 2:3 or 3:4), at least 650×920 px. The name sits on top of it."
+                options:
+                  media: images
+
       # ----------------------------------------------------------- Meet Tyler
       - name: about
         label: Meet Tyler
@@ -415,6 +472,10 @@ content:
       - name: instagram_url
         label: Instagram profile link
         type: string
+      - name: journal_url
+        label: Journal link
+        type: string
+        description: "Where the Journal link in the menu goes (e.g. a blog or Substack URL). Leave as # until the journal exists."
       - name: footer_copyright
         label: Footer copyright
         type: string

@@ -40,6 +40,7 @@ eleventyExcludeFromCollections: true
         </ul>
         <a class="sticky-nav__logo" href="#top" aria-label="The Intentional Edit — back to top"></a>
         <div class="nav__group nav__group--right">
+          <a class="nav__link" href="{{ site.journal_url or "#" }}">Journal</a>
           <a class="nav__link" href="#faq">FAQ</a>
           <button class="btn btn--outline btn--sm" type="button" data-inquire>Inquire</button>
         </div>
@@ -71,6 +72,7 @@ eleventyExcludeFromCollections: true
           </picture>
         </a>
         <div class="nav__group nav__group--right">
+          <a class="nav__link" href="{{ site.journal_url or "#" }}">Journal</a>
           <a class="nav__link" href="#faq">FAQ</a>
           <button class="btn btn--outline-light btn--sm" type="button" data-inquire>Inquire</button>
         </div>
@@ -121,6 +123,44 @@ eleventyExcludeFromCollections: true
 
         <button class="btn btn--outline" type="button" data-inquire data-reveal>{{ services.button }}</button>
       </section>
+
+      {%- if destinations.show and destinations.slides.length %}
+      <!-- 03 Destinations slider -->
+      <section class="dest" aria-roledescription="carousel" aria-label="{{ destinations.label }}" data-dest data-autoplay="{{ destinations.autoplay_seconds or 6 }}">
+        <div class="dest__bgs" aria-hidden="true">
+          {%- for slide in destinations.slides %}
+          <div class="dest__bg{% if loop.first %} is-active{% endif %}">{% picture slide.background, "", "100vw", [800, 1280, 1920, 2560], {}, { sharpAvifOptions: { quality: 55 } } %}</div>
+          {%- endfor %}
+        </div>
+
+        {%- for slide in destinations.slides %}
+        <div class="dest__slide{% if loop.first %} is-active{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ destinations.slides.length }}: {{ slide.name }}"{% if not loop.first %} aria-hidden="true" inert{% endif %}>
+          <div class="dest__stack" aria-hidden="true">
+            {%- for key in ["photo_1", "photo_2", "photo_3"] %}{% if slide[key] %}
+            <div class="dest__card dest__card--{{ loop.index }}"><div class="dest__card-inner">{% picture slide[key], "", "(max-width: 767px) 62vw, 322px", [320, 480, 640, 960] %}</div></div>
+            {%- endif %}{% endfor %}
+          </div>
+          <h2 class="dest__title">{{ slide.name }}</h2>
+        </div>
+        {%- endfor %}
+
+        <div class="dest__footer">
+          <div class="dest__tabs" role="tablist" aria-label="Choose a destination">
+            {%- for slide in destinations.slides %}
+            <button class="dest__tab{% if loop.first %} is-active{% endif %}" type="button" role="tab" aria-selected="{{ 'true' if loop.first else 'false' }}" data-dest-go="{{ loop.index0 }}">
+              <span class="dest__progress" aria-hidden="true"></span>
+              <span class="dest__num">{{ "0" if loop.index < 10 }}{{ loop.index }}</span>
+              <span class="dest__name">{{ slide.name }}</span>
+            </button>
+            {%- endfor %}
+          </div>
+          <div class="dest__nav">
+            <button class="dest__arrow dest__arrow--prev" type="button" aria-label="Previous destination" data-dest-prev><img src="/assets/svg/arrow-circle-left.svg" alt="" width="47" height="49"></button>
+            <button class="dest__arrow dest__arrow--next" type="button" aria-label="Next destination" data-dest-next><img src="/assets/svg/arrow-circle-right.svg" alt="" width="47" height="49"></button>
+          </div>
+        </div>
+      </section>
+      {%- endif %}
 
       <!-- 04 Meet Tyler -->
       <section class="about" id="about" aria-labelledby="about-title">
@@ -248,6 +288,7 @@ eleventyExcludeFromCollections: true
       <ul class="menu__links">
         <li><a class="menu__link" href="#services" data-menu-link>Services</a></li>
         <li><a class="menu__link" href="#about" data-menu-link>About</a></li>
+        <li><a class="menu__link" href="{{ site.journal_url or "#" }}" data-menu-link>Journal</a></li>
         <li><a class="menu__link" href="#faq" data-menu-link>FAQ</a></li>
         <li><button class="menu__link" type="button" data-inquire>Inquire</button></li>
       </ul>

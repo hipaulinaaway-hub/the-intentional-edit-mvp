@@ -278,6 +278,68 @@
     render();
   }
 
+  /* ---------- Destinations slider ----------
+     Slides change on a timer: the progress line under the active tab is a CSS animation,
+     and when it ends we move on, so pausing the animation pauses the slider. Paused while
+     hovered, while a control has focus, and while off screen. No autoplay for reduced
+     motion. Arrows, tabs, arrow keys and swipes all work by hand. */
+  const dest = document.querySelector('[data-dest]');
+  if (dest) {
+    const slides = [...dest.querySelectorAll('.dest__slide')];
+    const bgs = [...dest.querySelectorAll('.dest__bg')];
+    const tabs = [...dest.querySelectorAll('.dest__tab')];
+    const n = slides.length;
+    let index = 0;
+    dest.style.setProperty('--dest-time', `${Number(dest.dataset.autoplay) || 6}s`);
+    if (n < 2 || reducedMotion.matches) dest.classList.add('is-static');
+
+    const go = (to) => {
+      const next = (to + n) % n;
+      if (next === index) return;
+      [slides, bgs, tabs].forEach((list) => { list[index].classList.remove('is-active'); list[next].classList.add('is-active'); });
+      slides[index].setAttribute('aria-hidden', 'true'); slides[index].inert = true;
+      slides[next].removeAttribute('aria-hidden'); slides[next].inert = false;
+      tabs[index].setAttribute('aria-selected', 'false'); tabs[next].setAttribute('aria-selected', 'true');
+      index = next;
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => go(i));
+      tab.querySelector('.dest__progress').addEventListener('animationend', () => {
+        if (i === index && !dest.classList.contains('is-static')) go(index + 1);
+      });
+    });
+    dest.querySelector('[data-dest-prev]').addEventListener('click', () => go(index - 1));
+    dest.querySelector('[data-dest-next]').addEventListener('click', () => go(index + 1));
+    dest.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(index - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1); }
+    });
+
+    // Swipe left/right on touch screens
+    let startX = 0; let startY = 0;
+    dest.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') { startX = e.clientX; startY = e.clientY; } });
+    dest.addEventListener('pointerup', (e) => {
+      if (e.pointerType === 'mouse') return;
+      const dx = e.clientX - startX; const dy = e.clientY - startY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go(index + (dx < 0 ? 1 : -1));
+    });
+
+    // Pause while hovered, focused or off screen
+    let hovered = false; let focused = false; let visible = false;
+    const sync = () => dest.classList.toggle('is-paused', hovered || focused || !visible);
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      dest.addEventListener('pointerenter', () => { hovered = true; sync(); });
+      dest.addEventListener('pointerleave', () => { hovered = false; sync(); });
+    }
+    dest.addEventListener('focusin', () => { focused = true; sync(); });
+    dest.addEventListener('focusout', (e) => { if (!dest.contains(e.relatedTarget)) { focused = false; sync(); } });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }, { threshold: 0.35 }).observe(dest);
+    } else { visible = true; }
+    sync();
+  }
+
   /* ---------- Brown banner: script watermark drifts sideways, photos drift up and down
      at their own speeds (data-speed), so the scene has a little depth ---------- */
   const cta = document.querySelector('.cta');

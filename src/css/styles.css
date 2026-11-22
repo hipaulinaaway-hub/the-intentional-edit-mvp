@@ -192,6 +192,8 @@ input, textarea { font: inherit; color: inherit; }
   .btn--primary:not(:disabled):hover { background: var(--ink); }
   /* Kit says cream → white, which is invisible on the photo/brown; invert instead */
   .btn--light:not(:disabled):hover { background: transparent; color: var(--cream); }
+  /* CTA banner: same hover as the Inquire button in Services */
+  .cta .btn--light:not(:disabled):hover { background: var(--brown-dark); border-color: var(--brown-dark); color: var(--cream); }
   .btn--outline:not(:disabled):hover { background: var(--brown-dark); border-color: var(--brown-dark); color: var(--cream); }
   .btn--outline-light:not(:disabled):hover { background: var(--cream); color: var(--brown); }
   .nav__link:hover::after { transform: scaleX(1); }
@@ -407,6 +409,116 @@ input, textarea { font: inherit; color: inherit; }
 .about__intro { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; max-width: 560px; }
 .about__title { max-width: 520px; }
 .about__text { max-width: 530px; color: var(--brown-85); }
+
+/* ==========================================================================
+   03 Destinations slider
+   Each slide: a fan of three photos with the name over it, on a full-bleed
+   background. Changing slide: the old photos grow, blur and fade away, the new
+   ones settle in one after another, then the name comes into focus. Autoplay is
+   driven by the progress line under the active tab (main.js).
+   ========================================================================== */
+.dest {
+  --foot: 132px; /* room for the tabs under the photos */
+  position: relative;
+  isolation: isolate;
+  height: clamp(640px, 100svh, 900px);
+  overflow: hidden;
+  background: var(--brown-dark);
+  color: var(--sand);
+  touch-action: pan-y;
+}
+.dest__bgs, .dest__bg { position: absolute; inset: 0; }
+.dest__bgs { z-index: -1; }
+.dest__bgs::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(20, 13, 8, 0.45) 0%, rgba(20, 13, 8, 0.5) 55%, rgba(20, 13, 8, 0.78) 100%);
+}
+.dest__bg { opacity: 0; transform: scale(1.08); transition: opacity 1.4s var(--ease-in-out), transform 2.4s var(--ease-in-out); }
+.dest__bg.is-active { opacity: 1; transform: none; }
+.dest__bg img { width: 100%; height: 100%; object-fit: cover; }
+
+.dest__slide {
+  position: absolute; inset: 0 0 var(--foot);
+  display: grid; place-items: center;
+  pointer-events: none;
+}
+.dest__stack { grid-area: 1 / 1; position: relative; height: min(456px, 56svh); aspect-ratio: 322 / 456; }
+.dest__card { position: absolute; inset: 0; }
+.dest__card--1 { transform: translateX(12%) rotate(8.87deg); }
+.dest__card--2 { transform: translate(-8%, 3%) rotate(-8.18deg); }
+.dest__card-inner {
+  position: relative; width: 100%; height: 100%; overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  opacity: 0; transform: scale(1.25); filter: blur(16px);
+  transition: opacity 0.7s var(--ease-in-out), transform 1.1s var(--ease-in-out), filter 0.9s var(--ease-in-out);
+}
+.dest__card-inner::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); }
+.dest__card--1 .dest__card-inner::after { background: rgba(0, 0, 0, 0.3); }
+.dest__card-inner img { width: 100%; height: 100%; object-fit: cover; }
+.dest__slide.is-active .dest__card-inner { opacity: 1; transform: none; filter: none; }
+.dest__slide.is-active .dest__card--1 .dest__card-inner { transition-delay: 0.25s; }
+.dest__slide.is-active .dest__card--2 .dest__card-inner { transition-delay: 0.35s; }
+.dest__slide.is-active .dest__card--3 .dest__card-inner { transition-delay: 0.45s; }
+.dest__title {
+  grid-area: 1 / 1; position: relative; z-index: 1;
+  padding-inline: 24px;
+  font-family: var(--serif); font-weight: 400;
+  font-size: calc(56px * var(--type)); line-height: 0.92; letter-spacing: -0.025em;
+  text-transform: uppercase; text-align: center;
+  opacity: 0; filter: blur(20px); transform: translateY(30px);
+  transition: opacity 0.7s var(--ease-in-out), filter 0.9s var(--ease-in-out), transform 1.1s var(--ease-in-out);
+}
+.dest__slide.is-active .dest__title { opacity: 1; filter: none; transform: none; transition-delay: 0.55s; }
+
+.dest__footer {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  display: flex; align-items: flex-end; gap: 56px;
+  padding: 0 48px 48px 75px;
+}
+.dest__tabs { flex: 1; display: flex; gap: 20px; }
+.dest__tab {
+  position: relative; flex: 1 1 0; max-width: 274px;
+  display: flex; align-items: baseline; gap: 14px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(251, 249, 244, 0.2);
+  text-align: left; opacity: 0.55;
+  transition: opacity 0.3s ease;
+}
+.dest__tab.is-active { opacity: 1; }
+.dest__progress {
+  position: absolute; left: 0; right: 0; top: -1px; height: 1px;
+  background: var(--sand); transform: scaleX(0); transform-origin: left;
+}
+.dest__tab.is-active .dest__progress { animation: dest-progress var(--dest-time, 6s) linear forwards; }
+.dest.is-paused .dest__tab.is-active .dest__progress { animation-play-state: paused; }
+.dest.is-static .dest__progress { display: none; }
+@keyframes dest-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.dest__num { font-size: calc(11px * var(--type)); letter-spacing: 0.16em; }
+.dest__name { font-family: var(--serif); font-size: calc(24px * var(--type)); line-height: 1.05; letter-spacing: -0.01em; text-transform: uppercase; }
+.dest__nav { flex: none; display: flex; gap: 11px; }
+.dest__arrow { display: block; width: 47px; height: 49px; border-radius: 50%; transition: background-color 0.3s ease, transform 0.16s var(--ease); }
+.dest__arrow img { display: block; }
+.dest__arrow:active { transform: scale(0.95); }
+@media (hover: hover) and (pointer: fine) {
+  .dest__tab:hover { opacity: 1; }
+  .dest__arrow:hover { background-color: rgba(251, 249, 244, 0.12); }
+}
+
+/* Phones: photos and name centred, an arrow either side; the tabs stay in the page
+   for screen readers (and keep driving autoplay) but are hidden */
+@media (max-width: 767px) {
+  .dest { --foot: 0px; height: clamp(560px, 100svh, 760px); }
+  .dest__stack { height: min(320px, 44svh); }
+  .dest__title { font-size: calc(40px * var(--type)); padding-inline: 64px; } /* clear of the arrows */
+  .dest__footer { inset: 0; display: block; padding: 0; pointer-events: none; }
+  .dest__tabs { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .dest__nav { position: absolute; left: 12px; right: 12px; top: 50%; transform: translateY(-50%); justify-content: space-between; }
+  .dest__arrow { pointer-events: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dest__bg, .dest__card-inner, .dest__title { transform: none !important; filter: none !important; transition-property: opacity !important; transition-delay: 0s !important; }
+}
 
 /* ==========================================================================
    08 Start planning (CTA)

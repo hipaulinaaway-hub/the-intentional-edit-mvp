@@ -1,0 +1,35 @@
+{
+  "show": true,
+  "label": "Destinations",
+  "autoplay_seconds": 6,
+  "slides": [
+    {
+      "name": "Switzerland",
+      "background": "/assets/img/destinations/switzerland-bg.jpg",
+      "photo_1": "/assets/img/destinations/switzerland-1.jpg",
+      "photo_2": "/assets/img/destinations/switzerland-2.jpg",
+      "photo_3": "/assets/img/destinations/switzerland-3.jpg"
+    },
+    {
+      "name": "Portugal",
+      "background": "/assets/img/service-hotels.jpg",
+      "photo_1": "/assets/img/cta-bar.jpg",
+      "photo_2": "/assets/img/stamp-pool.jpg",
+      "photo_3": "/assets/img/cta-lounge.jpg"
+    },
+    {
+      "name": "Croatia",
+      "background": "/assets/img/service-trip.jpg",
+      "photo_1": "/assets/img/service-concierge.jpg",
+      "photo_2": "/assets/img/cta-cocktails.jpg",
+      "photo_3": "/assets/img/service-trip.jpg"
+    },
+    {
+      "name": "Greece",
+      "background": "/assets/img/hero.jpg",
+      "photo_1": "/assets/ig/ig-6-santorini.jpg",
+      "photo_2": "/assets/img/stamp-pool.jpg",
+      "photo_3": "/assets/ig/ig-1-santorini.jpg"
+    }
+  ]
+}
