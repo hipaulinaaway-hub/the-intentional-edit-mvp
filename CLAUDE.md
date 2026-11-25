@@ -46,7 +46,7 @@ Pages CMS edit (= commit to main) ──► Cloudflare Pages: npm run build ─�
 
 ## Before launch / open items
 - [ ] Turn off **Hide site from search engines** (Pages CMS → Site settings).
-- [ ] Add the **Formspree form ID**. Until then, inquiries aren't delivered.
+- [x] Formspree connected (form `mkjryqjq`, set in `src/_data/site.json` → `formspree_id`). Test it with a real submission before launch.
 - [ ] Replace the sample reviews with real ones, or switch the section off.
 - [ ] Tyler signs off the copy (FAQ, hero, About).
 - [ ] Terms & Conditions and Privacy pages (not built yet).
